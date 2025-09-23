@@ -18,10 +18,10 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.150.0' # match your local Hugo version
+          hugo-version: '0.150.0' # match your local version
           extended: true
 
-      # 3️⃣ Cache Hugo modules
+      # 3️⃣ Cache Hugo Modules
       - name: Cache Hugo Modules
         uses: actions/cache@v3
         with:
@@ -38,10 +38,9 @@ jobs:
 
       # 5️⃣ Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v5
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          # Optional: specify branch if you want to use 'gh-pages'
+          # Uncomment if using gh-pages branch instead of main
           # publish_branch: gh-pages
-
