@@ -14,6 +14,7 @@ design:
       autoplay: true
       muted: true
       playsinline: true
+      poster: "lss.png"
     image_darken: 0.4
     text_color_light: true
 
