@@ -24,7 +24,12 @@ sections:
         interests: ''
     design:
       # Apply a gradient background
-      css_class: hbx-bg-gradient
+      #css_class: hbx-bg-gradient
+      background:
+        image: assets/media/lss.png
+        image_darken: 0.3   # optional: dark overlay for readability (0–1)
+        image_parallax: true # optional: parallax scrolling
+        text_color_light: true # makes text white for contrast
       # Avatar customization
       avatar:
         size: medium # Options: small (150px), medium (200px, default), large (320px), xl (400px), xxl (500px)
