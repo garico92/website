@@ -73,7 +73,7 @@ education:
       text: 'Read Thesis'
       url: 'http://amslaurea.unibo.it/13167/'  
   - area: BS Astronomy
-    institution: MITBologna University
+    institution: Bologna University
     date_start: 29/09/2011
     date_end: 18/09/2014
     summary: |
@@ -86,7 +86,7 @@ work:
     company_logo: ''
     date_start: 2020-01-01
     date_end: ''
-    summary: |2-
+    summary: | 
       Leading positions in the Euclid Collaboration.
   - position: Postdoctoral fellow
     company_name: University of Zurich
