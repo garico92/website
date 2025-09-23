@@ -1,13 +1,13 @@
 ---
 # Display name
-title: Giovanni Aricò
+title: Alex Johnson
 
 # Name pronunciation (optional)
 name_pronunciation: ''
 
 # Full name (for SEO)
-first_name: Giovanni
-last_name: Aricò
+first_name: Alex
+last_name: Johnson
 
 # Pronouns (optional)
 pronouns: he/him
@@ -23,33 +23,35 @@ superuser: true
 highlight_name: true
 
 # Role/position/tagline
-role: Postdoctoral fellow
+role: Senior AI Research Scientist
 
 # Organizations/Affiliations to display in Biography blox
 organizations:
-  - name: INFN
-    url: https://www.infn.it/
+  - name: Meta AI
+    url: https://ai.meta.com/
 
 # Social network links
 # Need to use another icon? Simply download the SVG icon to your `assets/media/icons/` folder.
 profiles:
   - icon: at-symbol
-    url: 'mailto:arico@bo.infn.it'
+    url: 'mailto:alex.johnson@meta.com'
     label: E-mail Me
-  - icon: brands/linkedin
-    url: https://www.linkedin.com/in/giovanni-aric%C3%B2-8832684a/
+  - icon: brands/x
+    url: https://twitter.com/AlexAIResearch
   - icon: brands/github
-    url: https://github.com/garico92/
+    url: https://github.com/alexjohnsonai
+  - icon: brands/linkedin
+    url: https://www.linkedin.com/in/alexjohnsonai/
   - icon: academicons/google-scholar
-    url: https://scholar.google.com/citations?user=vjSA_X0AAAAJ&hl=it&oi=ao
+    url: https://scholar.google.com/citations?user=alexjohnson
   - icon: academicons/orcid
-    url: https://orcid.org/0000-0002-2802-2928
+    url: https://orcid.org/0000-0002-1825-0097
 
 interests:
-  - Cosmology
-  - Astrophysics
-  - Machine Learning
-  - Numerical simulations
+  - Large Language Models
+  - Computer Vision
+  - Reinforcement Learning
+  - AI Ethics
 
 education:
   - area: PhD Computer Science (AI Focus)
