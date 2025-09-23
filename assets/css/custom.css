@@ -1,5 +1,17 @@
-/* Full homepage background */
-body.homepage {
-    background: url("assets/media/lss.png") no-repeat center center;
-    background-size: cover;
+/* Ensure video background fills the section and sits behind content */
+.resume-biography-3 .hbx-bg-video video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* scales video like background-size: cover */
+    z-index: -1;
+    /* keeps content on top */
+}
+
+/* Remove any default background color from section */
+.resume-biography-3 {
+    background-color: transparent !important;
 }

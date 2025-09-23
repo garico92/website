@@ -7,17 +7,6 @@ type: landing
 design:
   # Default section spacing
   spacing: '6rem'
-  background:
-    video:
-      filename: "lss_sample.mp4"
-      loop: true
-      autoplay: true
-      muted: true
-      playsinline: true
-      poster: "lss.png"
-    image_darken: 0.4
-    text_color_light: true
-
 
 sections:
   - block: resume-biography-3
@@ -34,12 +23,22 @@ sections:
         education: ''
         interests: ''
     design:
-      # Apply a gradient background
-      #css_class: hbx-bg-gradient
-      # Avatar customization
+      background:
+        video:
+          filename: "lss_sample.mp4"
+          loop: true
+          autoplay: true
+          muted: true
+          playsinline: true
+          poster: "lss.png"
+        image_darken: 0.4
+        text_color_light: true
+      # Remove any section-level background color so video is visible
+      css_class: ""
       avatar:
-        size: medium # Options: small (150px), medium (200px, default), large (320px), xl (400px), xxl (500px)
-        shape: circle # Options: circle (default), square, rounded
+        size: medium
+        shape: circle
+
   - block: markdown
     content:
       title: '📚 My Research'
@@ -50,6 +49,7 @@ sections:
         Please reach out to collaborate 😃
     design:
       columns: '1'
+      
   - block: collection
     id: papers
     content:
