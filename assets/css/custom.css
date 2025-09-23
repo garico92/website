@@ -1,5 +1,5 @@
-/* Make cover block video fill the section and sit behind content */
-.cover .hbx-bg-video video {
+/* Make the video fill the first section and stay behind content */
+.custom-video-bg video {
     position: absolute;
     top: 0;
     left: 0;
@@ -9,9 +9,8 @@
     z-index: -1;
 }
 
-/* Optional: ensure text sits above video */
-.cover .hbx-bg-overlay,
-.cover .container {
+/* Ensure content sits above the video */
+.resume-biography-3 {
     position: relative;
-    z-index: 1;
+    background: transparent !important;
 }

@@ -1,47 +1,31 @@
 ---
-# Leave the homepage title empty to use the site title
 title: ''
 date: 2022-10-24
 type: landing
 
 design:
-  # Default section spacing
   spacing: '6rem'
 
 sections:
-# First section: Cover with video background
-  - block: cover
-    content:
-      title: ""
-      button:
-        text: "Download CV"
-        url: "https://drive.google.com/file/d/1V-aCVBPsB-IDIA41RHm67a5p_Lzw83Wc/view?usp=sharing"
-    design:
-      background:
-        video:
-          filename: "lss_sample.mp4"
-          loop: true
-          autoplay: true
-          muted: true
-          playsinline: true
-          poster: "lss.png"
-        image_darken: 0.4
-        text_color_light: true
-
-  # Second section: Biography
+  # First section: resume-biography-3 with video background
   - block: resume-biography-3
     content:
       username: admin
-      text: ''
+      text: '{{ partial "video_bg.html" . }}'
       headings:
         about: ''
         education: ''
         interests: ''
+      button:
+        text: Download CV
+        url: https://drive.google.com/file/d/1V-aCVBPsB-IDIA41RHm67a5p_Lzw83Wc/view?usp=sharing
     design:
       avatar:
         size: medium
         shape: circle
+      css_class: ""  # remove any gradient/background
 
+  # Second section: Markdown / Research
   - block: markdown
     content:
       title: '📚 My Research'
@@ -53,6 +37,7 @@ sections:
     design:
       columns: '1'
 
+  # Third section: Featured Publications
   - block: collection
     id: papers
     content:
@@ -64,16 +49,19 @@ sections:
     design:
       view: article-grid
       columns: 2
+
+  # Fourth section: Recent Publications
   - block: collection
     content:
       title: Recent Publications
-      text: ''
       filters:
         folders:
           - publications
         exclude_featured: false
     design:
       view: citation
+
+  # Fifth section: Talks
   - block: collection
     id: talks
     content:
@@ -83,37 +71,24 @@ sections:
           - events
     design:
       view: card
+
+  # Sixth section: News
   - block: collection
     id: news
     content:
       title: Recent News
-      subtitle: ''
-      text: ''
-      # Page type to display. E.g. post, talk, publication...
       page_type: blog
-      # Choose how many pages you would like to display (0 = all pages)
       count: 5
-      # Filter on criteria
       filters:
-        author: ''
-        category: ''
-        tag: ''
         exclude_featured: false
-        exclude_future: false
-        exclude_past: false
-        publication_type: ''
-      # Choose how many pages you would like to offset by
-      offset: 0
-      # Page order: descending (desc) or ascending (asc) date.
-      order: desc
     design:
-      # Choose a layout view
       view: card
-      # Reduce spacing
       spacing:
-        padding: [0, 0, 0, 0]
+        padding: [0,0,0,0]
+
+  # Seventh section: CTA Card
   - block: cta-card
-    demo: true # Only display this section in the Hugo Blox Builder demo site
+    demo: true
     content:
       title: 👉 Build your own academic website like this
       text: |-
@@ -127,9 +102,4 @@ sections:
       button:
         text: Get Started
         url: https://hugoblox.com/templates/
-    #design:
-    #  card:
-        # Card background color (CSS class)
-    #    css_class: 'bg-primary-700'
-    #    css_style: ''
 ---
