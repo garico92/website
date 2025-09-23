@@ -18,10 +18,20 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.150.0' # match your local version
+          hugo-version: '0.150.0'
           extended: true
 
-      # 3️⃣ Cache Hugo Modules
+      # 3️⃣ Setup Node (needed for TailwindCSS)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 4️⃣ Install TailwindCSS CLI
+      - name: Install TailwindCSS
+        run: npm install -g tailwindcss
+
+      # 5️⃣ Cache Hugo Modules
       - name: Cache Hugo Modules
         uses: actions/cache@v3
         with:
@@ -32,15 +42,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-hugo-
 
-      # 4️⃣ Build the site
+      # 6️⃣ Build the site
       - name: Build site
         run: hugo --minify
 
-      # 5️⃣ Deploy to GitHub Pages
+      # 7️⃣ Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          # Uncomment if using gh-pages branch instead of main
-          # publish_branch: gh-pages
+          publish_branch: gh-pages
