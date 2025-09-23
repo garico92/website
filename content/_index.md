@@ -8,11 +8,15 @@ design:
   # Default section spacing
   spacing: '6rem'
   background:
-    image: 
-      filename: "lss.png"
-    image_darken: 1   # optional: dark overlay for readability (0–1)
-    image_parallax: false # optional: parallax scrolling
-    text_color_light: true # makes text white for contrast
+    video:
+      filename: "lss.mp4"
+      loop: true
+      autoplay: true
+      muted: true
+      playsinline: true
+    image_darken: 0.4
+    text_color_light: true
+
 
 sections:
   - block: resume-biography-3
