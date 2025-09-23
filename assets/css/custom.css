@@ -1,5 +1,5 @@
 /* Full homepage background */
 body.homepage {
-    background: url("assets/media/lss.png") no-repeat center center fixed;
+    background: url("assets/media/lss.png") no-repeat center center;
     background-size: cover;
 }

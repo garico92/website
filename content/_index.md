@@ -10,7 +10,7 @@ design:
   background:
     image: 
       filename: "lss.png"
-    image_darken: 0.8   # optional: dark overlay for readability (0–1)
+    image_darken: 1   # optional: dark overlay for readability (0–1)
     image_parallax: false # optional: parallax scrolling
     text_color_light: true # makes text white for contrast
 
