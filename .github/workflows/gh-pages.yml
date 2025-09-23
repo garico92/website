@@ -1,0 +1,47 @@
+name: Hugo Build and Deploy
+
+on:
+  push:
+    branches:
+      - main  # or your default branch
+  workflow_dispatch:
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1️⃣ Checkout the repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup Hugo
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.150.0' # match your local Hugo version
+          extended: true
+
+      # 3️⃣ Cache Hugo modules
+      - name: Cache Hugo Modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/hugo_modules
+            ./resources/_gen
+          key: ${{ runner.os }}-hugo-${{ hashFiles('go.mod') }}
+          restore-keys: |
+            ${{ runner.os }}-hugo-
+
+      # 4️⃣ Build the site
+      - name: Build site
+        run: hugo --minify
+
+      # 5️⃣ Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          # Optional: specify branch if you want to use 'gh-pages'
+          # publish_branch: gh-pages
+
