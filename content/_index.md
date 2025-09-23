@@ -9,19 +9,13 @@ design:
   spacing: '6rem'
 
 sections:
-  - block: resume-biography-3
+# First section: Cover with video background
+  - block: cover
     content:
-      # Choose a user profile to display (a folder name within `content/authors/`)
-      username: admin
-      text: ''
-      # Show a call-to-action button under your biography? (optional)
+      title: ""
       button:
-        text: Download CV
-        url: https://drive.google.com/file/d/1V-aCVBPsB-IDIA41RHm67a5p_Lzw83Wc/view?usp=sharing
-      headings:
-        about: ''
-        education: ''
-        interests: ''
+        text: "Download CV"
+        url: "https://drive.google.com/file/d/1V-aCVBPsB-IDIA41RHm67a5p_Lzw83Wc/view?usp=sharing"
     design:
       background:
         video:
@@ -33,8 +27,17 @@ sections:
           poster: "lss.png"
         image_darken: 0.4
         text_color_light: true
-      # Remove any section-level background color so video is visible
-      css_class: ""
+
+  # Second section: Biography
+  - block: resume-biography-3
+    content:
+      username: admin
+      text: ''
+      headings:
+        about: ''
+        education: ''
+        interests: ''
+    design:
       avatar:
         size: medium
         shape: circle
@@ -49,7 +52,7 @@ sections:
         Please reach out to collaborate 😃
     design:
       columns: '1'
-      
+
   - block: collection
     id: papers
     content:
