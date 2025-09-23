@@ -7,11 +7,12 @@ type: landing
 design:
   # Default section spacing
   spacing: '6rem'
-background:
-  image: "lss.png"
-  image_darken: 0.3   # optional: dark overlay for readability (0–1)
-  image_parallax: true # optional: parallax scrolling
-  text_color_light: true # makes text white for contrast
+  background:
+    image: 
+      filename: "lss.png"
+    image_darken: 0.3   # optional: dark overlay for readability (0–1)
+    image_parallax: true # optional: parallax scrolling
+    text_color_light: true # makes text white for contrast
 
 sections:
   - block: resume-biography-3
@@ -118,9 +119,9 @@ sections:
       button:
         text: Get Started
         url: https://hugoblox.com/templates/
-    design:
-      card:
+    #design:
+    #  card:
         # Card background color (CSS class)
-        css_class: 'bg-primary-700'
-        css_style: ''
+    #    css_class: 'bg-primary-700'
+    #    css_style: ''
 ---
