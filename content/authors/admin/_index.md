@@ -52,49 +52,50 @@ interests:
   - Numerical simulations
 
 education:
-  - area: PhD Computer Science (AI Focus)
-    institution: Stanford University
-    date_start: 2015-09-01
-    date_end: 2019-06-30
+  - area: PhD in physics
+    institution: Zaragoza University
+    date_start: 18/09/2017
+    date_end: 22/11/2021
     summary: |
-      Thesis on _Scaling Laws for Neural Language Models_. Supervised by Prof. Andrew Ng. Published 5 papers in NeurIPS and ICML, with 2 best paper awards.
+      Thesis on Cosmology with baryons: modelling the cosmic matter distribution for Large-Scale Structure analyses. Supervised by Prof. Raul Angulo and Dr. Carlos Hern´andez-Monteagudo
     button:
       text: 'Read Thesis'
-      url: 'https://example.com/thesis.pdf'
-  - area: MS Computer Science
-    institution: Carnegie Mellon University
-    date_start: 2013-09-01
-    date_end: 2015-05-31
+      url: 'https://zaguan.unizar.es/record/110751#'
+  - area: MS Cosmology and Astrophysics
+    institution: Bologna University
+    date_start: 28/11/2014
+    date_end: 10/03/2017
     summary: |
-      GPA: 4.0/4.0
+      GPA: 110/110
 
-      Specialized in machine learning and robotics.
-  - area: BS Computer Science
-    institution: MIT
-    date_start: 2009-09-01
-    date_end: 2013-05-31
+      Thesis: Testing the methods to reconstruct and model the Baryonic Acoustic Oscillations of different tracers using N-body simulations
+    button:
+      text: 'Read Thesis'
+      url: 'http://amslaurea.unibo.it/13167/'  
+  - area: BS Astronomy
+    institution: MITBologna University
+    date_start: 29/09/2011
+    date_end: 18/09/2014
     summary: |
-      GPA: 3.9/4.0
-
-      Minored in Mathematics. President of AI Club.
+      GPA: 109/110
 
 work:
-  - position: Senior AI Research Scientist
-    company_name: Meta AI
-    company_url: 'https://ai.meta.com/'
+  - position: Postdoctoral fellow
+    company_name: Istituto Nazionale di Fisica Nucleare (INFN), Bologna, Italy
+    company_url: 'https://www.infn.it/'
     company_logo: ''
     date_start: 2020-01-01
     date_end: ''
     summary: |2-
-      Leading research on multimodal AI systems. Contributed to Llama 2 and other open-source models. 50+ citations in 3 years.
-  - position: AI Research Intern
-    company_name: OpenAI
-    company_url: 'https://openai.com/'
+      Leading positions in the Euclid Collaboration.
+  - position: Postdoctoral fellow
+    company_name: University of Zurich
+    company_url: 'https://www.uzh.ch/'
     company_logo: ''
-    date_start: 2019-06-01
-    date_end: 2019-12-31
+    date_start: 01/01/2022
+    date_end: 31/12/2024
     summary: |
-      Worked on GPT-3 scaling. Co-authored paper on prompt engineering.
+      Running of Euclid simulation project, featuring over 500 large simulations for a total of 72 million core hours
 
 # Skills
 # Add your own SVG icons to `assets/media/icons/`
@@ -131,37 +132,40 @@ skills:
         icon: book-open
 
 languages:
-  - name: English
+  - name: Italian
     percent: 100
+  - name: English
+    percent: 90
   - name: Spanish
-    percent: 50
+    percent: 80
+  - name: Euskera
+    percent: 30
 
 # Awards.
 #   Add/remove as many awards below as you like.
 #   Only `title`, `awarder`, and `date` are required.
 #   Begin multi-line `summary` with YAML's `|` or `|2-` multi-line prefix and indent 2 spaces below.
+#    icon: hero/trophy
+#    icon: hero/currency-dollar
+#    icon: hero/academic-cap
 awards:
-  - title: Best Paper Award
-    url: https://neurips.cc/
-    date: '2022-12-01'
-    awarder: NeurIPS
-    icon: hero/trophy
-    summary: |
-      Awarded for groundbreaking work on efficient training of large models.
-  - title: AI Innovation Grant
+  - title: Marenostrum grant
     url: https://www.nsf.gov/
     date: '2021-06-15'
-    awarder: National Science Foundation
+    awarder: Red Española de Supercomputación
     icon: hero/currency-dollar
     summary: |
-      $500,000 grant for research in ethical AI development.
-  - title: Outstanding PhD Thesis
-    url: https://www.stanford.edu/
-    date: '2019-06-30'
-    awarder: Stanford University
-    icon: hero/academic-cap
-    summary: |
-      Recognized for contributions to scaling laws in deep learning.
+      6 million CPU hours on the supercomputer Marenostrum to run cosmological simulations.
+
 ---
 
-Alex Johnson is a Senior AI Research Scientist at Meta AI, where he leads groundbreaking work on large language models and multimodal systems. His research has been published in top conferences like NeurIPS and ICML, with over 10,000 citations. Alex is passionate about pushing the boundaries of AI while ensuring ethical development. Outside of work, he enjoys hiking in the Rockies, building custom PCs, and mentoring the next generation of AI talent.
+I am a computational cosmologist with expertise in large-scale structure, numerical simulations, astrophysical processes in cosmology and machine learning applications
+for data analysis. I aim to answer fundamental questions such as the nature of dark matter and dark energy, the validity of General Relativity at the largest scale of the Universe, and the physics of the formation of galaxies. To do so, I analyse multi-wavelength maps of the large-scale structure of the Universe using Bayesian inference. I optimise the extraction of information by developing new non-linear methods, which combine cosmological simulations, theoretical models of astrophysics, and machine learning techniques. 
+
+I currently hold a senior postdoctoral position at the Istituto Nazionale di Fisica Nucleare in Bologna, Italy. 
+Previously, I was a postdoc at the Institute for Computational Science at the University of Zurich, Switzerland. I obtained my  PhD from the University of Zaragoza, working at the Donostia International Physics Centre and the Centro de Estudios de Fisica del Cosmo de Aragón, in Spain. I was a visitor at MPA of Munich, at IMPU of Tokyo, and at Beecroft Institute, University of Oxford.  
+
+I am author of more than 25 papers in international peer-reviewed journals (6 as first author), with over 1100 citations and an H-index of 18. I am a regular reviewer for Monthly Notices of Astronomical Society, The Astrophysical Journal, and The Open Journal of Astrophysics. 
+I contributed to more than 40 international events, including conferences, meetings, workshops, panel discussions, seminars, and schools, 19 of which as an invited speaker, in Europe, Asia and America. I am a  member of the Euclid Collaboration, where I lead a Work Package and a Key Project that investigate baryonic physics.
+
+I have a long experience operating with several high-performance computer facilities. I am the P.I. of a project awarded 6 million CPU hours in Marenostrum (Barcelon), and I am leading the Euclid Emulator 3 simulation project, which employed 72 million core hours on the Alps machine of the Swiss National Computer Centre (CSCS) to run one of the world's largest suite of cosmological simulations. I am a core member of the BACCO simulation project, which holds a world-leading position in cosmological simulations.
