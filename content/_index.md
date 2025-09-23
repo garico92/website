@@ -8,7 +8,7 @@ design:
   # Default section spacing
   spacing: '6rem'
 background:
-  image: assets/media/lss.png
+  image: "assets/media/lss.png"
   image_darken: 0.3   # optional: dark overlay for readability (0–1)
   image_parallax: true # optional: parallax scrolling
   text_color_light: true # makes text white for contrast
