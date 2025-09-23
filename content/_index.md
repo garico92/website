@@ -7,10 +7,15 @@ design:
   spacing: '6rem'
 
 sections:
-  # Video background block
+  # Video background block (direct HTML)
   - block: markdown
     content:
-      text: '{{ partial "video_bg.html" . }}'
+      text: |
+        <div class="custom-video-bg">
+          <video autoplay muted loop playsinline poster="/media/lss.png">
+            <source src="/media/lss_sample.mp4" type="video/mp4">
+          </video>
+        </div>
     design:
       css_class: "homepage-video"
 
