@@ -9,7 +9,7 @@ design:
   spacing: '6rem'
   background:
     video:
-      filename: "lss.mp4"
+      filename: "lss_sample.mp4"
       loop: true
       autoplay: true
       muted: true
