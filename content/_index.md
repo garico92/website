@@ -7,11 +7,17 @@ design:
   spacing: '6rem'
 
 sections:
-  # First section: resume-biography-3 with video background
+  # Video background block
+  - block: markdown
+    content:
+      text: '{{ partial "video_bg.html" . }}'
+    design:
+      css_class: "homepage-video"
+
+  # Biography section
   - block: resume-biography-3
     content:
       username: admin
-      text: '{{ partial "video_bg.html" . }}'
       headings:
         about: ''
         education: ''
@@ -23,9 +29,9 @@ sections:
       avatar:
         size: medium
         shape: circle
-      css_class: ""  # remove any gradient/background
+      css_class: ""
 
-  # Second section: Markdown / Research
+  # Markdown / Research section
   - block: markdown
     content:
       title: '📚 My Research'
@@ -37,7 +43,7 @@ sections:
     design:
       columns: '1'
 
-  # Third section: Featured Publications
+  # Featured Publications
   - block: collection
     id: papers
     content:
@@ -50,7 +56,7 @@ sections:
       view: article-grid
       columns: 2
 
-  # Fourth section: Recent Publications
+  # Recent Publications
   - block: collection
     content:
       title: Recent Publications
@@ -61,7 +67,7 @@ sections:
     design:
       view: citation
 
-  # Fifth section: Talks
+  # Recent & Upcoming Talks
   - block: collection
     id: talks
     content:
@@ -72,7 +78,7 @@ sections:
     design:
       view: card
 
-  # Sixth section: News
+  # Recent News
   - block: collection
     id: news
     content:
@@ -86,7 +92,7 @@ sections:
       spacing:
         padding: [0,0,0,0]
 
-  # Seventh section: CTA Card
+  # CTA Card
   - block: cta-card
     demo: true
     content:

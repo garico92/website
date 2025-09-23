@@ -1,5 +1,4 @@
-/* Make the video fill the first section and stay behind content */
-.custom-video-bg video {
+.homepage-video video {
     position: absolute;
     top: 0;
     left: 0;
@@ -9,8 +8,8 @@
     z-index: -1;
 }
 
-/* Ensure content sits above the video */
-.resume-biography-3 {
+.homepage-video {
     position: relative;
-    background: transparent !important;
+    height: 100vh;
+    /* full viewport height */
 }
