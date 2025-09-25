@@ -7,13 +7,10 @@ design:
   spacing: '6rem'
 
 sections:
-  # Static image block (instead of video)
   - block: markdown
     content:
       text: |
-        <div class="custom-video-bg">
-          <img src="/media/lss.png" alt="Landing image" class="homepage-static-img">
-        </div>
+        {{< video_bg >}}
     design:
       css_class: "homepage-video"
 
