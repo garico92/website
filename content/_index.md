@@ -7,11 +7,6 @@ design:
   spacing: '6rem'
 
 sections:
-  - block: markdown
-    content: ''
-    design:
-      css_class: "homepage-video"
-
   # Biography section
   - block: resume-biography-3
     content:
