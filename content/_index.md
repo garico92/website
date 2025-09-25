@@ -8,9 +8,7 @@ design:
 
 sections:
   - block: markdown
-    content:
-      text: |
-        {{< video_bg >}}
+    content: ''
     design:
       css_class: "homepage-video"
 
