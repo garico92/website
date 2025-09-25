@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: " en" }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>
+        {% if page.title %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }}
+    </title>
+
+    {%- seo -%}
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+</head>
+
+<body>
+    <!-- Background video -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline poster="{{ '/media/lss.png' | relative_url }}">
+            <source src="{{ '/media/lss.mp4' | relative_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Site header -->
+    <header>
+        {%- include header.html -%}
+    </header>
+
+    <!-- Main content -->
+    <main id="content" role="main">
+        {{ content }}
+    </main>
+
+    <!-- Site footer -->
+    <footer>
+        {%- include footer.html -%}
+    </footer>
+</body>
+
+</html>
