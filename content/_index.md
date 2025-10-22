@@ -9,7 +9,7 @@ design:
   spacing: '6rem'
   background:
     image: 
-      filename: "jades.jpg"
+      filename: "sim.png"
     image_darken: 1   # optional: dark overlay for readability (0–1)
     image_parallax: true # optional: parallax scrolling
     text_color_light: true # makes text white for contrast
@@ -42,7 +42,7 @@ sections:
       text: |-
         I aim to answer fundamental questions such as the nature of dark matter and dark energy, the validity of General Relativity at the largest scale of the Universe, and the physics of the formation of galaxies. To do so, I analyse multi-wavelength maps of the large-scale structure of the Universe using Bayesian inference. I optimise the extraction of information by developing new non-linear methods, which combine cosmological simulations, theoretical models of astrophysics, and machine learning techniques.
 
-        Please reach out to collaborate 😃
+        Feel free to reach out! 😃
     design:
       columns: '1'
   - block: collection
