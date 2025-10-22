@@ -9,9 +9,9 @@ design:
   spacing: '6rem'
   background:
     image: 
-      filename: "lss.png"
+      filename: "jades.jpg"
     image_darken: 1   # optional: dark overlay for readability (0–1)
-    image_parallax: false # optional: parallax scrolling
+    image_parallax: true # optional: parallax scrolling
     text_color_light: true # makes text white for contrast
 
 sections:
