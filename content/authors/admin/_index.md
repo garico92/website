@@ -91,28 +91,30 @@ work:
 skills:
   - name: Technical Skills
     items:
-      - name: Python & C
+      - name: Programming Python & C
         percent: 95
         icon: code-bracket
-      - name: Machine Learning
+      - name: Machine Learning Tensorflow & Jax
         percent: 100
         icon: chart-bar
-      - name: Cloud Computing (AWS/GCP)
+      - name: HPC computing 
         percent: 85
         icon: cloud
   - name: Hobbies
     color: '#eeac02'
     color_border: '#f0bf23'
     items:
-      - name: Hiking 
-        percent: 80
-        icon: person-simple-walk
-      - name: Movies & Series
-        percent: 90
-        icon: cpu-chip
       - name: Books
         percent: 70
         icon: book-open
+      - name: Movies & Series
+        percent: 90
+        icon: cpu-chip
+      - name: Hiking 
+        percent: 80
+        icon: person-simple-walk
+      
+    
 
 languages:
   - name: Italian
@@ -125,13 +127,23 @@ languages:
     percent: 30
 
 awards:
+  - title: INFN fellowship
+    date: 2025-01-01
+    awarder: Istituto Nazionale di FIsica Nucleare
+    icon: hero/currency-dollar
   - title: Marenostrum grant
-    url: https://www.nsf.gov/
-    date: 2021-06-15
+    url: https://www.bsc.es/news/bsc-news/european-supercomputer-marenostrum-5-starts-bsc
+    date: 2025-06-15
     awarder: Red Española de Supercomputación
     icon: hero/currency-dollar
     summary: |
       6 million CPU hours on the supercomputer Marenostrum to run cosmological simulations.
+  - title: CEFCA summer fellowship
+    url: https://www.bsc.es/news/bsc-news/european-supercomputer-marenostrum-5-starts-bsc
+    date: 2019-06-01
+    awarder: Centro de Fısica del Cosmo de Aragon
+    icon: hero/currency-dollar
+  
 ---
 
 I am a computational cosmologist with expertise in large-scale structure, numerical simulations, astrophysical processes in cosmology and machine learning applications for data analysis. I aim to answer fundamental questions such as the nature of dark matter and dark energy, the validity of General Relativity at the largest scale of the Universe, and the physics of the formation of galaxies. To do so, I analyse multi-wavelength maps of the large-scale structure of the Universe using Bayesian inference. I optimise the extraction of information by developing new non-linear methods, which combine cosmological simulations, theoretical models of astrophysics, and machine learning techniques.
