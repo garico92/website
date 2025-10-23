@@ -33,7 +33,7 @@ sections:
       #css_class: hbx-bg-gradient
       # Avatar customization
       avatar:
-        size: medium # Options: small (150px), medium (200px, default), large (320px), xl (400px), xxl (500px)
+        size: large # Options: small (150px), medium (200px, default), large (320px), xl (400px), xxl (500px)
         shape: circle # Options: circle (default), square, rounded
   - block: markdown
     content:
@@ -69,7 +69,7 @@ sections:
   - block: collection
     id: talks
     content:
-      title: Recent & Upcoming Talks
+      title: Talks
       filters:
         folders:
           - events
@@ -78,13 +78,13 @@ sections:
   - block: collection
     id: news
     content:
-      title: Recent News
+      title: Media
       subtitle: ''
       text: ''
       # Page type to display. E.g. post, talk, publication...
       page_type: blog
       # Choose how many pages you would like to display (0 = all pages)
-      count: 5
+      count: 1
       # Filter on criteria
       filters:
         author: ''
