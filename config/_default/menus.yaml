@@ -22,8 +22,8 @@ main:
   - name: Talks
     url: /#talks
     weight: 12
-  - name: short CV
-    url: experience/
+  - name: Short CV
+    url: /#short-cv
     weight: 13
   - name: Resources
     url: /#resources
