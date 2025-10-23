@@ -5,6 +5,12 @@ type: landing
 
 design:
   spacing: '5rem'
+  background:
+    image: 
+      filename: "sim.png"
+    image_darken: 1   # optional: dark overlay for readability (0–1)
+    image_parallax: true # optional: parallax scrolling
+    text_color_light: true # makes text white for contrast
 
 # Note: `username` refers to the user's folder name in `content/authors/`
 

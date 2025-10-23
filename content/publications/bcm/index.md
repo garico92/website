@@ -1,5 +1,5 @@
 ---
-title: 'The BACCO Simulation Project: A baryonification emulator with Neural Networks'
+title: 'Modelling the large scale structure of the Universe as a function of cosmology and baryonic physics'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
