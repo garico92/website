@@ -9,10 +9,6 @@ last_name: Aricò
 # Pronouns (optional)
 pronouns: he/him
 
-# Status emoji
-status:
-  icon: 🚀
-
 # Is this the primary user of the site?
 superuser: true
 
@@ -95,7 +91,7 @@ work:
 skills:
   - name: Technical Skills
     items:
-      - name: Python & PyTorch
+      - name: Python & C
         percent: 95
         icon: code-bracket
       - name: Machine Learning
@@ -108,13 +104,13 @@ skills:
     color: '#eeac02'
     color_border: '#f0bf23'
     items:
-      - name: Hiking in the Rockies
+      - name: Hiking 
         percent: 80
         icon: person-simple-walk
-      - name: Building Custom PCs
+      - name: Movies & Series
         percent: 90
         icon: cpu-chip
-      - name: Sci-Fi Reading
+      - name: Books
         percent: 70
         icon: book-open
 
