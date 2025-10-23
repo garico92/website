@@ -73,8 +73,10 @@ sections:
       filters:
         folders:
           - events
+        featured_only: true
     design:
-      view: card
+      view: article-grid
+      columns: 3
   - block: collection
     id: resources
     content:
