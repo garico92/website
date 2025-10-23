@@ -1,10 +1,10 @@
 ---
-title: "Cosmology from Home: Giovanni Aricò"
+title: "Baryonic effects on large-scale structure"
 
 event: Cosmology from Home 2022
 event_url: https://www.youtube.com/watch?v=hIXDmuQ25zM
 
-summary: Cosmology talk by Giovanni Aricò.
+summary: Recap of the role of baryonic physics and astrophysical processes in shaping the structure of the universe.
 abstract: The role of baryonic physics and astrophysical processes in shaping the structure of the universe is still largely unknown. Gravity is dominant at large scales, but at smaller scales, galaxy formation triggers supernovae and AGN feedback, perturbing the mass distribution and reshaping the gravitational potential. In this talk, I review how baryonic effects can bias cosmological analyses, in particular weak lensing surveys. After mentioning some of the methods that allow the modeling of baryonic effects in large-scale structure, I will focus on a specific technique — the baryon correction model (also known as baryonification). This model relies on N-body simulations for the description of gravity and analytical functions for the inclusion of baryons. I will explain the details of the model and show tests with hydrodynamical simulations that assess its accuracy. Emulators can be used to speed up the analyses by several orders of magnitude. I will conclude by explaining how the baryonification can be informed directly by observations, allowing for joint analyses of cosmology and astrophysics.
 
 # Talk start and end times.

@@ -24,7 +24,7 @@ summary: We designed an enhanced baryonification model that captures not only ho
 
 tags:
 - Cosmology, Baryons
-featured: false
+featured: true
 
 hugoblox:
   ids:
