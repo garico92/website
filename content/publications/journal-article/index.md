@@ -2,14 +2,11 @@
 title: "An example journal article"
 authors:
 - admin
-- Robert Ford
-author_notes:
-- "Equal contribution"
-- "Equal contribution"
-date: "2015-09-01T00:00:00Z"
+- Raul Angulo
+date: "2024-06-03T00:00:00Z"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2017-01-01T00:00:00Z"
+publishDate: "2024-06-10T00:00:00Z"
 
 # Publication type.
 # Accepts a single type but formatted as a YAML list (for Hugo requirements).
@@ -17,68 +14,32 @@ publishDate: "2017-01-01T00:00:00Z"
 publication_types: ["article-journal"]
 
 # Publication name and optional abbreviated publication name.
-publication: "*Journal of Source Themes, 1*(1)"
-publication_short: ""
+publication: "Astronomy & Astrophysics"
+publication_short: "A&A"
 
-abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.
+abstract: Baryonification algorithms model the impact of galaxy formation and feedback on the matter field in gravity-only simulations by adopting physically motivated parametric prescriptions. In this paper, we extend these models to describe gas temperature and pressure, allowing for a self-consistent modelling of the thermal Sunyaev-Zel'dovich effect, weak gravitational lensing, and their cross-correlation, down to small scales. We validate our approach by showing that it can simultaneously reproduce the electron pressure, gas, stellar, and dark matter power spectra as measured in all BAHAMAS hydrodynamical simulations. Specifically, with only two additional free parameters, we can fit the electron pressure auto- and cross-power spectra at 10% while reproducing the suppression in the matter power spectrum induced by baryons at the per cent level, for different active galactic nuclei (AGN) feedback strengths in BAHAMAS. Furthermore, we reproduce BAHAMAS convergence and thermal Sunyaev Zel'dovich angular power spectra within 1% and 10% accuracy, respectively, down to ℓ = 5000. When used jointly with cosmological rescaling algorithms, the baryonification presented here allows for a fast and accurate exploration of cosmological and astrophysical scenarios. Therefore, it can be employed to create mock catalogues, lightcones, and large training sets for emulators aimed at interpreting forthcoming multi-wavelength observations of the large-scale structure of the Universe.
 
 # Summary. An optional shortened abstract.
-summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
+summary: We designed an enhanced baryonification model that captures not only how galaxy formation shapes matter but also how it heats and pressurizes gas — unlocking realistic predictions for lensing and the thermal Sunyaev-Zel’dovich effect. With just two extra parameters, it matches state-of-the-art hydrodynamical simulations at percent-level precision, paving the way for fast, accurate modeling of the Universe’s small-scale structure.
 
 tags:
-- Source Themes
+- Cosmology, Baryons
 featured: false
 
 hugoblox:
   ids:
-    arxiv: 1512.04133v1
+    arxiv: 2406.01672
 
 links:
   - type: pdf
-    url: http://arxiv.org/pdf/1512.04133v1
+    url: https://arxiv.org/pdf/2406.01672
   - type: code
     url: https://github.com/HugoBlox/hugo-blox-builder
-  - type: dataset
-    url: ""
-  - type: poster
-    url: ""
-  - type: project
-    url: ""
-  - type: slides
-    url: https://www.slideshare.net/
-  - type: source
-    url: ""
-  - type: video
-    url: ""
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder. 
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/jdD8gXaTZsc)'
+  caption: 'Cosmic density fields obtained by applying our baryonification to an N-body simulation: dark matter, galaxies, bound gas in hydrostatic equilibrium, and gas ejected by AGN feedback'
   focal_point: ""
   preview_only: false
-
-# Associated Projects (optional).
-#   Associate this publication with one or more of your projects.
-#   Simply enter your project's folder or file name without extension.
-#   E.g. `internal-project` references `content/project/internal-project/index.md`.
-#   Otherwise, set `projects: []`.
-projects: []
-
-# Slides (optional).
-#   Associate this publication with Markdown slides.
-#   Simply enter your slide deck's filename without extension.
-#   E.g. `slides: "example"` references `content/slides/example/index.md`.
-#   Otherwise, set `slides: ""`.
-slides: ""
 ---
-
-{{% callout note %}}
-Click the *Cite* button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-{{% /callout %}}
-
-{{% callout note %}}
-Create your slides in Markdown - click the *Slides* button to check out the example.
-{{% /callout %}}
-
-Add the publication's **full text** or **supplementary notes** here. You can use rich formatting such as including [code, math, and images](https://docs.hugoblox.com/content/writing-markdown-latex/).
