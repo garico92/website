@@ -55,7 +55,7 @@ sections:
         featured_only: true
     design:
       view: article-grid
-      columns: 2
+      columns: 3
   - block: collection
     content:
       title: Recent Publications
@@ -78,7 +78,7 @@ sections:
   - block: collection
     id: news
     content:
-      title: Media
+      title: Resources
       subtitle: ''
       text: ''
       # Page type to display. E.g. post, talk, publication...
