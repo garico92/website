@@ -1,5 +1,5 @@
 ---
-title: "An example journal article"
+title: "Baryonification extended to thermal Sunyaev Zel’dovich"
 authors:
 - admin
 - Raul Angulo
