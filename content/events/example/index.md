@@ -1,24 +1,16 @@
 ---
-title: Example Talk
+title: "Cosmology Talks: Giovanni Aricò"
 
-event: Hugo Blox Builder Conference
-event_url: https://example.org
+event: Cosmology Talks
+event_url: https://www.youtube.com/watch?v=023dBECojxM
 
-location: Hugo Blox Builder HQ
-address:
-  street: 450 Serra Mall
-  city: Stanford
-  region: CA
-  postcode: '94305'
-  country: United States
-
-summary: An example talk using Hugo Blox Builder's Markdown slides feature.
-abstract: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellusac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam.'
+summary: Cosmology talk by Giovanni Aricò.
+abstract: Giovanni Arico tells us about his recent work adding baryons to the modelling of Dark Energy Survey cosmic shear analysis. By adding baryonic modelling he and collaborators are able to use all of the DES data. The cosmological constraints don't tighten a lot, because although a lot of data is added, the baryonic effects are largely degenerate with cosmology. However, they are able to obtain a clear lower bound on one of the baryonic parameters, which parameterises the typical halo mass that has ejected 50% of its gas. Their results are 1.4σ different the DES' own cosmic shear analysis, and therefore their S₈ measurement is not in tension with Planck. This isn't mainly due top the baryons though, so there is no clear story that "baryons are responsible for the S₈ tension". Instead the difference comes roughly half from the methods to include non-linear clustering and half from intrinsic alignment modelling. This isn't a death knell for the S₈ tension in any case because DES cosmic shear alone wasn't in very large tension with Planck, and many other measurements are - however it does highlight how a number of assumptions, each on their own small enough to perhaps not worry about, can ultimately add up to something more substantial. The future is bright as, with appropriate modelling, the "baryonification" methods used here can be used for all the other large scale structure measurements out there. Also, if the baryon parameters are constrained with additional data sets (tSZ, kSZ, X-ray temperature, stellar mass function, etc) then the degeneracies with cosmological parameters can be broken, allowing full constraining power from these small scales.
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: '2030-06-01T13:00:00Z'
-date_end: '2030-06-01T15:00:00Z'
+date: '2023-06-01T13:00:00Z'
+date_end: '2023-06-01T15:00:00Z'
 all_day: false
 
 # Schedule page publish date (NOT talk date).
@@ -33,41 +25,14 @@ tags: []
 featured: false
 
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/bzdhc5b3Bxs)'
+  caption: ''
   focal_point: Right
 
 links:
-  - type: code
-    url: https://github.com
-  - type: slides
-    url: https://slideshare.net
   - type: video
-    url: https://youtube.com
-
-# Markdown Slides (optional).
-#   Associate this talk with Markdown slides.
-#   Simply enter your slide deck's filename without extension.
-#   E.g. `slides = "example-slides"` references `content/slides/example-slides.md`.
-#   Otherwise, set `slides = ""`.
-slides: ""
-
-# Projects (optional).
-#   Associate this post with one or more of your projects.
-#   Simply enter your project's folder or file name without extension.
-#   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
-#   Otherwise, set `projects = []`.
-projects:
-  - example
+    url: https://www.youtube.com/watch?v=023dBECojxM
+  - type: paper
+    url: https://arxiv.org/abs/2303.05537
+  - type: code
+    url:  https://bitbucket.org/rangulo/baccoemu/src/master/
 ---
-
-{{% callout note %}}
-Click on the **Slides** button above to view the built-in slides feature.
-{{% /callout %}}
-
-Slides can be added in a few ways:
-
-- **Create** slides using Hugo Blox Builder's [_Slides_](https://docs.hugoblox.com/reference/content-types/) feature and link using the `slides` parameter in the front matter of the talk file
-- **Upload** an existing slide deck to this page bundle and link it using `links: [{ type: slides, url: path/to/file } ]` in front matter
-- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://docs.hugoblox.com/reference/markdown/).
-
-Further event details, including [page elements](https://docs.hugoblox.com/reference/markdown/) such as image galleries, can be added to the body of this page.
