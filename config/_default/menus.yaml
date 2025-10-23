@@ -25,7 +25,4 @@ main:
   - name: Short CV
     url: /#short-cv
     weight: 13
-  - name: Resources
-    url: /#resources
-    weight: 14
 
