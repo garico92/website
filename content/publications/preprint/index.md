@@ -2,6 +2,11 @@
 title: "DES Y3 cosmic shear down to small scales: constraints on cosmology and baryons"
 authors:
 - admin
+- Raul Angulo 
+- Matteo Zennaro 
+- Sergio Contreras 
+- Angela Chen
+- Carlos Hernández-Monteagudo
 date: "2023-08-07T00:00:00Z"
 
 # Schedule page publish date (NOT publication's date).
@@ -10,11 +15,11 @@ publishDate: "2023-08-08T00:00:00Z"
 # Publication type.
 # Accepts a single type but formatted as a YAML list (for Hugo requirements).
 # Enter a publication type from the CSL standard.
-publication_types: ["article"]
+publication_types: ['article-journal']
 
 # Publication name and optional abbreviated publication name.
-publication: ""
-publication_short: ""
+publication: "Astronomy & Astrophysics"
+publication_short: "A&A"
 
 abstract: We present the first analysis of cosmic shear measured in DES Y3 that employs the entire range of angular scales in the data. To achieve this, we build upon recent advances in the theoretical modelling of weak lensing provided by a combination of N-body simulations, physical models of baryonic processes, and neural networks. Specifically, we use BACCOemu to model the linear and nonlinear matter power spectrum including baryonic physics, allowing us to robustly exploit scales smaller than those used by the DES Collaboration. We show that the additional data produce cosmological parameters that are tighter but consistent with those obtained from larger scales, while also constraining the distribution of baryons. In particular, we measure the mass scale at which haloes have lost half of their gas, log Mc = 14.38+0.60-0.56 log(h−1 M⊙), and a parameter that quantifies the weighted amplitudes of the present-day matter inhomogeneities, S8 = 0.799+0.023 −0.015. Our constraint on S8 is statistically compatible with that inferred from the Planck satellite’s data at the 0.9σ level. We find instead a 1.4σ shift in comparison to that from the official DES Y3 cosmic shear, because of different choices in the modelling of intrinsic alignment, non-linearities, baryons, and lensing shear ratios. We conclude that small scales in cosmic shear data contain valuable astrophysical and cosmological information and thus should be included in standard analyses.
 
