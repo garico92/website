@@ -21,9 +21,7 @@ publication_types: ['speech']
 # Publication name and optional abbreviated publication name.
 #publication:  Astrophysics Source Code Library
 
-abstract: Numerical simulations currently provide our most accurate predictions for structure formation in the Universe, in a wide range of scales and redshifts. 
-We will overview cosmological N-body simulations, discussing common assumptions, approximations and regime of applicability. Furthermore, we will introduce the main hydrodynamical schemes, and review the sub-grid prescriptions used to model galaxy formation with its relevant astrophysical processes. 
-Finally, we will go through useful simulation post-processing techniques and tools for cosmological analyses.
+abstract: Numerical simulations currently provide our most accurate predictions for structure formation in the Universe, in a wide range of scales and redshifts. We will overview cosmological N-body simulations, discussing common assumptions, approximations and regime of applicability. Furthermore, we will introduce the main hydrodynamical schemes, and review the sub-grid prescriptions used to model galaxy formation with its relevant astrophysical processes. Finally, we will go through useful simulation post-processing techniques and tools for cosmological analyses.
 
 # Summary. An optional shortened abstract.
 summary: Lecture on numerical simulations of the universe delivered for the COLOURS Cosmology school. 
