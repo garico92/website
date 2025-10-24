@@ -1,7 +1,14 @@
+
+/* Light mode background */
 [data-theme="light"] .home-section-hero {
     background-image: url("/media/sim_inverted.png");
+    background-size: cover;
+    background-position: center;
 }
 
+/* Dark mode background */
 [data-theme="dark"] .home-section-hero {
     background-image: url("/media/sim.png");
+    background-size: cover;
+    background-position: center;
 }
