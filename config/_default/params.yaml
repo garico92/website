@@ -10,13 +10,19 @@ appearance:
 
 assets:
   disableHLJS: true 
+  favicon: "favicon.ico"
+  favicon16x16: "favicon-16x16.png" 
+  favicon32x32: "favicon-32x32.png" 
+  webmanifest: "site.webmanifest"
+  apple_touch_icon: "apple-touch-icon.png"
+
   css:
     - css/custom.css
 
 social:
   image:"media/sim.png"
 
-favicon: "/favicon.png"
+
 
 # SEO
 marketing:
