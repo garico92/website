@@ -1,5 +1,7 @@
-/* Full homepage background */
-body.homepage {
-    background: url("assets/media/lss.png") no-repeat center center;
-    background-size: cover;
+[data-theme="light"] .home-section-hero {
+    background-image: url("/media/sim_inverted.png");
+}
+
+[data-theme="dark"] .home-section-hero {
+    background-image: url("/media/sim.png");
 }
