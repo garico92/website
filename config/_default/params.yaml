@@ -9,13 +9,14 @@ appearance:
   color: indigo
 
 assets:
+  disableHLJS: true 
   css:
     - css/custom.css
 
 social:
   image:"media/sim.png"
 
-favicon: "/favicon.ico"
+favicon: "/favicon.png"
 
 # SEO
 marketing:
