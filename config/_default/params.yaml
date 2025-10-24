@@ -12,6 +12,9 @@ assets:
   css:
     - css/custom.css
 
+social:
+  image:"media/sim.png"
+
 # SEO
 marketing:
   seo:
