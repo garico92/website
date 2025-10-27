@@ -34,9 +34,9 @@ featured: true
 
 # Custom links
 links:
-  - type: Slides
+  - type: slides
     url: https://indico.ijclab.in2p3.fr/event/11110/contributions/37761/attachments/25686/37870/giovanni_slides.pdf
-  - type: School
+  - type: school
     url: https://indico.ijclab.in2p3.fr/event/11110/overview
 
 
