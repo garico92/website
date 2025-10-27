@@ -9,7 +9,7 @@ design:
     image_darken: 1   # optional: dark overlay for readability (0–1)
     image_parallax: true # optional: parallax scrolling
     text_color_light: false # makes text white for contrast
-    
+
 title: 'How to simulate the large-scale structure of the universe'
 
 # Authors
