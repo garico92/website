@@ -1,4 +1,13 @@
 ---
+design:
+  # Default section spacing
+  spacing: '6rem'
+  background:
+    image: 
+      filename: "sim.png"
+    image_darken: 1   # optional: dark overlay for readability (0–1)
+    image_parallax: true # optional: parallax scrolling
+    text_color_light: false # makes text white for contrast
 title: "DES Y3 cosmic shear down to small scales: constraints on cosmology and baryons"
 authors:
 - admin
