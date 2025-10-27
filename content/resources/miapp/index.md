@@ -1,5 +1,5 @@
 ---
-title: 'COnstraining baryonic physics in LSS'
+title: 'Constraining baryonic physics in LSS'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
@@ -18,6 +18,17 @@ publishDate: '2023-01-01T00:00:00Z'
 publication_types: ['speech']
 
 abstract: Slides of the talk at the MIAPbP workshop.
+
+
+design:
+  # Default section spacing
+  spacing: '6rem'
+  background:
+    image: 
+      filename: "sim.png"
+    image_darken: 1   # optional: dark overlay for readability (0–1)
+    image_parallax: true # optional: parallax scrolling
+    text_color_light: false # makes text white for contrast
 
 
 tags:
