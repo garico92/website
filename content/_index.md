@@ -86,6 +86,7 @@ sections:
     design:
       # Choose a layout view
       view: card
+      columns: 3
       # Reduce spacing
       spacing:
         padding: [0, 0, 0, 0]
