@@ -35,8 +35,7 @@ tags:
   - Cosmology, Baryons, Simulations
 
 # Display this page in the Featured widget?
-featured: true
-
+featured: false
 
 # Custom links
 links:
@@ -44,11 +43,10 @@ links:
     url: https://drive.google.com/drive/folders/1mMNgyKE2jp4P0K4wFAr6VpHm5I-mf8sA
 
 
-
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder.
 image:
-  caption: ''
+  caption: 'Preview'
   focal_point: ''
   preview_only: false
 
