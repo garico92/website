@@ -48,7 +48,7 @@ sections:
   - block: collection
     id: publications
     content:
-      title: Publications
+      title: Selected Publications
       filters:
         folders:
           - publications
@@ -58,7 +58,7 @@ sections:
       columns: 2
   - block: collection
     content:
-      title: Recent Publications
+      title: Publications
       text: ''
       filters:
         folders:
