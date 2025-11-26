@@ -82,7 +82,7 @@ sections:
       title: Resources
       filters:
         folders:
-          - resources
+          - _resources
     design:
       # Choose a layout view
       view: card
