@@ -1,1 +1,1 @@
-COde to generate my website. Based on https://github.com/HugoBlox/theme-academic-cv. Feel free to copy it! 
+Code to generate my website. Based on https://github.com/HugoBlox/theme-academic-cv.
