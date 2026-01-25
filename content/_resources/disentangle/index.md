@@ -1,14 +1,15 @@
 ---
 title: 'Disentangle'
+type: resources
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
   - admin
-  - Raul Angulo 
-  - Matteo Zennaro 
-  - Marcos Pellejero-Ibañez
+  - "Raul Angulo" 
+  - "Matteo Zennaro" 
+  - "Marcos Pellejero-Ibañez"
 
 
 date: '2020-11-30T00:00:00Z'
@@ -30,7 +31,10 @@ abstract: BACCOemu provides a collection of emulators for large-scale structure 
 summary: BACCOemu is a software library providing neural-network emulators for cosmological large-scale structure statistics.
 
 tags:
-  - Cosmology, Baryons, Simulations , Machine Learning
+  - Cosmology
+  - Baryons
+  - Simulations
+  - Machine Learning
 
 # Display this page in the Featured widget?
 featured: true
