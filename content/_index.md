@@ -24,6 +24,9 @@ sections:
       button:
         text: Curriculum Vitae
         url: https://drive.google.com/file/d/1V-aCVBPsB-IDIA41RHm67a5p_Lzw83Wc/view?usp=sharing
+      button:
+        text: Publication List
+        url: https://scholar.google.com/citations?hl=it&user=vjSA_X0AAAAJ&view_op=list_works
       headings:
         about: ''
         education: ''
@@ -47,9 +50,6 @@ sections:
       columns: '1'
   - block: collection
     id: publications
-    button:
-        text: Publication List
-        url: https://scholar.google.com/citations?hl=it&user=vjSA_X0AAAAJ&view_op=list_works
     content:
       title: Selected Publication
       filters:
@@ -67,6 +67,9 @@ sections:
         folders:
           - publications
         exclude_featured: false
+      button:
+        text: Publication List
+        url: https://scholar.google.com/citations?hl=it&user=vjSA_X0AAAAJ&view_op=list_works
     design:
       view: citation
   - block: collection
