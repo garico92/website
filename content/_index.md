@@ -64,7 +64,13 @@ sections:
   - block: collection
     content:
       title: Cite
-      text: '[Publication List](https://scholar.google.com/citations?hl=it&user=vjSA_X0AAAAJ&view_op=list_works)'
+      text: |
+        <p style="margin-top: 1rem;">
+          <a href="https://scholar.google.com/citations?hl=it&user=vjSA_X0AAAAJ&view_op=list_works"
+            style="font-size: 1.25rem; text-decoration: underline; font-weight: 500;">
+            Full Publication List
+          </a>
+        </p>
       filters:
         folders:
           - publications
