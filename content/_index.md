@@ -19,13 +19,16 @@ sections:
     content:
       # Choose a user profile to display (a folder name within `content/authors/`)
       username: admin
-      text: ''
-      # Show a call-to-action button under your biography? (optional)
+      text: |
+        <p style="margin-top: 1rem;">
+          <a href="https://scholar.google.com/citations?hl=it&user=vjSA_X0AAAAJ&view_op=list_works"
+            style="font-size: 1.25rem; text-decoration: underline; font-weight: 500;">
+            Publication List
+          </a>
+        </p>
       button:
-        - text: Curriculum Vitae
-          url: https://drive.google.com/file/d/1V-aCVBPsB-IDIA41RHm67a5p_Lzw83Wc/view?usp=sharing
-        - text: Publication List
-          url: https://scholar.google.com/citations?hl=it&user=vjSA_X0AAAAJ&view_op=list_works
+        text: Curriculum Vitae
+        url: https://drive.google.com/file/d/1V-aCVBPsB-IDIA41RHm67a5p_Lzw83Wc/view?usp=sharing
       headings:
         about: ''
         education: ''
