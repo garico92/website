@@ -1,0 +1,99 @@
+{{/*
+  Video background hook.
+
+  Reads frontmatter:
+    design:
+      background:
+        video:
+          filename: "lss.mp4"     # must live in assets/media/
+        image_darken: 0.4         # optional 0..1 dark overlay
+        text_color_light: true    # optional, lightens body text
+
+  Renders a fixed, looping, muted, playsinline <video> element behind
+  every other element on the page (z-index: -2). The body scrolls on
+  top of it. Works on any page that declares the frontmatter — so
+  dropping it in content/_index.md gives you a video landing page.
+*/}}
+
+{{- $bg := .Params.design.background -}}
+{{- with $bg -}}
+  {{- with .video -}}
+    {{- $filename := .filename | default "" -}}
+    {{- if $filename -}}
+      {{- $video := resources.Get (printf "media/%s" $filename) -}}
+      {{- with $video -}}
+        {{- $darken := $bg.image_darken | default 0 -}}
+        {{- $lightText := $bg.text_color_light | default false -}}
+<video
+  id="hbx-bg-video"
+  autoplay
+  loop
+  muted
+  playsinline
+  preload="auto"
+  aria-hidden="true"
+>
+  <source src="{{ .RelPermalink }}" type="video/mp4">
+</video>
+<style>
+  /* The video itself — fixed to the viewport, behind everything. */
+  #hbx-bg-video {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+    pointer-events: none;
+  }
+
+  /* Let the video show through the theme's default page background,
+     hero background, and any custom.css hero-image rules. */
+  html,
+  body,
+  #page-bg,
+  .page-body,
+  .home-section-hero,
+  .landing-section,
+  [class*="hbx-section"],
+  [class*="section"] > .hbx-section-bg {
+    background: transparent !important;
+  }
+
+  {{ if gt $darken 0.0 }}
+  /* Optional dark overlay for contrast. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, {{ $darken }});
+    z-index: -1;
+    pointer-events: none;
+  }
+  {{ end }}
+
+  {{ if $lightText }}
+  body, .page-body, .hbx-section { color: #f5f5f5; }
+  {{ end }}
+
+  /* Respect users who prefer reduced motion — pause the video. */
+  @media (prefers-reduced-motion: reduce) {
+    #hbx-bg-video { display: none; }
+  }
+</style>
+<script>
+  // Some browsers (iOS Safari on low-power mode) ignore autoplay until
+  // a user gesture. Start playing on first interaction as a fallback.
+  (function () {
+    var v = document.getElementById('hbx-bg-video');
+    if (!v) return;
+    var tryPlay = function () { v.play().catch(function () {}); };
+    tryPlay();
+    window.addEventListener('click', tryPlay, { once: true, passive: true });
+    window.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+  })();
+</script>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
