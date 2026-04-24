@@ -20,7 +20,7 @@ assets:
     - css/custom.css
 
 social:
-  image:"media/sim.png"
+  image: "media/sharing.png"   # (not actually read by the theme — see assets/media/sharing.png)
 
 
 
@@ -29,9 +29,9 @@ marketing:
   seo:
     site_type: Person
     local_business_type: ''
-    org_name: ''
-    description: ''
-    twitter: ''
+    org_name: 'INFN Bologna'
+    description: 'Computational cosmologist probing dark matter, dark energy, and General Relativity through large-scale structure, simulations, and machine learning.'
+    twitter: ''   # add your @handle here if you have one, e.g. 'garico92'
   analytics:
     google_analytics: ''
     baidu_tongji: ''
