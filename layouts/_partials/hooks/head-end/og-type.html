@@ -12,8 +12,19 @@
 {{- else if and (eq .Kind "term") (eq .Section "authors") -}}
   {{- $ogType = "profile" -}}
 {{- end -}}
+
+{{/*
+  Build og:locale as "xx_YY" from site.Language.Lang (e.g. "en-us" → "en_US").
+  site.Language has no .Locale field in Hugo 0.150, so we derive it from .Lang.
+*/}}
+{{- $lang := site.Language.Lang | default "en-us" -}}
+{{- $parts := split $lang "-" -}}
+{{- $ogLocale := index $parts 0 -}}
+{{- if gt (len $parts) 1 -}}
+  {{- $ogLocale = printf "%s_%s" (index $parts 0) (upper (index $parts 1)) -}}
+{{- end -}}
 <meta property="og:type" content="{{ $ogType }}">
-<meta property="og:locale" content="{{ replace (site.Language.Locale | default "en_US") "-" "_" }}">
+<meta property="og:locale" content="{{ $ogLocale }}">
 
 {{/*
   article:* metadata for single pages — gives LinkedIn/Twitter nicer cards.
