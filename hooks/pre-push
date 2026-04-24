@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Build the site before allowing a push, so CI never fails on a template error.
+set -e
+echo "→ Running hugo build check before push..."
+hugo --quiet --gc
+echo "✓ Build clean"

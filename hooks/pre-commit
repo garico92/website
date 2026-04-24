@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Validate YAML config + Markdown front-matter on staged files before commit.
+# Fast: only inspects files actually staged for this commit.
+
+set -e
+
+STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ya?ml|md)$' || true)
+if [ -z "$STAGED" ]; then
+    exit 0
+fi
+
+python3 - <<'PY'
+import subprocess, sys, pathlib, re
+try:
+    import yaml
+except ImportError:
+    print("pre-commit: PyYAML not installed — skipping YAML validation.", file=sys.stderr)
+    print("           install with: pip install pyyaml", file=sys.stderr)
+    sys.exit(0)
+
+def staged_files():
+    out = subprocess.check_output(
+        ["git", "diff", "--cached", "--name-only", "--diff-filter=ACM"],
+        text=True,
+    ).splitlines()
+    return [f for f in out if f.endswith((".yaml", ".yml", ".md"))]
+
+FM_RE = re.compile(r"^---\s*\n(.*?)\n---\s*(\n|$)", re.DOTALL)
+
+errors = []
+for f in staged_files():
+    p = pathlib.Path(f)
+    if not p.exists():
+        continue
+    text = p.read_text(encoding="utf-8", errors="replace")
+    try:
+        if f.endswith((".yaml", ".yml")):
+            yaml.safe_load(text)
+        elif f.endswith(".md"):
+            m = FM_RE.match(text)
+            if m:
+                yaml.safe_load(m.group(1))
+    except yaml.YAMLError as e:
+        errors.append(f"  x {f}\n    {e}")
+
+if errors:
+    print("pre-commit: YAML / front-matter errors", file=sys.stderr)
+    print("\n".join(errors), file=sys.stderr)
+    sys.exit(1)
+
+print("pre-commit: YAML ok")
+PY
