@@ -1,0 +1,115 @@
+{{/*
+  Media page behaviour (only emitted on pages that use the `media-item` shortcode).
+
+  * Deep-zoom viewer: a <dialog> with OpenSeadragon, loaded on demand from
+    static/vendor/openseadragon/ (nothing is downloaded until a visitor opens it).
+  * Looping animations: play only while visible, click (or the button) to pause,
+    and stay paused for visitors who prefer reduced motion.
+*/}}
+{{- if .Store.Get "media_js" -}}
+<dialog id="media-zoom" class="media-zoom" aria-label="Deep-zoom viewer">
+  <div class="media-zoom__bar">
+    <span class="media-zoom__title" id="media-zoom-title"></span>
+    <span class="media-zoom__hint">scroll / pinch to zoom · drag to pan</span>
+    <div class="media-zoom__tools">
+      <button type="button" id="media-zoom-in" aria-label="Zoom in">{{ partial "functions/get_icon" (dict "name" "plus") }}</button>
+      <button type="button" id="media-zoom-out" aria-label="Zoom out">{{ partial "functions/get_icon" (dict "name" "minus") }}</button>
+      <button type="button" id="media-zoom-home" aria-label="Reset view">{{ partial "functions/get_icon" (dict "name" "arrows-pointing-in") }}</button>
+      <button type="button" id="media-zoom-full" aria-label="Full screen">{{ partial "functions/get_icon" (dict "name" "arrows-pointing-out") }}</button>
+      <button type="button" id="media-zoom-close" aria-label="Close viewer">{{ partial "functions/get_icon" (dict "name" "x-mark") }}</button>
+    </div>
+  </div>
+  <div id="media-zoom-viewer" class="media-zoom__viewer"></div>
+</dialog>
+
+<script>
+(function () {
+  var OSD_SRC = {{ "vendor/openseadragon/openseadragon.min.js" | relURL }};
+
+  /* ---------- deep zoom ---------- */
+  var dlg = document.getElementById('media-zoom');
+  var viewer = null, current = null, osdLoading = null;
+
+  function loadOSD() {
+    if (window.OpenSeadragon) return Promise.resolve();
+    if (osdLoading) return osdLoading;
+    osdLoading = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = OSD_SRC; s.onload = resolve; s.onerror = reject;
+      document.head.appendChild(s);
+    });
+    return osdLoading;
+  }
+
+  function openZoom(dzi, title) {
+    document.getElementById('media-zoom-title').textContent = title || '';
+    if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+    loadOSD().then(function () {
+      if (!viewer) {
+        viewer = OpenSeadragon({
+          id: 'media-zoom-viewer',
+          tileSources: dzi,
+          showNavigator: true,
+          navigatorPosition: 'BOTTOM_RIGHT',
+          navigatorBackground: '#000',
+          navigatorBorderColor: 'rgba(255,255,255,.25)',
+          navigatorDisplayRegionColor: '#a5b4fc',
+          zoomInButton: 'media-zoom-in',
+          zoomOutButton: 'media-zoom-out',
+          homeButton: 'media-zoom-home',
+          fullPageButton: 'media-zoom-full',
+          maxZoomPixelRatio: 2,
+          visibilityRatio: 0.8,
+          constrainDuringPan: true,
+          animationTime: 0.6,
+          crossOriginPolicy: false
+        });
+      } else if (current !== dzi) {
+        viewer.open(dzi);
+      }
+      current = dzi;
+    }).catch(function () {
+      document.getElementById('media-zoom-viewer').innerHTML =
+        '<p style="color:#fff;padding:2rem">Could not load the deep-zoom viewer.</p>';
+    });
+  }
+
+  document.querySelectorAll('.media-zoom-trigger').forEach(function (el) {
+    el.addEventListener('click', function () { openZoom(el.dataset.dzi, el.dataset.title); });
+  });
+  document.getElementById('media-zoom-close').addEventListener('click', function () { dlg.close(); });
+  // click on the backdrop closes the dialog
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+
+  /* ---------- looping animations ---------- */
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.media-loop').forEach(function (box) {
+    var v = box.querySelector('video');
+    var btn = box.querySelector('.media-loop-toggle');
+    var userPaused = reduce, visible = false;
+
+    function sync() {
+      var playing = !v.paused;
+      box.classList.toggle('is-paused', !playing);
+      btn.setAttribute('aria-label', playing ? 'Pause animation' : 'Play animation');
+    }
+    function update() {
+      if (visible && !userPaused) { v.play().catch(function () {}); } else { v.pause(); }
+    }
+    function toggle() { userPaused = !v.paused; if (!userPaused) visible = true; update(); }
+
+    v.addEventListener('play', sync);
+    v.addEventListener('pause', sync);
+    v.addEventListener('click', toggle);
+    btn.addEventListener('click', toggle);
+    sync();
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting; update();
+      }, { threshold: 0.35 }).observe(box);
+    } else { visible = true; update(); }
+  });
+})();
+</script>
+{{- end -}}

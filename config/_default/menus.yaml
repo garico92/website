@@ -28,3 +28,6 @@ main:
   - name: Resources
     url: /#resources
     weight: 14
+  - name: Media
+    url: media/
+    weight: 15

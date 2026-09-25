@@ -1,0 +1,60 @@
+{
+  "items": {
+    "baryonification": {
+      "bytes": 1375699,
+      "download": {
+        "bytes": 1375699,
+        "file": "baryonification.mp4"
+      },
+      "duration_s": 25.0,
+      "file": "baryonification.mp4",
+      "height": 902,
+      "kind": "loop",
+      "poster": "baryonification_poster.webp",
+      "width": 820
+    },
+    "nenya-composite-zoom": {
+      "dzi": "deepzoom/nenya-composite-zoom.dzi",
+      "height": 4096,
+      "kind": "image",
+      "preview": "nenya-composite-zoom_1600.webp",
+      "preview_bytes": 789384,
+      "release": {
+        "bytes": 34345432,
+        "file": "nenya_composite_zoom_4096px.png"
+      },
+      "tiles_bytes": 8083984,
+      "width": 4096
+    },
+    "nenya-orbit-dive": {
+      "duration_s": 25.0,
+      "fps": 24.0,
+      "height": 1080,
+      "hold_end_s": 2.0,
+      "kind": "video",
+      "poster": "nenya-orbit-dive_poster.webp",
+      "release": {
+        "bytes": 487327909,
+        "duration_s": 25.0,
+        "file": "nenya_orbit_dive_1080p_25s.mp4"
+      },
+      "renditions": {
+        "1080p": {
+          "bytes": 34629842,
+          "codec": "h264",
+          "file": "nenya-orbit-dive_1080p.mp4",
+          "height": 1080
+        },
+        "720p": {
+          "bytes": 13606956,
+          "codec": "h264",
+          "file": "nenya-orbit-dive_720p.mp4",
+          "height": 720
+        }
+      },
+      "width": 1920
+    }
+  },
+  "release_base": "https://github.com/garico92/website/releases/download/media-v1/",
+  "release_tag": "media-v1"
+}

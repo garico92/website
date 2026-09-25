@@ -51,7 +51,7 @@ featured: true
 # Standard identifiers for auto-linking
 hugoblox:
   ids:
-    doi: 10.1093/mnras/staa1478 
+    doi: 10.1093/mnras/stab1911
 
 # Custom links
 links:

@@ -1,9 +1,34 @@
 #!/usr/bin/env bash
-# Validate YAML config + Markdown front-matter on staged files before commit.
-# Fast: only inspects files actually staged for this commit.
+# Pre-commit checks (fast: only inspects files staged for this commit):
+#   1. no file above MAX_FILE_MB (default 50 MB)
+#   2. YAML config + Markdown front-matter parse correctly
 
 set -e
 
+# ---------------------------------------------------------------------------
+# 1. Block large files. GitHub rejects files > 100 MB and warns above 50 MB;
+#    heavy media belong in media_originals/ (git-ignored) + the GitHub Release.
+#    Override once with:  MAX_FILE_MB=80 git commit ...   (or --no-verify)
+# ---------------------------------------------------------------------------
+MAX_FILE_MB=${MAX_FILE_MB:-50}
+LIMIT=$((MAX_FILE_MB * 1024 * 1024))
+BIG=""
+while IFS= read -r -d '' f; do
+    size=$(git cat-file -s ":$f" 2>/dev/null || echo 0)
+    if [ "$size" -gt "$LIMIT" ]; then
+        BIG="$BIG\n  x $f ($((size / 1024 / 1024)) MB)"
+    fi
+done < <(git diff --cached --name-only --diff-filter=ACM -z)
+if [ -n "$BIG" ]; then
+    printf "pre-commit: staged files larger than %s MB:%b\n" "$MAX_FILE_MB" "$BIG" >&2
+    echo "           Put originals in media_originals/ and run scripts/make_web_media.py," >&2
+    echo "           then upload them with scripts/publish_media_release.sh." >&2
+    exit 1
+fi
+
+# ---------------------------------------------------------------------------
+# 2. Validate YAML config + Markdown front-matter on staged files.
+# ---------------------------------------------------------------------------
 STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ya?ml|md)$' || true)
 if [ -z "$STAGED" ]; then
     exit 0

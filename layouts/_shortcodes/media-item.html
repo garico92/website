@@ -1,0 +1,162 @@
+{{/*
+  media-item — one entry of the Media page (image / video / looping animation).
+
+  Everything technical (file names, sizes, dimensions, release URL) comes from
+  `manifest.json` in the same page bundle, written by scripts/make_web_media.py.
+
+  Usage (in content/media/index.md):
+
+    {{< media-item id="nenya-orbit-dive" title="Diving into a galaxy cluster"
+        alt="..." note="Acknowledgement (markdown)" >}}
+    Description in **markdown**, links allowed.
+    {{< /media-item >}}
+
+  Parameters
+    id      required  key in manifest.json
+    title   required
+    alt     optional  alt text / accessible label for the media
+    note    optional  small print under the description (markdown): acknowledgements, credits
+    layout  optional  "split" (media beside text) or "wide" (media full width, text below).
+                      Default: wide for videos, split otherwise.
+*/}}
+{{- $id := .Get "id" -}}
+{{- $title := .Get "title" -}}
+{{- $alt := .Get "alt" | default $title -}}
+{{- $man := dict -}}
+{{- with .Page.Resources.Get "manifest.json" -}}{{- $man = . | transform.Unmarshal -}}{{- end -}}
+{{- $it := index ($man.items | default dict) $id -}}
+{{- if not $it -}}
+  {{- errorf "media-item: id %q not found in %s/manifest.json — run scripts/make_web_media.py" $id .Page.File.Dir -}}
+{{- end -}}
+{{- .Page.Store.Set "media_js" true -}}
+{{- $kind := $it.kind -}}
+{{- $layout := .Get "layout" | default (cond (eq $kind "video") "wide" "split") -}}
+{{- $res := .Page.Resources -}}
+{{- $anchor := $id | anchorize -}}
+{{- $license := .Page.Params.media_license | default "" -}}
+
+{{- /* download link: full-quality file on the GitHub Release ("release"),
+       or the light file already on the website ("download") */ -}}
+{{- $dl := "" -}}{{- $dl_label := "" -}}{{- $dl_text := "Download original" -}}
+{{- $dl_file := dict -}}
+{{- with $it.release -}}
+  {{- $dl_file = . -}}
+  {{- $dl = printf "%s%s" $man.release_base .file -}}
+{{- else -}}
+  {{- with $it.download -}}
+    {{- $dl_file = . -}}
+    {{- with $res.Get .file -}}{{- $dl = .RelPermalink -}}{{- end -}}
+    {{- $dl_text = "Download" -}}
+  {{- end -}}
+{{- end -}}
+{{- with $dl -}}
+  {{- $ext := path.Ext $dl_file.file | strings.TrimPrefix "." | upper -}}
+  {{- $mb := div (float $dl_file.bytes) 1e6 -}}
+  {{- $size := cond (ge $mb 100.0) (lang.FormatNumber 0 $mb) (lang.FormatNumber 1 $mb) -}}
+  {{- $dl_label = printf "%s · %s MB" $ext $size -}}
+{{- end -}}
+
+{{- /* one-line technical summary */ -}}
+{{- $specs := slice (printf "%d × %d px" (int $it.width) (int $it.height)) -}}
+{{- if eq $kind "video" -}}
+  {{- $specs = $specs | append (printf "%g fps" $it.fps) (printf "%.0f s" $it.duration_s) -}}
+{{- else if eq $kind "loop" -}}
+  {{- $specs = $specs | append (printf "%.0f s loop" $it.duration_s) -}}
+{{- end -}}
+
+<section id="{{ $anchor }}" class="not-prose media-item scroll-mt-24 my-14 first:mt-6 {{ if eq $layout "split" }}grid gap-8 md:grid-cols-12 md:items-start{{ end }}">
+
+  {{/* ---------------- media ---------------- */}}
+  <div class="{{ if eq $layout "split" }}md:col-span-7{{ else }}mb-6{{ end }}">
+  {{- if eq $kind "image" -}}
+    {{- $pv := $res.Get $it.preview -}}
+    {{- $dzi := $res.Get $it.dzi -}}
+    {{- $small := $pv.Resize "800x webp q80" -}}
+    <button type="button" class="media-zoom-trigger group relative block w-full cursor-zoom-in overflow-hidden rounded-xl ring-1 ring-black/10 dark:ring-white/10 shadow-lg"
+            data-dzi="{{ $dzi.RelPermalink }}" data-title="{{ $title }}" aria-label="Open {{ $title }} in the deep-zoom viewer">
+      <img src="{{ $pv.RelPermalink }}"
+           srcset="{{ $small.RelPermalink }} 800w, {{ $pv.RelPermalink }} {{ $pv.Width }}w"
+           sizes="(min-width: 1024px) 640px, 100vw"
+           width="{{ $pv.Width }}" height="{{ $pv.Height }}"
+           alt="{{ $alt }}" loading="lazy" decoding="async"
+           class="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.015]">
+      <span class="pointer-events-none absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-black/65 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+        <span class="inline-block h-4 w-4">{{ partial "functions/get_icon" (dict "name" "magnifying-glass-plus") }}</span>
+        Explore in deep zoom
+      </span>
+    </button>
+  {{- else if eq $kind "video" -}}
+    {{- $r := $it.renditions -}}
+    {{- $poster := $res.Get $it.poster -}}
+    <div class="overflow-hidden rounded-xl bg-black shadow-lg ring-1 ring-black/10 dark:ring-white/10">
+      <video class="block h-auto w-full" controls playsinline preload="none"
+             width="{{ $it.width }}" height="{{ $it.height }}"
+             {{ with $poster }}poster="{{ .RelPermalink }}"{{ end }} aria-label="{{ $alt }}">
+        {{- with index $r "720p" }}{{ with $res.Get .file }}
+        <source src="{{ .RelPermalink }}" type="video/mp4" media="(max-width: 767px)">
+        {{- end }}{{ end }}
+        {{- with index $r "1080p_av1" }}{{ with $res.Get .file }}
+        <source src="{{ .RelPermalink }}" type='video/mp4; codecs="av01.0.08M.08"'>
+        {{- end }}{{ end }}
+        {{- with index $r "1080p" }}{{ with $res.Get .file }}
+        <source src="{{ .RelPermalink }}" type="video/mp4">
+        {{- end }}{{ end }}
+        Your browser cannot play this video{{ with $dl }} — <a href="{{ . }}">download it here</a>{{ end }}.
+      </video>
+    </div>
+  {{- else if eq $kind "loop" -}}
+    {{- $v := $res.Get $it.file -}}
+    {{- $poster := $res.Get $it.poster -}}
+    <div class="media-loop relative overflow-hidden rounded-xl bg-white shadow-lg ring-1 ring-black/10 dark:ring-white/10">
+      <video class="block h-auto w-full cursor-pointer" muted loop playsinline preload="metadata"
+             width="{{ $it.width }}" height="{{ $it.height }}"
+             {{ with $poster }}poster="{{ .RelPermalink }}"{{ end }} aria-label="{{ $alt }}">
+        <source src="{{ $v.RelPermalink }}" type="video/mp4">
+      </video>
+      <button type="button" class="media-loop-toggle absolute bottom-3 right-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition hover:bg-black/80"
+              aria-label="Pause animation">
+        <span class="media-icon-pause h-5 w-5">{{ partial "functions/get_icon" (dict "name" "pause") }}</span>
+        <span class="media-icon-play hidden h-5 w-5">{{ partial "functions/get_icon" (dict "name" "play") }}</span>
+      </button>
+    </div>
+  {{- end -}}
+  </div>
+
+  {{/* ---------------- text ---------------- */}}
+  <div class="{{ if eq $layout "split" }}md:col-span-5{{ else }}max-w-3xl{{ end }}">
+    <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+      <a href="#{{ $anchor }}" class="no-underline hover:underline decoration-primary-500/60">{{ $title }}</a>
+    </h2>
+    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">{{ delimit $specs " · " }}</p>
+
+    <div class="media-desc mt-4 text-slate-700 dark:text-slate-300">
+      {{ .Inner | .Page.RenderString (dict "display" "block") }}
+    </div>
+
+    <div class="mt-5 flex flex-wrap items-center gap-3">
+      {{- with $dl }}
+      <a href="{{ . }}" download rel="noreferrer"
+         class="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white no-underline shadow-md shadow-primary-500/25 transition hover:-translate-y-0.5 hover:bg-primary-700">
+        <span class="inline-block h-4 w-4">{{ partial "functions/get_icon" (dict "name" "arrow-down-tray") }}</span>
+        {{ $dl_text }} <span class="opacity-80">({{ $dl_label }})</span>
+      </a>
+      {{- end }}
+      {{- if eq $kind "image" }}
+      <button type="button" class="media-zoom-trigger inline-flex items-center gap-2 whitespace-nowrap rounded-lg border border-primary-500/60 px-4 py-2 text-sm font-medium text-primary-700 transition hover:bg-primary-50 dark:text-primary-300 dark:hover:bg-primary-950/40"
+              data-dzi="{{ ($res.Get $it.dzi).RelPermalink }}" data-title="{{ $title }}">
+        <span class="inline-block h-4 w-4">{{ partial "functions/get_icon" (dict "name" "magnifying-glass-plus") }}</span>
+        Deep zoom
+      </button>
+      {{- end }}
+    </div>
+
+    {{- with .Get "note" }}
+    <div class="mt-5 border-l-2 border-primary-500/40 pl-3 text-xs leading-relaxed text-slate-500 dark:text-slate-400 [&_a]:underline">
+      {{ . | $.Page.RenderString }}
+    </div>
+    {{- end }}
+    {{- with $license }}
+    <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">License: {{ . | $.Page.RenderString }}</p>
+    {{- end }}
+  </div>
+</section>

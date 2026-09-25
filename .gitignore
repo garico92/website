@@ -104,3 +104,10 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 venv/
+
+# ============================================================================
+# Heavy media originals (published via GitHub Release, never committed)
+# Web versions live in content/media/ — see scripts/make_web_media.py
+# ============================================================================
+
+media_originals/
