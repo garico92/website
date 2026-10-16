@@ -53,6 +53,27 @@
         }
       },
       "width": 1920
+    },
+    "periodic-boundary-conditions": {
+      "download": {
+        "bytes": 9605933,
+        "file": "periodic_boundary_conditions.mp4"
+      },
+      "duration_s": 35.0,
+      "fps": 30.0,
+      "height": 720,
+      "hold_end_s": 0,
+      "kind": "video",
+      "poster": "periodic-boundary-conditions_poster.webp",
+      "renditions": {
+        "default": {
+          "bytes": 9605933,
+          "codec": "h264",
+          "file": "periodic_boundary_conditions.mp4",
+          "height": 720
+        }
+      },
+      "width": 1280
     }
   },
   "release_base": "https://github.com/garico92/website/releases/download/media-v1/",

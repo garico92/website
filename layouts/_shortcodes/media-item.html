@@ -101,6 +101,9 @@
         {{- with index $r "1080p" }}{{ with $res.Get .file }}
         <source src="{{ .RelPermalink }}" type="video/mp4">
         {{- end }}{{ end }}
+        {{- with index $r "default" }}{{ with $res.Get .file }}
+        <source src="{{ .RelPermalink }}" type="video/mp4">
+        {{- end }}{{ end }}
         Your browser cannot play this video{{ with $dl }} — <a href="{{ . }}">download it here</a>{{ end }}.
       </video>
     </div>

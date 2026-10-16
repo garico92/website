@@ -16,14 +16,15 @@ ffmpeg + ffprobe on PATH (with libx264, libaom-av1), Python >= 3.9, Pillow (with
 Usage
 -----
 python scripts/make_web_media.py                      # build whatever is missing
-python scripts/make_web_media.py --only video         # video | loop | image
+python scripts/make_web_media.py --only video         # video | loop | image | ready
 python scripts/make_web_media.py --only video --step av1   # a single step (see --help)
 python scripts/make_web_media.py --force              # rebuild even if outputs exist
 python scripts/make_web_media.py --list               # print outputs and sizes
 
 Adding a new item
 -----------------
-1. Put the original in media_originals/.
+1. Put the original in media_originals/ (or, for a video that is already web-sized, kind "ready":
+   put it directly in content/media/; it is then also the download, no release upload needed).
 2. Add an entry to ITEMS below (copy one of the existing ones).
 3. Run this script, then add a {{< media-item id="..." >}} block to content/media/index.md.
 4. Upload media_originals/release/<release_name> to the GitHub Release (scripts/publish_media_release.sh).
@@ -97,6 +98,14 @@ ITEMS = [
         "source": "baryonification.gif",
         "release_name": None,    # no release copy: the web MP4 itself is the download
         "crf": 20,
+    },
+    {
+        "id": "periodic-boundary-conditions",
+        "kind": "ready",         # already web-sized: lives directly in content/media/, no re-encode
+        "file": "periodic_boundary_conditions.mp4",
+        "poster_time_s": 28.0,
+        "poster_width": 1280,
+        "poster_quality": 80,
     },
 ]
 
@@ -390,7 +399,31 @@ def build_image(item: dict, force: bool, step: str | None) -> dict:
 
 
 # --------------------------------------------------------------------------------------
-BUILDERS = {"video": build_video, "loop": build_loop, "image": build_image}
+# video that is already web-ready (no trim / re-encode, no release copy)
+# --------------------------------------------------------------------------------------
+def build_ready(item: dict, force: bool, step: str | None) -> dict:
+    src = OUT / item["file"]
+    if not src.exists():
+        sys.exit(f"{src} not found: put the web-ready video in content/media/")
+    info = probe(src)
+    poster = OUT / f"{item['id']}_poster.webp"
+    if step in (None, "poster") and needs(poster, force):
+        webp_from_frame(src, item.get("poster_time_s", 0), item.get("poster_width", 1280), poster,
+                        quality=item.get("poster_quality", 80))
+    size = src.stat().st_size
+    print(f"  {src.name}: {info['width']}x{info['height']} @ {info['fps']:g} fps, "
+          f"{info['duration']:.1f} s, {mb(size)}")
+    # the video is both the page version ("default" rendition: played on every screen)
+    # and the download (no separate release copy)
+    return {"kind": "video", "width": info["width"], "height": info["height"], "fps": info["fps"],
+            "duration_s": round(info["duration"], 2), "hold_end_s": 0, "poster": poster.name,
+            "renditions": {"default": {"file": src.name, "bytes": size, "codec": info["codec"],
+                                       "height": info["height"]}},
+            "download": {"file": src.name, "bytes": size}}
+
+
+# --------------------------------------------------------------------------------------
+BUILDERS = {"video": build_video, "loop": build_loop, "image": build_image, "ready": build_ready}
 
 
 def main() -> None:
@@ -398,7 +431,7 @@ def main() -> None:
     ap.add_argument("--only", choices=sorted(BUILDERS), help="build only items of this kind")
     ap.add_argument("--id", help="build only the item with this id")
     ap.add_argument("--step", help="only one step: video: poster|h264|av1|<rendition>|release; "
-                                   "loop: mp4|poster|release; image: preview|tiles|release")
+                                   "loop: mp4|poster|release; image: preview|tiles|release; ready: poster")
     ap.add_argument("--force", action="store_true", help="rebuild outputs that already exist")
     ap.add_argument("--list", action="store_true", help="print the manifest and exit")
     args = ap.parse_args()
