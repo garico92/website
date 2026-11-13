@@ -40,6 +40,13 @@ tags:
 featured: true
 
 
+# Talk gallery (/talks/): the recording is hosted by KITP, so it opens in a new tab
+event: New Synergies in Multi-Probe Cosmology (KITP conference)
+location: Kavli Institute for Theoretical Physics, Santa Barbara
+talk_type: Conference talk
+talk_summary: "How to use the small scales of the next sky surveys: baryonified N-body simulations and neural-network emulators, combined in one Bayesian pipeline for cosmic shear, galaxy clustering, X-ray and thermal Sunyaev–Zel'dovich data."
+video: https://online.kitp.ucsb.edu/online/cmblss-c26/arico/
+
 # Custom links
 links:
   - type: slides

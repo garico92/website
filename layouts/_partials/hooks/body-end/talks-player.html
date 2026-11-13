@@ -1,0 +1,94 @@
+{{/*
+  Video player for the talk gallery (layouts/_partials/talks/gallery.html), the talk list
+  (talk-list shortcode) and the animation strip (media-strip shortcode).
+  Emitted only on pages that render one of them.
+  - YouTube (data-yt): loaded from youtube-nocookie.com and only after a visitor clicks play
+    (no third-party iframe, cookies or player JS on page load; only the thumbnails come from i.ytimg.com).
+  - Our own MP4 files (data-mp4, data-mp4-sm for small screens): played with a <video> element.
+*/}}
+{{- if .Store.Get "talks_js" -}}
+<dialog id="tg-player" class="tg-player" aria-labelledby="tg-player-title">
+  <div class="tg-player__bar">
+    <span class="tg-player__title" id="tg-player-title"></span>
+    <a class="tg-player__ext" id="tg-player-ext" href="#" target="_blank" rel="noopener">
+      <span id="tg-player-ext-label">Open on YouTube</span> <span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-top-right-on-square") }}</span>
+    </a>
+    <button type="button" class="tg-player__close" id="tg-player-close" aria-label="Close video">{{ partial "functions/get_icon" (dict "name" "x-mark") }}</button>
+  </div>
+  <div class="tg-player__frame">
+    <iframe id="tg-player-iframe" title="" src="about:blank"
+       allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <video id="tg-player-video" controls playsinline preload="none" hidden></video>
+  </div>
+</dialog>
+<script>
+(function () {
+  var dlg = document.getElementById('tg-player');
+  var frame = document.getElementById('tg-player-iframe');
+  var vid = document.getElementById('tg-player-video');
+  var ttl = document.getElementById('tg-player-title');
+  var ext = document.getElementById('tg-player-ext');
+  var extLabel = document.getElementById('tg-player-ext-label');
+  var lastFocus = null;
+
+  function show() {
+    lastFocus = document.activeElement;
+    if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+  }
+  function openYT(el) {
+    var id = el.dataset.yt, start = parseInt(el.dataset.start || '0', 10) || 0;
+    var q = 'autoplay=1&rel=0&playsinline=1' + (start ? '&start=' + start : '');
+    vid.hidden = true; frame.hidden = false;
+    ttl.textContent = el.dataset.title || '';
+    frame.title = el.dataset.title || 'Video';
+    extLabel.textContent = 'Open on YouTube';
+    ext.href = 'https://www.youtube.com/watch?v=' + id + (start ? '&t=' + start + 's' : '');
+    frame.src = 'https://www.youtube-nocookie.com/embed/' + id + '?' + q;
+    show();
+  }
+  function openMP4(el) {
+    var small = el.dataset.mp4Sm && window.matchMedia('(max-width: 760px)').matches;
+    frame.hidden = true; frame.src = 'about:blank'; vid.hidden = false;
+    ttl.textContent = el.dataset.title || '';
+    extLabel.textContent = 'Description & download';
+    ext.removeAttribute('target');
+    ext.href = el.dataset.url || '#';
+    vid.loop = !!el.dataset.loop;
+    vid.src = small ? el.dataset.mp4Sm : el.dataset.mp4;
+    show();
+    var p = vid.play(); if (p && p.catch) p.catch(function () {});
+  }
+  function close() {
+    frame.src = 'about:blank';
+    vid.pause(); vid.removeAttribute('src'); vid.load();
+    ext.setAttribute('target', '_blank');
+    if (dlg.open) dlg.close();
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  document.querySelectorAll('.tg [data-yt]').forEach(function (el) {
+    el.addEventListener('click', function (e) { e.preventDefault(); openYT(el); });
+  });
+  document.querySelectorAll('.tg [data-mp4]').forEach(function (el) {
+    el.addEventListener('click', function (e) { e.preventDefault(); openMP4(el); });
+  });
+  document.getElementById('tg-player-close').addEventListener('click', close);
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });
+  dlg.addEventListener('close', function () { frame.src = 'about:blank'; vid.pause(); });
+
+  /* type filter (gallery) */
+  document.querySelectorAll('.tg').forEach(function (g) {
+    var chips = g.querySelectorAll('.tg-chip');
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var f = c.dataset.filter;
+        chips.forEach(function (o) { var on = o === c; o.classList.toggle('is-active', on); o.setAttribute('aria-pressed', on); });
+        g.querySelectorAll('.tg-card').forEach(function (card) {
+          card.hidden = !(f === 'all' || card.dataset.group === f);
+        });
+      });
+    });
+  });
+})();
+</script>
+{{- end -}}

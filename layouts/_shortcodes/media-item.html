@@ -18,6 +18,7 @@
     note    optional  small print under the description (markdown): acknowledgements, credits
     layout  optional  "split" (media beside text) or "wide" (media full width, text below).
                       Default: wide for videos, split otherwise.
+    badge   optional  short label next to the title, e.g. "Work in progress"
 */}}
 {{- $id := .Get "id" -}}
 {{- $title := .Get "title" -}}
@@ -129,6 +130,7 @@
   <div class="{{ if eq $layout "split" }}md:col-span-5{{ else }}max-w-3xl{{ end }}">
     <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
       <a href="#{{ $anchor }}" class="no-underline hover:underline decoration-primary-500/60">{{ $title }}</a>
+      {{- with .Get "badge" }} <span class="media-badge">{{ . }}</span>{{ end }}
     </h2>
     <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">{{ delimit $specs " · " }}</p>
 

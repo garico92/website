@@ -1,0 +1,12 @@
+{{/*
+  talk-gallery — all recorded talks as a filterable video gallery.
+  Usage (content/talks/index.md):   {{< talk-gallery >}}
+  Options: hero="false" (no large first card), filters="false", limit=N.
+  Talks are read from content/events/ (one bundle per talk) and from any page with `video:`;
+  see layouts/_partials/talks/gallery.html for the front-matter fields.
+*/}}
+{{- partial "talks/gallery.html" (dict
+      "page" .Page
+      "hero" (ne (.Get "hero") "false")
+      "filters" (ne (.Get "filters") "false")
+      "limit" (int (.Get "limit" | default 0))) -}}

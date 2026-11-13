@@ -1,0 +1,32 @@
+{{/*
+  Home-page block: the most recent recorded talks, playable in place, with a link to /talks/.
+
+  sections:
+    - block: talk-videos
+      id: talks
+      content:
+        title: Talks
+        text: ''            # optional, markdown
+        count: 3
+        archive: { text: 'All talks & videos', link: talks/ }
+*/}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $count := $block.content.count | default 3 }}
+<div class="flex flex-col items-center max-w-prose mx-auto gap-3 justify-center px-6 md:px-0">
+  {{ with $block.content.title }}
+  <div class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">{{ . | emojify | $page.RenderString }}</div>
+  {{ end }}
+  {{ with $block.content.text }}<p>{{ . | emojify | $page.RenderString }}</p>{{ end }}
+</div>
+<div class="tg-home mx-auto px-6">
+  {{ partial "talks/gallery.html" (dict "page" $page "limit" $count "hero" false "filters" false "compact" true) }}
+  {{ with $block.content.archive }}
+  <div class="tg-more">
+    <a href="{{ .link | default "talks/" | relLangURL }}" class="tg-btn tg-btn--primary">
+      {{ .text | default "All talks & videos" }}
+      <span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-right") }}</span>
+    </a>
+  </div>
+  {{ end }}
+</div>

@@ -1,0 +1,77 @@
+{{/*
+  talk-list — the complete list of talks and events, grouped by year (data/talks.yaml).
+  Usage (content/talks/index.md):   {{< talk-list open=3 >}}
+    open   number of most recent years shown expanded (default 3); the others are collapsed
+
+  Rows with `page:` link to that page; when the page has a recording, the "Watch" button
+  plays it in the same player as the gallery (YouTube) or opens it in a new tab.
+*/}}
+{{- $open := int (.Get "open" | default 3) -}}
+{{- $items := sort (site.Data.talks | default slice) "date" "desc" -}}
+{{- .Page.Store.Set "talks_js" true -}}
+{{- $kinds := dict
+      "seminar" "Seminar" "invited" "Invited talk" "plenary" "Plenary talk" "keynote" "Keynote"
+      "talk" "Talk" "lecture" "Lecture" "panel" "Panel" "discussion" "Discussion leader"
+      "poster" "Poster" "attendee" "Participant" -}}
+{{- $speaker := slice "seminar" "invited" "plenary" "keynote" "talk" "lecture" "panel" "discussion" -}}
+
+{{- /* resolve dates and recordings once */ -}}
+{{- $rows := slice -}}
+{{- range $items -}}
+  {{- $p := "" -}}{{- with .page }}{{ $p = site.GetPage . }}{{ end -}}
+  {{- $date := time.AsTime .date -}}
+  {{- $url := "" }}{{ $yt := "" }}{{ $start := 0 -}}
+  {{- with $p -}}
+    {{- $url = .Params.video | default "" -}}
+    {{- if not $url }}{{ range .Params.links }}{{ if and (not $url) (eq .type "video") }}{{ $url = .url }}{{ end }}{{ end }}{{ end -}}
+    {{- with findRESubmatch `(?:youtube\.com/watch\?(?:.*&)?v=|youtu\.be/)([A-Za-z0-9_-]{11})` $url 1 }}{{ $yt = index (index . 0) 1 }}{{ end -}}
+    {{- $start = .Params.video_start | default 0 -}}
+    {{- if not $start }}{{ with findRESubmatch `[?&]t=(\d+)s?` $url 1 }}{{ $start = int (index (index . 0) 1) }}{{ end }}{{ end -}}
+    {{- if $url }}{{ $date = .Date }}{{ end -}}
+  {{- end -}}
+  {{- $end := cond (and $p $url) "" (.end | default "") -}}{{/* recorded: the page date replaces the range */}}
+  {{- $rows = $rows | append (dict "d" . "p" $p "date" $date "end" $end "url" $url "yt" $yt "start" $start) -}}
+{{- end -}}
+{{- $rows = sort $rows "date" "desc" -}}
+
+{{- $n_speaker := 0 }}{{ $n_video := 0 -}}
+{{- range $rows }}{{ if in $speaker .d.kind }}{{ $n_speaker = add $n_speaker 1 }}{{ end }}{{ if .url }}{{ $n_video = add $n_video 1 }}{{ end }}{{ end -}}
+
+<div class="tg tl not-prose" id="all-talks">
+  <p class="tl-intro">{{ len $rows }} events since {{ (index (last 1 $rows) 0).date.Format "2006" }}, {{ $n_speaker }} of them as a speaker{{ with $n_video }}; <span class="tl-dot" aria-hidden="true"></span> {{ . }} with a recording{{ end }}.</p>
+  {{- $years := slice }}{{ range $rows }}{{ $years = $years | append (.date.Format "2006") }}{{ end }}{{ $years = $years | uniq -}}
+  {{- range $i, $y := $years }}
+  {{- $yr := where $rows "date.Year" (int $y) }}
+  <details class="tl-year"{{ if lt $i $open }} open{{ end }}>
+    <summary><span class="tl-year__label">{{ $y }}</span><span class="tl-year__count">{{ len $yr }} {{ cond (eq (len $yr) 1) "event" "events" }}</span>
+      {{- $nv := 0 }}{{ range $yr }}{{ if .url }}{{ $nv = add $nv 1 }}{{ end }}{{ end }}
+      {{- with $nv }}<span class="tl-year__rec"><span class="tl-dot" aria-hidden="true"></span> {{ . }} {{ cond (eq . 1) "recording" "recordings" }}</span>{{ end }}</summary>
+    <ol class="tl-rows">
+      {{- range $yr }}
+      {{- $d := .d }}{{ $p := .p }}
+      <li class="tl-row{{ if .url }} tl-row--video{{ end }}">
+        <time class="tl-date" datetime="{{ .date.Format "2006-01-02" }}">
+          {{- .date.Format "Jan 2" }}{{ $d0 := .date }}{{ with .end }}{{ $e := time.AsTime . }}{{ if eq ($e.Format "Jan") ($d0.Format "Jan") }}–{{ $e.Format "2" }}{{ else }}–{{ $e.Format "Jan 2" }}{{ end }}{{ end -}}
+        </time>
+        <span class="tg-badge tl-kind tl-kind--{{ $d.kind }}">{{ index $kinds $d.kind | default (humanize $d.kind) }}</span>
+        <span class="tl-text">
+          {{- with $d.title }}<span class="tl-title">{{ . }}</span>{{ else }}{{ with $p }}{{ if .Params.video }}<span class="tl-title">{{ .Title | markdownify }}</span>{{ end }}{{ end }}{{ end }}
+          <span class="tl-event">{{ $d.event | markdownify }}{{ with $d.place }} · {{ . }}{{ end }}</span>
+        </span>
+        <span class="tl-links">
+          {{- if .yt }}
+          <button type="button" class="tg-btn tg-btn--primary" data-yt="{{ .yt }}" data-start="{{ .start }}" data-title="{{ $p.Title }}" data-url="{{ .url }}" aria-label="Watch: {{ $p.Title }}">
+            <span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "play") }}</span>Watch</button>
+          {{- else if .url }}
+          <a class="tg-btn tg-btn--primary" href="{{ .url }}" target="_blank" rel="noopener"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "play") }}</span>Watch</a>
+          {{- end }}
+          {{- with $d.slides }}<a class="tg-btn" href="{{ . }}" target="_blank" rel="noopener">Slides</a>{{ end }}
+          {{- with $p }}<a class="tg-btn" href="{{ .RelPermalink }}">{{ cond (isset .Params "abstract") "Abstract" "Details" }}</a>{{ end }}
+          {{- with $d.url }}<a class="tg-btn" href="{{ . }}" target="_blank" rel="noopener" aria-label="Event page (opens in a new tab)">Event <span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-top-right-on-square") }}</span></a>{{ end }}
+        </span>
+      </li>
+      {{- end }}
+    </ol>
+  </details>
+  {{- end }}
+</div>

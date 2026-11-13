@@ -24,7 +24,9 @@ python scripts/make_web_media.py --list               # print outputs and sizes
 Adding a new item
 -----------------
 1. Put the original in media_originals/ (or, for a video that is already web-sized, kind "ready":
-   put it directly in content/media/; it is then also the download, no release upload needed).
+   put the clean file in media_originals/ready/; the script writes the web copy, with the
+   credit burnt into the last second, to content/media/; it is also the download, no release
+   upload needed).
 2. Add an entry to ITEMS below (copy one of the existing ones).
 3. Run this script, then add a {{< media-item id="..." >}} block to content/media/index.md.
 4. Upload media_originals/release/<release_name> to the GitHub Release (scripts/publish_media_release.sh).
@@ -45,6 +47,9 @@ from pathlib import Path
 
 from PIL import Image
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from video_credit import CREDIT, add_credit, credit_start, drawtext  # noqa: E402
+
 Image.MAX_IMAGE_PIXELS = None  # our composites are intentionally huge
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,6 +57,10 @@ ORIG = ROOT / "media_originals"
 RELEASE = ORIG / "release"
 OUT = ROOT / "content" / "media"
 MANIFEST = OUT / "manifest.json"
+
+# Every video on the page shows this small credit in its last second (bottom-right corner).
+# Set "credit": False on an item to skip it. The GitHub Release originals are left untouched.
+CREDIT_SECONDS = 1.0
 
 RELEASE_TAG = "media-v1"
 RELEASE_BASE = f"https://github.com/garico92/website/releases/download/{RELEASE_TAG}/"
@@ -101,8 +110,48 @@ ITEMS = [
     },
     {
         "id": "periodic-boundary-conditions",
-        "kind": "ready",         # already web-sized: lives directly in content/media/, no re-encode
+        "kind": "ready",         # already web-sized: no re-encode (only the credit at the end)
+        "source": "periodic_boundary_conditions.mp4",
         "file": "periodic_boundary_conditions.mp4",
+        "poster_time_s": 28.0,
+        "poster_width": 1280,
+        "poster_quality": 80,
+    },
+    # Cosmology-rescaling films (marenostrum/outreach/rescaling): option A is the
+    # Omega_m = 0.2 -> 0.6 version, option B the Omega_m = 0.2 -> 0.8 one (Nov 2026).
+    # Rendered at 1080p / 30 fps / ~1.5 Mbit/s with +faststart: already web-sized.
+    {
+        "id": "rescaling-four-acts",
+        "kind": "ready",
+        "source": "optionA_four_acts_Om0.2_0.6.mp4",
+        "file": "rescaling-four-acts.mp4",
+        "poster_time_s": 78.0,                      # the slide-across comparison
+        "poster_width": 1280,
+        "poster_quality": 80,
+    },
+    {
+        "id": "rescaling-three-universes",
+        "kind": "ready",
+        "source": "optionB_three_universes_Om0.2_0.8.mp4",
+        "file": "rescaling-three-universes.mp4",
+        "poster_time_s": 58.0,                    # final triptych
+        "poster_width": 1280,
+        "poster_quality": 80,
+    },
+    {
+        "id": "zeldovich-displacement",
+        "kind": "ready",
+        "source": "zeldovich_displacement.mp4",     # marenostrum/outreach/sentence, --style tech --lang en
+        "file": "zeldovich-displacement.mp4",
+        "poster_time_s": 37.0,                      # the portrait, whole-box projection
+        "poster_width": 1280,
+        "poster_quality": 80,
+    },
+    {
+        "id": "folding-explainer",
+        "kind": "ready",
+        "source": "folding_explainer.mp4",          # marenostrum/outreach/rescaling (work in progress)
+        "file": "folding-explainer.mp4",
         "poster_time_s": 28.0,
         "poster_width": 1280,
         "poster_quality": 80,
@@ -237,6 +286,9 @@ def build_video(item: dict, force: bool, step: str | None) -> dict:
                     filters.append(f"tpad=stop_mode=clone:stop_duration={item['hold_end_s']}")
                 if r["height"] != info["height"]:
                     filters.append(f"scale=-2:{r['height']}:flags=lanczos")
+                if item.get("credit", True):
+                    total = keep / fps + item.get("hold_end_s", 0)
+                    filters.append(drawtext(r["height"], total - CREDIT_SECONDS))
                 common = ["ffmpeg", "-y", "-v", "error", "-stats", "-i", src, "-map", "0:v:0",
                           "-vf", ",".join(filters), "-an"]
                 if r["codec"] == "h264":
@@ -291,8 +343,12 @@ def build_loop(item: dict, force: bool, step: str | None) -> dict:
     out = OUT / f"{item['id']}.mp4"
     poster = OUT / f"{item['id']}_poster.webp"
     if step in (None, "mp4") and needs(out, force):
+        vf = "scale=trunc(iw/2)*2:trunc(ih/2)*2:flags=lanczos"
+        if item.get("credit", True):
+            start, fade = credit_start(src, CREDIT_SECONDS)
+            vf += "," + drawtext(info["height"] // 2 * 2, start, CREDIT, fade)
         run(["ffmpeg", "-y", "-v", "error", "-i", src, *vfr_flag(),
-             "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2:flags=lanczos",
+             "-vf", vf,
              "-c:v", "libx264", "-preset", "veryslow", "-tune", "animation", "-crf", str(item.get("crf", 20)),
              "-pix_fmt", "yuv420p", "-profile:v", "high", "-tag:v", "avc1",
              "-movflags", "+faststart", "-an", out])
@@ -403,8 +459,18 @@ def build_image(item: dict, force: bool, step: str | None) -> dict:
 # --------------------------------------------------------------------------------------
 def build_ready(item: dict, force: bool, step: str | None) -> dict:
     src = OUT / item["file"]
+    clean = ORIG / "ready" / item["source"] if item.get("source") else None
+    if clean is not None and clean.exists():
+        # web copy = clean file + credit in the last second (only the end is re-encoded)
+        stale = src.exists() and src.stat().st_mtime < clean.stat().st_mtime
+        if step in (None, "credit") and (needs(src, force) or stale):
+            if item.get("credit", True):
+                how = add_credit(clean, src, CREDIT, CREDIT_SECONDS)
+                print(f"  -> {src.name}: credit added ({how} re-encode), {mb(src.stat().st_size)}")
+            else:
+                shutil.copy2(clean, src)
     if not src.exists():
-        sys.exit(f"{src} not found: put the web-ready video in content/media/")
+        sys.exit(f"{src} not found: put the clean video in media_originals/ready/ (\"source\")")
     info = probe(src)
     poster = OUT / f"{item['id']}_poster.webp"
     if step in (None, "poster") and needs(poster, force):
@@ -431,7 +497,7 @@ def main() -> None:
     ap.add_argument("--only", choices=sorted(BUILDERS), help="build only items of this kind")
     ap.add_argument("--id", help="build only the item with this id")
     ap.add_argument("--step", help="only one step: video: poster|h264|av1|<rendition>|release; "
-                                   "loop: mp4|poster|release; image: preview|tiles|release; ready: poster")
+                                   "loop: mp4|poster|release; image: preview|tiles|release; ready: credit|poster")
     ap.add_argument("--force", action="store_true", help="rebuild outputs that already exist")
     ap.add_argument("--list", action="store_true", help="print the manifest and exit")
     args = ap.parse_args()

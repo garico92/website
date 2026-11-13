@@ -1,0 +1,27 @@
+---
+title: Talks & videos
+summary: Recorded seminars, conference talks, panels and lectures on cosmology, large-scale structure, baryons and simulations, short animations from my simulations, and the complete list of my talks.
+date: 2026-11-09
+hide_date: true
+reading_time: false
+show_date_updated: false
+share: false
+profile: false
+toc: false
+---
+
+Recordings of my seminars, conference talks and panel discussions on cosmology, the large-scale structure of the Universe, baryons and simulations. Click a thumbnail to play the video right here (it starts at my talk when the recording covers a whole session); the title leads to the abstract and the buttons to slides, papers and code. Below the recordings: [short animations](#animations) from my simulations and the [complete list of my talks](#all-talks).
+
+{{< talk-gallery >}}
+
+## Animations from my simulations {#animations}
+
+Short films made from my N-body simulations, several of them run on MareNostrum 5. They play here; each one is described, with a download, on the [Media]({{< relref "/media" >}}) page. Feel free to use them in talks and outreach, with credit.
+
+{{< media-strip >}}
+
+## All talks and events {#all-talks}
+
+Every conference, workshop, seminar and school where I have spoken or taken part, most recent first. Talks with a recording have a **Watch** button.
+
+{{< talk-list open=3 >}}

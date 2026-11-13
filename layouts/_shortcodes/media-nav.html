@@ -1,0 +1,21 @@
+{{/*
+  media-nav — a strip of small thumbnails linking to every `media-item` on the page,
+  in page order. Usage: {{< media-nav >}} (anywhere above the items).
+  Titles are read from the media-item calls; thumbnails from manifest.json.
+*/}}
+{{- $man := dict -}}
+{{- with .Page.Resources.Get "manifest.json" -}}{{- $man = . | transform.Unmarshal -}}{{- end -}}
+{{- $res := .Page.Resources -}}
+{{- $calls := findRESubmatch `(?s)\{\{<\s*media-item\s+id="([^"]+)"\s+title="([^"]+)"` .Page.RawContent -}}
+<nav class="not-prose media-nav" aria-label="Media on this page">
+  {{- range $calls }}
+  {{- $id := index . 1 }}{{ $title := index . 2 }}
+  {{- $it := index ($man.items | default dict) $id }}
+  {{- $src := "" }}
+  {{- with $it }}{{ with $res.Get (.poster | default .preview) }}{{ $src = (.Fill "320x180 Center webp q70").RelPermalink }}{{ end }}{{ end }}
+  <a class="media-nav__item" href="#{{ $id | anchorize }}">
+    {{- with $src }}<img src="{{ . }}" width="160" height="90" alt="" loading="lazy" decoding="async">{{ end }}
+    <span>{{ $title }}</span>
+  </a>
+  {{- end }}
+</nav>

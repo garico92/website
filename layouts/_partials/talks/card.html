@@ -1,0 +1,54 @@
+  {{- $t := .t -}}{{- $p := $t.p -}}{{- $hero := .hero -}}{{- $compact := .compact -}}
+  {{- $id := printf "talk-%s" (path.Base $p.File.Dir | anchorize) -}}
+  {{- $where := slice -}}
+  {{- with $p.Params.event }}{{ $where = $where | append . }}{{ end -}}
+  {{- with $p.Params.location }}{{ $where = $where | append . }}{{ end -}}
+  {{- $label := cond (ne $t.yt "") (printf "Play: %s" $p.Title) (printf "Watch %s (opens in a new tab)" $p.Title) -}}
+  <article id="{{ $id }}" class="tg-card{{ if $hero }} tg-card--hero{{ end }}" data-group="{{ $t.group }}">
+    {{- if $t.yt }}
+    <button type="button" class="tg-thumb" data-yt="{{ $t.yt }}" data-start="{{ $t.start }}" data-title="{{ $p.Title }}"
+            data-url="{{ $t.url }}" aria-label="{{ $label }}">
+    {{- else }}
+    <a class="tg-thumb" href="{{ $t.url }}" target="_blank" rel="noopener" aria-label="{{ $label }}">
+    {{- end }}
+      {{ partial "talks/thumb.html" (dict "t" $t "w" (cond $hero 720 400) "sizes" (cond $hero "(min-width: 1024px) 720px, 100vw" "(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw")) }}
+      <span class="tg-play" aria-hidden="true">
+        {{- if $t.yt }}<span class="tg-play__icon">{{ partial "functions/get_icon" (dict "name" "play") }}</span>
+        {{- else }}<span class="tg-play__icon">{{ partial "functions/get_icon" (dict "name" "arrow-top-right-on-square") }}</span>{{ end -}}
+      </span>
+      {{- if not $t.yt }}<span class="tg-thumb__tag">{{ with urls.Parse $t.url }}{{ replace .Host "www." "" }}{{ end }}</span>{{ end }}
+    {{- if $t.yt }}</button>{{ else }}</a>{{ end }}
+
+    <div class="tg-body">
+      <div class="tg-meta">
+        <span class="tg-badge tg-badge--{{ $t.group }}">{{ $t.type }}</span>
+        <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "Jan 2006" }}</time>
+      </div>
+      <h3 class="tg-title"><a href="{{ $p.RelPermalink }}">{{ $p.Title | markdownify }}</a></h3>
+      {{- with $where }}<p class="tg-where">{{ delimit . " · " }}</p>{{ end }}
+      {{- if not $compact }}
+      {{- with $p.Params.talk_summary | default $p.Params.summary }}<p class="tg-summary">{{ . | markdownify }}</p>{{ end }}
+      {{- end }}
+      <div class="tg-actions">
+        {{- if $t.yt }}
+        <button type="button" class="tg-btn tg-btn--primary" data-yt="{{ $t.yt }}" data-start="{{ $t.start }}" data-title="{{ $p.Title }}" data-url="{{ $t.url }}">
+          <span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "play") }}</span>Watch
+        </button>
+        {{- else }}
+        <a class="tg-btn tg-btn--primary" href="{{ $t.url }}" target="_blank" rel="noopener">
+          <span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-top-right-on-square") }}</span>Watch
+        </a>
+        {{- end }}
+        {{- if not $compact }}
+        {{- range $p.Params.links }}
+          {{- if eq .type "video" }}{{ continue }}{{ end }}
+          {{- $u := .url | default "" -}}
+          {{- if and (not $u) (eq .provider "arxiv") }}{{ $u = printf "https://arxiv.org/abs/%s" .id }}{{ end -}}
+          {{- if not $u }}{{ continue }}{{ end }}
+          <a class="tg-btn" href="{{ $u }}" target="_blank" rel="noopener">{{ .name | default (humanize .type) }}</a>
+        {{- end }}
+        {{- end }}
+      </div>
+      {{- if not $compact }}{{ with $p.Params.video_note }}<p class="tg-note">{{ . | markdownify }}</p>{{ end }}{{ end }}
+    </div>
+  </article>

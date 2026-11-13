@@ -78,16 +78,14 @@ sections:
         exclude_featured: false
     design:
       view: citation
-  - block: collection
+  - block: talk-videos        # layouts/_partials/hbx/blocks/talk-videos/block.html
     id: talks
     content:
       title: Talks
-      filters:
-        folders:
-          - events
-    design:
-      view: article-grid
-      columns: 3
+      count: 3
+      archive:
+        text: All talks & videos
+        link: talks/
   - block: collection
     id: resources
     content:

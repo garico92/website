@@ -1,0 +1,13 @@
+  {{- $t := .t -}}{{- $p := $t.p -}}{{- $w := .w -}}
+  {{- $img := partial "functions/get_featured_image" $p -}}
+  {{- if $img -}}
+    {{- $a := $img.Fill (printf "%dx%d Center webp q78" $w (div (mul $w 9) 16)) -}}
+    {{- $b := $img.Fill (printf "%dx%d Center webp q78" (mul $w 2) (div (mul $w 9) 8)) -}}
+    <img src="{{ $a.RelPermalink }}" srcset="{{ $a.RelPermalink }} {{ $a.Width }}w, {{ $b.RelPermalink }} {{ $b.Width }}w"
+         sizes="{{ .sizes }}" width="{{ $a.Width }}" height="{{ $a.Height }}" alt="" loading="lazy" decoding="async">
+  {{- else if $t.yt -}}
+    <img src="https://i.ytimg.com/vi/{{ $t.yt }}/hqdefault.jpg" width="480" height="360" alt="" loading="lazy" decoding="async"
+         referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'tg-thumb__fallback'}))">
+  {{- else -}}
+    <span class="tg-thumb__fallback" aria-hidden="true"></span>
+  {{- end -}}

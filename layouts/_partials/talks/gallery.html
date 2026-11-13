@@ -1,0 +1,102 @@
+{{/*
+  talks/gallery — video gallery of recorded talks, seminars, panels and lectures.
+
+  Called by the `talk-gallery` shortcode (content/talks/index.md) and by the
+  `talk-videos` home-page block. Input dict:
+    page     the page being rendered (needed to register the player JS)
+    limit    max number of talks (0 = all)
+    hero     true: the most recent talk is shown large on top
+    filters  true: type filter chips
+    compact  true: shorter cards (home page)
+
+  Where the talks come from
+  -------------------------
+  Every page in content/events/ (one bundle per talk), plus any other page with a
+  `video:` parameter (e.g. content/resources/kitp/). Front matter used:
+
+    title, date, summary            as usual (talk_summary, if set, replaces summary here)
+    event, event_url, location      where it was given
+    talk_type                       "Invited seminar" | "Plenary talk" | "Invited talk" |
+                                    "Contributed talk" | "Panel discussion" | "Interview" | "Lecture"
+    video                           YouTube URL (played in the page) or any other URL (opens in a new tab).
+                                    Fallback: the first `links:` entry with `type: video`.
+    video_start                     optional, seconds (also read from `t=` in the URL)
+    video_note                      optional, small print under the card (e.g. "starts at 31:37 of the session")
+    links                           slides / paper / code ... shown as small buttons
+    featured.jpg in the bundle      used as thumbnail; otherwise the YouTube thumbnail
+*/}}
+{{- $page := .page -}}
+{{- $limit := .limit | default 0 -}}
+{{- $compact := .compact | default false -}}
+{{- $page.Store.Set "talks_js" true -}}
+
+{{- /* collect */ -}}
+{{- $pages := slice -}}
+{{- range site.RegularPages -}}
+  {{- if or (eq .Section "events") .Params.video -}}
+    {{- $pages = $pages | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $pages = sort $pages "Date" "desc" -}}
+
+{{- $talks := slice -}}
+{{- range $pages -}}
+  {{- $url := .Params.video | default "" -}}
+  {{- if not $url -}}
+    {{- range .Params.links -}}{{- if and (not $url) (eq .type "video") -}}{{- $url = .url -}}{{- end -}}{{- end -}}
+  {{- end -}}
+  {{- if not $url -}}{{- continue -}}{{- end -}}
+  {{- $yt := "" -}}
+  {{- with findRESubmatch `(?:youtube\.com/watch\?(?:.*&)?v=|youtu\.be/|youtube(?:-nocookie)?\.com/embed/)([A-Za-z0-9_-]{11})` $url 1 -}}
+    {{- $yt = index (index . 0) 1 -}}
+  {{- end -}}
+  {{- $start := .Params.video_start | default 0 -}}
+  {{- if not $start -}}
+    {{- with findRESubmatch `[?&]t=(\d+)s?` $url 1 -}}{{- $start = int (index (index . 0) 1) -}}{{- end -}}
+  {{- end -}}
+  {{- $type := .Params.talk_type | default "Talk" -}}
+  {{- $group := "talk" -}}
+  {{- if in (slice "Invited seminar" "Seminar") $type -}}{{- $group = "seminar" -}}
+  {{- else if in (slice "Panel discussion" "Interview") $type -}}{{- $group = "conversation" -}}
+  {{- else if eq $type "Lecture" -}}{{- $group = "lecture" -}}
+  {{- end -}}
+  {{- $talks = $talks | append (dict "p" . "url" $url "yt" $yt "start" (int $start) "type" $type "group" $group) -}}
+{{- end -}}
+{{- $total := len $talks -}}
+{{- if gt $limit 0 -}}{{- $talks = first $limit $talks -}}{{- end -}}
+
+{{- $groups := dict "seminar" "Seminars" "talk" "Conference talks" "conversation" "Panels" "lecture" "Lectures" -}}
+{{- $group_order := slice "seminar" "talk" "conversation" "lecture" -}}
+
+<div class="tg not-prose{{ if $compact }} tg--compact{{ end }}">
+  {{- if .filters }}
+  {{- $present := slice -}}
+  {{- range $talks }}{{ $present = $present | append .group }}{{ end -}}
+  {{- $present = $present | uniq -}}
+  {{- $years := slice -}}{{ range $talks }}{{ $years = $years | append (.p.Date.Format "2006") }}{{ end -}}
+  {{- $years = sort ($years | uniq) -}}
+  <div class="tg-toolbar">
+    <p class="tg-count">{{ $total }} recorded talks{{ if gt (len $years) 1 }} · {{ index $years 0 }}–{{ index $years (sub (len $years) 1) }}{{ end }}</p>
+    {{- if gt (len $present) 1 }}
+    <div class="tg-filters" role="group" aria-label="Filter talks by type">
+      <button type="button" class="tg-chip is-active" data-filter="all" aria-pressed="true">All</button>
+      {{- range $group_order }}{{ if in $present . }}
+      <button type="button" class="tg-chip" data-filter="{{ . }}" aria-pressed="false">{{ index $groups . }}</button>
+      {{- end }}{{ end }}
+    </div>
+    {{- end }}
+  </div>
+  {{- end }}
+
+  {{- $rest := $talks -}}
+  {{- if and .hero (gt (len $talks) 0) }}
+  {{ partial "talks/card.html" (dict "t" (index $talks 0) "hero" true "compact" false) }}
+  {{- $rest = after 1 $talks -}}
+  {{- end }}
+
+  <div class="tg-grid">
+    {{- range $rest }}
+    {{ partial "talks/card.html" (dict "t" . "hero" false "compact" $compact) }}
+    {{- end }}
+  </div>
+</div>

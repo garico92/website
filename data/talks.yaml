@@ -1,0 +1,295 @@
+# Complete list of talks, seminars, lectures and events, shown at the bottom of /talks/
+# (layouts/_shortcodes/talk-list.html). Source: the conference list of the CV.
+#
+# Fields
+#   date    first day (YYYY-MM-DD); `end` optional, last day of a multi-day event
+#   kind    seminar | invited | plenary | keynote | talk | lecture | panel | discussion |
+#           poster | attendee        (sets the coloured label)
+#   title   optional, the title of my talk
+#   event   name of the event;  place: city / institute
+#   page    optional, a page of this site with the recording or the slides
+#           (e.g. events/cosmo_home): it adds a "Watch" (plays in the page) or "Slides" button
+#   slides, url   optional external links (slides PDF, event page)
+#
+# Recorded talks have a page in content/events/ (or a `video:` field): the date shown is the
+# one of that page.
+
+- date: 2026-10-20
+  kind: seminar
+  title: The interplay between gravity and baryons in the large-scale structure of the universe
+  event: Seminar
+  place: Osservatorio Astronomico di Roma, INAF, Rome
+- date: 2026-10-12
+  end: 2026-10-16
+  kind: talk
+  event: Euclid Weak Lensing Science Working Group meeting
+  place: Scuola Superiore Meridionale, Naples
+- date: 2026-08-23
+  end: 2026-09-13
+  kind: discussion
+  event: "Aspen summer program: A new cross-correlation perspective on cosmic baryons"
+  place: Aspen Center for Physics, Colorado
+- date: 2026-08-10
+  end: 2026-08-14
+  kind: talk
+  event: New Frontiers in Cosmology conference
+  place: A Coruña
+- date: 2026-06-16
+  end: 2026-06-19
+  kind: keynote
+  event: The non-Gaussian Universe workshop
+  place: Heraklion
+  slides: https://indico.in2p3.fr/event/38089/contributions/172685/attachments/102323/159135/Giovanni_slides.pdf
+  url: https://indico.in2p3.fr/event/38089/
+- date: 2026-05-25
+  end: 2026-05-29
+  kind: attendee
+  event: Euclid Consortium Meeting
+  place: Barcelona
+- date: 2026-05-13
+  kind: seminar
+  event: Invited seminar
+  place: CEA Paris-Saclay
+- date: 2026-05-06
+  end: 2026-05-08
+  kind: talk
+  event: UniVersum VII conference
+  place: Naples
+- date: 2026-04-13
+  end: 2026-04-14
+  kind: talk
+  event: Euclid Cosmological Simulations SWG meeting
+  place: Barcelona
+- date: 2026-04-09
+  kind: seminar
+  event: CMB/LSS meeting
+  place: Institute of Astronomy, University of Cambridge
+- date: 2026-02-02
+  end: 2026-02-06
+  kind: talk
+  page: resources/kitp
+  event: New Synergies in Multi-Probe Cosmology
+  place: KITP, Santa Barbara
+  url: https://www.kitp.ucsb.edu/activities/cmblss-c26
+- date: 2026-01-19
+  end: 2026-01-22
+  kind: attendee
+  event: "Workshop: Cosmology from Euclid Data Release 1"
+  place: International Space Science Institute, Bern
+- date: 2025-09-29
+  end: 2025-10-03
+  kind: talk
+  event: Euclid Weak Lensing Science Working Group meeting
+  place: Laboratoire d'Astrophysique de Marseille
+- date: 2025-06-02
+  end: 2025-06-13
+  kind: lecture
+  page: resources/lecture_colours
+  event: Cosmology school COLOURS
+  place: Institut Pascal, Paris-Saclay
+  url: https://www.institut-pascal.universite-paris-saclay.fr/en/scientific-programs/cosmological-surveys-and-synergies-colours
+- date: 2025-05-12
+  end: 2025-05-23
+  kind: talk
+  event: "Workshop: Big Data, Big Questions"
+  place: MIAPbP, Munich
+- date: 2025-03-05
+  end: 2025-03-07
+  kind: talk
+  event: Euclid Cosmological Simulations SWG meeting
+  place: Barcelona
+- date: 2025-02-03
+  end: 2025-02-07
+  kind: talk
+  event: Cosmology on the Steep Rise
+  place: Sexten
+- date: 2024-11-20
+  kind: plenary
+  title: Simultaneous modelling of cosmology and baryons in LSS
+  event: "Workshop: Early and Late Universe Cosmology (also session chair)"
+  place: Institut Pascal, Université Paris-Saclay
+- date: 2024-10-08
+  end: 2024-10-11
+  kind: invited
+  event: "Workshop: Mock Barcelona"
+  place: Barcelona
+- date: 2024-09-09
+  end: 2024-09-13
+  kind: invited
+  event: "Workshop: Testing gravity with the large-scale structure of the Universe"
+  place: IFPU, Trieste
+- date: 2024-06-17
+  end: 2024-06-21
+  kind: discussion
+  event: Euclid Consortium Meeting
+  place: Sapienza University, Rome
+- date: 2024-04-08
+  end: 2024-04-12
+  kind: invited
+  event: "Workshop: Baryons in the Universe (also session chair)"
+  place: Kavli IPMU, Tokyo
+  url: https://indico.ipmu.jp/event/429/overview
+- date: 2024-02-20
+  kind: seminar
+  event: Cosmology seminar
+  place: Beecroft Institute for Particle Astrophysics and Cosmology, University of Oxford
+- date: 2023-11-15
+  end: 2023-11-17
+  kind: talk
+  event: Euclid Cosmological Simulations SWG meeting
+  place: Barcelona
+- date: 2023-10-05
+  kind: seminar
+  page: events/coskasi_seminar
+  event: CosKASI Early Career Researcher seminar
+  place: Korea Astronomy and Space Science Institute, Daejeon
+- date: 2023-09-11
+  end: 2023-09-15
+  kind: talk
+  event: COSMO'23 conference
+  place: Madrid
+- date: 2023-07-03
+  kind: panel
+  page: events/cfh2023_s8_panel
+  event: "Cosmology from Home 2023 — panel: The state of S₈ in 2023"
+  place: Online
+- date: 2023-06-26
+  kind: panel
+  event: "Cosmology Talks mini-workshop: Cosmology results from cosmic shear reanalyses by DES+KiDS & BACCOemu"
+  place: Online
+- date: 2023-06-05
+  kind: seminar
+  event: Cosmology seminar
+  place: ETH Zurich
+- date: 2023-05-15
+  end: 2023-05-18
+  kind: talk
+  event: "Workshop: CosmoLSS — Cosmology with the LSS (also local organiser)"
+  place: DIPC, Donostia
+- date: 2023-04-10
+  end: 2023-04-14
+  kind: talk
+  event: "Workshop: Future Science with CMB × LSS"
+  place: YITP, Kyoto University
+- date: 2023-04-09
+  kind: invited
+  page: events/cosmo_talks
+  event: Cosmology Talks
+  place: Online
+- date: 2023-03-15
+  kind: talk
+  event: Dark Energy Survey general weak-lensing meeting
+  place: Online
+- date: 2022-07-04
+  kind: plenary
+  page: events/cosmo_home
+  event: Cosmology from Home 2022
+  place: Online
+- date: 2022-05-09
+  end: 2022-06-03
+  kind: talk
+  event: "Workshop: Advances in Cosmology through Numerical Simulations"
+  place: MIAPbP, Munich
+- date: 2022-04-25
+  end: 2022-04-29
+  kind: attendee
+  event: Euclid Consortium Meeting
+  place: Oslo
+- date: 2022-04-19
+  kind: talk
+  page: events/fof2022_cordoba
+  event: XI Friends of Friends meeting (FoF 2022)
+  place: IATE / OAC, Córdoba, Argentina
+- date: 2022-04-11
+  end: 2022-04-15
+  kind: invited
+  event: "Workshop: Cosmology with Weak Lensing — Beyond the Two-point Statistics"
+  place: YITP, Kyoto University
+- date: 2022-04-08
+  kind: seminar
+  page: events/uzh_seminar
+  event: ICS seminar
+  place: Institute for Computational Science, University of Zurich
+- date: 2022-01-28
+  kind: panel
+  event: "Cosmology Talks mini-workshop: Baryonic effects in clustering analyses"
+  place: Online
+- date: 2021-06-12
+  kind: seminar
+  page: events/iccub_seminar
+  event: ICCUB seminar
+  place: Institute of Cosmos Sciences, University of Barcelona
+- date: 2021-05-11
+  kind: talk
+  event: Euclid Weak-Lensing Simulation group
+  place: Barcelona
+- date: 2021-05-07
+  kind: seminar
+  event: Invited seminar
+  place: University of Oxford
+- date: 2020-11-03
+  kind: seminar
+  event: Invited seminar
+  place: Max Planck Institute for Astrophysics, Garching
+- date: 2020-11-02
+  kind: seminar
+  event: Invited seminar
+  place: Center for Theoretical Physics, Polish Academy of Sciences, Warsaw
+- date: 2020-06-12
+  kind: talk
+  event: Euclid working group IST:NonLinear
+  place: Online
+- date: 2020-05-04
+  end: 2020-05-08
+  kind: talk
+  event: Euclid Consortium Meeting 2020
+  place: Barcelona
+- date: 2020-03-09
+  end: 2020-03-14
+  kind: invited
+  event: "Workshop: Mock Innsbruck (also chair and discussion leader)"
+  place: Innsbruck
+- date: 2019-11-19
+  end: 2019-11-22
+  kind: talk
+  event: Euclid Weak-Lensing Simulation group
+  place: Barcelona
+- date: 2019-09-01
+  end: 2019-09-07
+  kind: poster
+  event: Dark Matera conference
+  place: Matera
+- date: 2019-06-26
+  kind: talk
+  event: PhD Students Day
+  place: University of Zaragoza
+- date: 2018-07-23
+  end: 2018-07-27
+  kind: attendee
+  event: MPA Summer School on Large-Scale Structure
+  place: Berlin
+- date: 2018-05-28
+  end: 2018-05-30
+  kind: attendee
+  event: VI Meeting on Fundamental Cosmology
+  place: Granada
+- date: 2018-05-22
+  end: 2018-05-25
+  kind: attendee
+  event: "CosmoStat conference: Statistical Challenges in 21st Century Cosmology"
+  place: Valencia
+- date: 2018-05-20
+  end: 2018-05-22
+  kind: attendee
+  event: ADA IX conference
+  place: Valencia
+- date: 2017-09-18
+  end: 2017-09-22
+  kind: attendee
+  event: Cosmology School in the Canary Islands
+  place: Fuerteventura
+- date: 2017-09-11
+  end: 2017-09-13
+  kind: attendee
+  event: Fundamental Cosmology Meeting
+  place: Teruel

@@ -1,0 +1,55 @@
+{{/*
+  media-strip — the videos of the Media page as small cards that play in place
+  (same player as the talk gallery). Usage:  {{< media-strip >}}
+    ids     optional, comma-separated media-item ids to show, in this order (default: all videos)
+    page    optional, the media page (default "/media")
+  Titles and badges are read from the media-item calls of that page, files from its manifest.json.
+*/}}
+{{- $mp := site.GetPage (.Get "page" | default "/media") -}}
+{{- if not $mp }}{{ errorf "media-strip: media page not found" }}{{ end -}}
+{{- .Page.Store.Set "talks_js" true -}}
+{{- $man := dict -}}
+{{- with $mp.Resources.Get "manifest.json" }}{{ $man = . | transform.Unmarshal }}{{ end -}}
+{{- $res := $mp.Resources -}}
+{{- $calls := findRESubmatch `(?s)\{\{<\s*media-item\s+id="([^"]+)"\s+title="([^"]+)"(.*?)>\}\}` $mp.RawContent -}}
+{{- $want := slice }}{{ with .Get "ids" }}{{ range split . "," }}{{ $want = $want | append (trim . " ") }}{{ end }}{{ end -}}
+{{- $cards := slice -}}
+{{- range $calls -}}
+  {{- $id := index . 1 }}{{ $it := index ($man.items | default dict) $id -}}
+  {{- if or (not $it) (eq $it.kind "image") }}{{ continue }}{{ end -}}
+  {{- if and $want (not (in $want $id)) }}{{ continue }}{{ end -}}
+  {{- $badge := "" }}{{ with findRESubmatch `badge="([^"]+)"` (index . 3) 1 }}{{ $badge = index (index . 0) 1 }}{{ end -}}
+  {{- $cards = $cards | append (dict "id" $id "title" (index . 2) "it" $it "badge" $badge) -}}
+{{- end -}}
+<div class="tg ms not-prose">
+  <div class="ms-grid">
+  {{- range $cards }}
+  {{- $it := .it -}}
+  {{- $src := "" }}{{ $src_sm := "" -}}
+  {{- if eq $it.kind "loop" }}{{ with $res.Get $it.file }}{{ $src = .RelPermalink }}{{ end -}}
+  {{- else -}}
+    {{- with $it.renditions -}}
+      {{- range $k, $r := . }}{{ with $res.Get $r.file }}{{ if or (eq $k "default") (eq $k "1080p") }}{{ $src = .RelPermalink }}{{ else if eq $k "720p" }}{{ $src_sm = .RelPermalink }}{{ end }}{{ end }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $poster := "" }}{{ with $res.Get $it.poster }}{{ $poster = . }}{{ end -}}
+  {{- $dur := int (math.Round $it.duration_s) -}}
+  {{- $link := printf "%s#%s" $mp.RelPermalink (.id | anchorize) -}}
+  <article class="ms-card">
+    <button type="button" class="tg-thumb ms-thumb" data-mp4="{{ $src }}"{{ with $src_sm }} data-mp4-sm="{{ . }}"{{ end }}
+            data-title="{{ .title }}" data-url="{{ $link }}"{{ if eq $it.kind "loop" }} data-loop="1"{{ end }} aria-label="Play: {{ .title }}">
+      {{- with $poster }}{{ $th := .Fill "480x270 Center webp q75" }}
+      <img src="{{ $th.RelPermalink }}" width="{{ $th.Width }}" height="{{ $th.Height }}" alt="" loading="lazy" decoding="async">
+      {{- else }}<span class="tg-thumb__fallback" aria-hidden="true"></span>{{ end }}
+      <span class="tg-play" aria-hidden="true"><span class="tg-play__icon">{{ partial "functions/get_icon" (dict "name" "play") }}</span></span>
+      <span class="ms-dur">{{ div $dur 60 }}:{{ printf "%02d" (mod $dur 60) }}</span>
+    </button>
+    <div class="ms-body">
+      <h3 class="ms-title"><a href="{{ $link }}">{{ .title }}</a></h3>
+      {{- with .badge }}<span class="media-badge">{{ . }}</span>{{ end }}
+    </div>
+  </article>
+  {{- end }}
+  </div>
+  <p class="ms-more"><a href="{{ $mp.RelPermalink }}">Descriptions, downloads and the deep-zoom picture on the Media page →</a></p>
+</div>
