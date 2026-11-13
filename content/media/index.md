@@ -68,11 +68,11 @@ The film shows the *cosmology-rescaling* method of [Angulo & White (2010)](https
 
 {{< media-item
     id="rescaling-three-universes"
-    title="Three universes, one seed"
+    title="How to change the cosmology of you simulation"
     alt="Three simulated boxes side by side: a 20%-matter universe, an 80%-matter universe of the same size, and a four times smaller 80%-matter box that, stretched four times and seen at redshift 2, becomes the twin of the first."
     note="Dark-matter-only particle-mesh simulations with 512³ particles and Zel'dovich initial conditions; Ω<sub>m</sub> = 0.2, σ<sub>8</sub> = 0.80 (1000 Mpc/*h* box) and Ω<sub>m</sub> = 0.8, σ<sub>8</sub> = 0.75 (1000 and 250 Mpc/*h* boxes)."
 >}}
-A shorter companion to the film above, with an even more extreme universe. Same random seed, same box size, same moment in time: the only difference between the first two universes is **how much of the Universe is matter**, 20% or 80% (Ω<sub>m</sub> = 0.2 and 0.8). More matter gives a finer, more evolved web; less matter, bigger voids and longer filaments. Then a third box enters, with Ω<sub>m</sub> = 0.8 again but four times smaller (250 Mpc/*h*), drawn to scale. Stretched ×4 and seen at an earlier time (*z* = 2), it becomes the twin of the Ω<sub>m</sub> = 0.2 universe, while the Ω<sub>m</sub> = 0.8 universe of the same size and age stays clearly lumpier. Gravity only cares how lumpy matter is, scale by scale.
+Two simulations, same random seed, same box size, same moment in time: the only difference is **how much metter there is in the universe**, 20% or 80% (Ω<sub>m</sub> = 0.2 and 0.8). More matter gives a finer, more evolved cosmic web. Then a third box appears, with Ω<sub>m</sub> = 0.8 again but four times smaller (250 Mpc/*h*), drawn to scale. Stretched ×4 and seen at an earlier time (*z* = 2), it becomes the twin of the Ω<sub>m</sub> = 0.2 universe. Gravity does not know about cosmology, it only cares how clumpy (linear) matter is, scale by scale.
 {{< /media-item >}}
 
 {{< media-item
