@@ -68,7 +68,7 @@ The film shows the *cosmology-rescaling* method of [Angulo & White (2010)](https
 
 {{< media-item
     id="rescaling-three-universes"
-    title="How to change the cosmology of you simulation"
+    title="How to change the cosmology of your simulation"
     alt="Three simulated boxes side by side: a 20%-matter universe, an 80%-matter universe of the same size, and a four times smaller 80%-matter box that, stretched four times and seen at redshift 2, becomes the twin of the first."
     note="Dark-matter-only particle-mesh simulations with 512³ particles and Zel'dovich initial conditions; Ω<sub>m</sub> = 0.2, σ<sub>8</sub> = 0.80 (1000 Mpc/*h* box) and Ω<sub>m</sub> = 0.8, σ<sub>8</sub> = 0.75 (1000 and 250 Mpc/*h* boxes)."
 >}}
@@ -77,7 +77,7 @@ Two simulations, same random seed, same box size, same moment in time: the only 
 
 {{< media-item
     id="zeldovich-displacement"
-    title="Zel'dovich displacement"
+    title="Zel'dovich displacement to picture Zel'dovich"
     alt="Animation: a cosmological simulation starts from a uniform distribution of matter; gravity builds the cosmic web, and by today the dark matter draws a portrait of Yakov B. Zel'dovich."
     note="Dark-matter-only particle-mesh simulation with 512³ particles in a 1000 Mpc/*h* box (Ω<sub>m</sub> = 0.2, σ<sub>8</sub> = 0.80), Zel'dovich initial conditions at *z* = 5. Shown: a 60 Mpc/*h* slab, then the projection through the whole box."
 >}}
