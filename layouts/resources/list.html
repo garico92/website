@@ -1,0 +1,13 @@
+{{/* Resources section page: intro text and every resource as a card, newest first. */}}
+{{ define "main" }}
+<div class="ga ga-page">
+  <header class="ga-head ga-head--page">
+    <h1 class="ga-h1">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="ga-lead">{{ . | $.RenderString }}</p>{{ end }}
+  </header>
+  {{ with .Content }}<div class="ga-prose">{{ . }}</div>{{ end }}
+  <div class="ga-resgrid ga-resgrid--page">
+    {{ range .RegularPages.ByDate.Reverse }}{{ partial "ga/resource-card" . }}{{ end }}
+  </div>
+</div>
+{{ end }}

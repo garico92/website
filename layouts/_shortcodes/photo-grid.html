@@ -1,0 +1,49 @@
+{{/*
+  photo-grid — a grid of photos from the page bundle; click one to see it large.
+  Usage, one photo per line ("file | caption"):
+    {{< photo-grid >}}
+    featured.jpg | On stage at ARCI L'Impegno.
+    poster.jpg   | The poster.
+    {{< /photo-grid >}}
+  Styles: .ga-photos in assets/css/custom.css. Lightbox: native <dialog>, no library.
+*/}}
+{{- $page := .Page -}}
+{{- $items := slice -}}
+{{- range split (trim .Inner "\n ") "\n" -}}
+  {{- $l := trim . " " -}}
+  {{- if $l -}}
+    {{- $parts := split $l "|" -}}
+    {{- $f := trim (index $parts 0) " " -}}
+    {{- $cap := "" }}{{ if gt (len $parts) 1 }}{{ $cap = trim (delimit (after 1 $parts) "|") " " }}{{ end -}}
+    {{- with $page.Resources.Get $f -}}{{- $items = $items | append (dict "r" . "cap" $cap) -}}{{- else -}}{{- warnf "photo-grid: %s not found in %s" $f $page.File.Path -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $id := printf "pg-%d" .Ordinal -}}
+<div class="ga ga-photos not-prose" id="{{ $id }}">
+  {{- range $i, $it := $items }}
+  {{- $th := $it.r.Fill "600x750 Center webp q78" }}
+  {{- $big := $it.r }}{{ if gt $it.r.Width 1800 }}{{ $big = $it.r.Resize "1800x webp q85" }}{{ end }}
+  <figure class="ga-photo">
+    <a href="{{ $big.RelPermalink }}" data-big="{{ $big.RelPermalink }}" data-cap="{{ $it.cap }}">
+      <img src="{{ $th.RelPermalink }}" width="{{ $th.Width }}" height="{{ $th.Height }}" alt="{{ $it.cap }}" loading="lazy" decoding="async">
+    </a>
+    {{- with $it.cap }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+  </figure>
+  {{- end }}
+  <dialog class="ga-lightbox" aria-label="Photo">
+    <form method="dialog"><button class="ga-lightbox__close" aria-label="Close">×</button></form>
+    <img alt=""><p class="ga-lightbox__cap"></p>
+  </dialog>
+</div>
+<script>
+(function () {
+  var root = document.getElementById('{{ $id }}'); if (!root || !window.HTMLDialogElement) return;
+  var dlg = root.querySelector('dialog'), img = dlg.querySelector('img'), cap = dlg.querySelector('.ga-lightbox__cap');
+  root.querySelectorAll('a[data-big]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault(); img.src = a.dataset.big; img.alt = a.dataset.cap || ''; cap.textContent = a.dataset.cap || ''; dlg.showModal();
+    });
+  });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+})();
+</script>

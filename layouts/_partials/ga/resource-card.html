@@ -1,0 +1,16 @@
+{{/* ga/resource-card — one resource (software, lecture, slides). Input: the page. */}}
+{{- $types := dict "software" "Software" "speech" "Talk" "lecture" "Lecture" "dataset" "Data" -}}
+{{- $t := index (.Params.publication_types | default (slice "")) 0 -}}
+{{- $label := .Params.resource_type | default (index $types $t | default "Resource") -}}
+{{- $img := "" }}{{ with .Resources.GetMatch "featured*" }}{{ $img = .Fill "560x315 Center webp q78" }}{{ end -}}
+<article class="ga-card ga-res">
+  <a class="ga-res__img" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">
+    {{- with $img }}<img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="" loading="lazy" decoding="async">{{ end -}}
+  </a>
+  <div class="ga-res__body">
+    <p class="tg-meta"><span class="tg-badge ga-tag--{{ urlize $label }}">{{ $label }}</span><span>{{ .Date.Format "Jan 2006" }}</span></p>
+    <h3 class="ga-h3"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p class="ga-res__summary">{{ .Params.summary | default .Summary | plainify }}</p>
+    {{ partial "ga/links" (dict "page" .) }}
+  </div>
+</article>

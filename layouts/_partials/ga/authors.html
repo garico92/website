@@ -1,0 +1,16 @@
+{{/* ga/authors — author list of a page, own name highlighted. Input: dict "page" ["max" n] */}}
+{{- $p := .page -}}
+{{- $max := .max | default 99 -}}
+{{- $names := slice -}}
+{{- range $p.Params.authors -}}
+  {{- $n := trim . " " -}}
+  {{- if eq $n "admin" }}{{ $names = $names | append "<strong>G. Aricò</strong>" -}}
+  {{- else -}}
+    {{- $parts := split $n " " -}}
+    {{- $last := index $parts (sub (len $parts) 1) -}}
+    {{- $ini := "" }}{{ range first (sub (len $parts) 1) $parts }}{{ $ini = printf "%s%s. " $ini (substr . 0 1) }}{{ end -}}
+    {{- $names = $names | append (printf "%s%s" $ini $last) -}}
+  {{- end -}}
+{{- end -}}
+{{- $shown := first $max $names -}}
+{{- delimit $shown ", " | safeHTML -}}{{ if gt (len $names) $max }} et al.{{ end -}}

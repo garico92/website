@@ -1,0 +1,33 @@
+{{/* Filters and search for the publication list (pub-list shortcode). Emitted only where it is used. */}}
+{{- if .Store.Get "pubs_js" -}}
+<script>
+(function () {
+  var root = document.getElementById('all-papers'); if (!root) return;
+  var rows = [].slice.call(root.querySelectorAll('.pl-row'));
+  var years = [].slice.call(root.querySelectorAll('[data-pl-year]'));
+  var chips = [].slice.call(root.querySelectorAll('[data-pl-filter]'));
+  var input = root.querySelector('[data-pl-search]');
+  var count = root.querySelector('[data-pl-count]');
+  var empty = root.querySelector('[data-pl-empty]');
+  var role = 'all';
+  function apply() {
+    var q = (input && input.value || '').trim().toLowerCase(), shown = 0;
+    rows.forEach(function (r) {
+      var ok = (role === 'all' || r.dataset.plRole === role) && (!q || r.dataset.plText.indexOf(q) !== -1);
+      r.hidden = !ok; if (ok) shown++;
+    });
+    years.forEach(function (y) { y.hidden = !y.querySelector('.pl-row:not([hidden])'); });
+    if (count) count.textContent = shown;
+    if (empty) empty.hidden = shown > 0;
+  }
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      role = c.dataset.plFilter;
+      chips.forEach(function (o) { o.classList.toggle('is-active', o === c); o.setAttribute('aria-pressed', o === c); });
+      apply();
+    });
+  });
+  if (input) input.addEventListener('input', apply);
+})();
+</script>
+{{- end -}}

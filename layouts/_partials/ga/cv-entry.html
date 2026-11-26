@@ -1,0 +1,12 @@
+{{/* ga/cv-entry — one position or degree of the CV page (cv-page block). */}}
+<li class="ga-tl__item">
+  <span class="ga-tl__when">{{ .start }}{{ with .end }}–{{ . }}{{ else }}–now{{ end }}</span>
+  <div class="ga-tl__body">
+    <h3 class="ga-tl__title">{{ .title }}</h3>
+    <p class="ga-tl__org">{{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}{{ .org }}{{ if .url }}</a>{{ end }}{{ with .country }}, {{ . }}{{ end }}</p>
+    {{ with .topics }}<p class="ga-tl__detail">{{ . }}</p>{{ end }}
+    {{ with .detail }}<p class="ga-tl__detail">{{ . | markdownify }}</p>{{ end }}
+    {{ with .people }}<p class="ga-tl__people">{{ if $.isEdu }}Supervisor{{ else }}Advisor{{ end }}{{ if in . "," }}s{{ end }}: {{ . }}</p>{{ end }}
+    {{ with .link }}<a class="tg-btn ga-tl__btn" href="{{ .url }}" target="_blank" rel="noopener">{{ .text }}<span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-top-right-on-square") }}</span></a>{{ end }}
+  </div>
+</li>

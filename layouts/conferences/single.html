@@ -1,0 +1,20 @@
+{{/* Conferences page: title, buttons, then the complete talk list (talk-list shortcode in the content). */}}
+{{ define "main" }}
+<div class="ga ga-page">
+  <header class="ga-head ga-head--page">
+    <h1 class="ga-h1">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="ga-lead">{{ . | $.RenderString }}</p>{{ end }}
+    {{ with .Params.buttons }}
+    <div class="ga-hero__actions">
+      {{ range . }}
+      {{ $u := .url }}{{ $ext := hasPrefix $u "http" }}{{ if not $ext }}{{ $u = $u | relLangURL }}{{ end }}
+      <a class="ga-btn{{ if .primary }} ga-btn--primary{{ end }}" href="{{ $u }}"{{ if or $ext (strings.HasSuffix $u ".pdf") }} target="_blank" rel="noopener"{{ end }}>
+        {{ with .icon }}<span class="tg-ico">{{ partial "functions/get_icon" (dict "name" .) }}</span>{{ end }}{{ .text }}
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </header>
+  <div class="ga-prose">{{ .Content }}</div>
+</div>
+{{ end }}

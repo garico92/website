@@ -1,0 +1,86 @@
+{{/*
+  cv-page — the CV page, built from data/cv.yaml (keep it in step with CV/main.tex).
+
+  sections:
+    - block: cv-page
+      content:
+        title: Curriculum Vitae
+        subtitle: '...'
+*/}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $cv := site.Data.cv }}
+{{ $c := $block.content }}
+<div class="ga ga-section ga-cv">
+  <header class="ga-head ga-head--page">
+    <h1 class="ga-h1">{{ $c.title | default "Curriculum Vitae" }}</h1>
+    {{ with $c.subtitle }}<p class="ga-lead">{{ . | $page.RenderString }}</p>{{ end }}
+    {{ with $cv.downloads }}
+    <div class="ga-hero__actions ga-cv__dl">
+      {{ range . }}<a class="ga-btn{{ if .primary }} ga-btn--primary{{ end }}" href="{{ .file | relURL }}" target="_blank" rel="noopener"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-down-tray") }}</span>{{ .text }}</a>{{ end }}
+    </div>
+    {{ end }}
+    {{ with $cv.updated }}<p class="ga-note">Last updated {{ (time.AsTime (printf "%s-01" .)).Format "January 2006" }}.</p>{{ end }}
+  </header>
+
+  {{ with $cv.stats }}
+  <dl class="ga-stats ga-stats--inline">{{ range . }}<div class="ga-stat"><dt>{{ .label }}</dt><dd>{{ .value }}</dd>{{ with .note }}<span class="ga-stat__note">{{ . }}</span>{{ end }}</div>{{ end }}</dl>
+  {{ end }}
+
+  <nav class="ga-cv__toc" aria-label="Sections">
+    <a href="#positions">Positions</a><a href="#education">Education</a><a href="#leadership">Leadership</a>
+    <a href="#computing">Computing</a><a href="#visits">Visits</a><a href="#service">Service &amp; teaching</a>
+    <a href="#awards">Awards</a><a href="#skills">Skills</a>
+  </nav>
+
+  <div class="ga-cv__grid">
+    <section class="ga-card ga-cv__sec" id="positions">
+      <h2 class="ga-cv__h"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "briefcase") }}</span>Research positions</h2>
+      <ol class="ga-tl">{{ range $cv.positions }}{{ partial "ga/cv-entry" (merge . (dict "isEdu" false)) }}{{ end }}</ol>
+    </section>
+    <section class="ga-card ga-cv__sec" id="education">
+      <h2 class="ga-cv__h"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "academic-cap") }}</span>Education</h2>
+      <ol class="ga-tl">{{ range $cv.education }}{{ partial "ga/cv-entry" (merge . (dict "isEdu" true)) }}{{ end }}</ol>
+    </section>
+
+    <section class="ga-card ga-cv__sec" id="leadership">
+      <h2 class="ga-cv__h"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "user-group") }}</span>Leadership in Euclid</h2>
+      <ul class="ga-list">{{ range $cv.leadership }}<li><strong>{{ .role }}</strong> <span class="ga-muted">({{ .when }})</span><br><span class="ga-muted">{{ .detail }}</span></li>{{ end }}</ul>
+    </section>
+    <section class="ga-card ga-cv__sec" id="awards">
+      <h2 class="ga-cv__h"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "trophy") }}</span>Fellowships &amp; awards</h2>
+      <ul class="ga-list ga-list--dated">{{ range $cv.awards }}<li><span class="ga-when">{{ .when }}</span>{{ .title }}</li>{{ end }}</ul>
+    </section>
+
+    <section class="ga-card ga-cv__sec ga-cv__sec--wide" id="computing">
+      <h2 class="ga-cv__h"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "server-stack") }}</span>Supercomputing projects</h2>
+      <table class="ga-table">
+        <thead><tr><th>Role</th><th>Project</th><th class="ga-num">Allocation</th></tr></thead>
+        <tbody>{{ range $cv.computing }}<tr><td><span class="tg-badge">{{ .role }}</span></td><td>{{ .project }}</td><td class="ga-num">{{ .hours }}</td></tr>{{ end }}</tbody>
+      </table>
+    </section>
+
+    <section class="ga-card ga-cv__sec" id="visits">
+      <h2 class="ga-cv__h"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "globe-europe-africa") }}</span>Research visits</h2>
+      <ul class="ga-list ga-list--dated">{{ range $cv.visits }}<li><span class="ga-when">{{ .when }}</span>{{ .place }}</li>{{ end }}</ul>
+    </section>
+    <section class="ga-card ga-cv__sec" id="service">
+      <h2 class="ga-cv__h"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "hand-raised") }}</span>Service, teaching &amp; outreach</h2>
+      <ul class="ga-list">{{ range $cv.service }}<li>{{ . | markdownify }}</li>{{ end }}</ul>
+      <h3 class="ga-cv__h3">Teaching</h3>
+      <ul class="ga-list">{{ range $cv.teaching }}<li>{{ . | markdownify }}</li>{{ end }}</ul>
+      <h3 class="ga-cv__h3">Outreach</h3>
+      <ul class="ga-list">{{ range $cv.outreach }}<li>{{ . | markdownify }}</li>{{ end }}</ul>
+    </section>
+
+    <section class="ga-card ga-cv__sec" id="skills">
+      <h2 class="ga-cv__h"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "code-bracket") }}</span>Technical skills</h2>
+      <dl class="ga-dl">{{ range $cv.skills }}<dt>{{ .area }}</dt><dd>{{ .items }}</dd>{{ end }}</dl>
+    </section>
+    <section class="ga-card ga-cv__sec">
+      <h2 class="ga-cv__h"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "language") }}</span>Languages</h2>
+      <ul class="ga-langs">{{ range $cv.languages }}<li><span>{{ .name }}</span><span class="ga-level ga-level--{{ .level }}">{{ .level }}</span></li>{{ end }}</ul>
+      <p class="ga-note ga-cv__pubs">Publications are listed on the <a href="{{ "publications/" | relLangURL }}">Publications</a> page and talks on the <a href="{{ "conferences/" | relLangURL }}">Conferences</a> page (recordings on <a href="{{ "talks/" | relLangURL }}">Talks</a>).</p>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+{{/*
+  media-teaser — a few films from the Media page, playable in place, with a link to the page.
+
+  sections:
+    - block: media-teaser
+      content:
+        title: From my simulations
+        subtitle: '...'
+        ids: nenya-orbit-dive, rescaling-four-acts, baryonification, zeldovich-displacement
+        more: { text: All pictures and films, link: media/ }
+*/}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+<div class="ga ga-section">
+  {{ partial "ga/heading" (dict "page" $page "block" $block) }}
+  <div class="ga-teaser">
+    {{ partial "media/strip.html" (dict "page" $page "ids" $block.content.ids "hide_more" true) }}
+  </div>
+  {{ with $block.content.more }}
+  <div class="tg-more"><a class="tg-btn tg-btn--primary" href="{{ .link | relLangURL }}">{{ .text }}<span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-right") }}</span></a></div>
+  {{ end }}
+</div>

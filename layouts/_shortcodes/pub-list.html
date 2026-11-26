@@ -1,0 +1,70 @@
+{{/*
+  pub-list — the complete list of refereed papers, grouped by year, with filters.
+  Data: data/publications.yaml, generated from the CV by scripts/cv_publications.py.
+  Usage (content/publications/_index.md):  {{< pub-list >}}
+
+  A paper links to its page on this site when a page in content/publications/ has the same
+  arXiv id or DOI (front matter hugoblox.ids or links).
+*/}}
+{{- $pubs := site.Data.publications.publications | default slice -}}
+{{- $roles := dict "lead" "First / corresponding author" "major" "Major contribution" "other" "Co-author" "submitted" "Submitted" -}}
+{{- .Page.Store.Set "pubs_js" true -}}
+
+{{- /* site pages by arXiv id and DOI */ -}}
+{{- $site := dict -}}
+{{- range where site.RegularPages "Section" "publications" -}}
+  {{- $p := . -}}
+  {{- with .Params.hugoblox.ids }}{{ with .arxiv }}{{ $site = merge $site (dict (string .) $p) }}{{ end }}{{ with .doi }}{{ $site = merge $site (dict (string .) $p) }}{{ end }}{{ end -}}
+  {{- range .Params.links }}{{ if and (eq (.provider | default "") "arxiv") .id }}{{ $site = merge $site (dict (string .id) $p) }}{{ end }}{{ end -}}
+{{- end -}}
+
+{{- $n := len $pubs -}}
+{{- $nlead := len (where $pubs "role" "lead") -}}
+{{- $nmajor := len (where $pubs "role" "major") -}}
+{{- $years := slice }}{{ range $pubs }}{{ $years = $years | append .year }}{{ end }}{{ $years = $years | uniq -}}
+
+<div class="tg pl not-prose" id="all-papers">
+  <div class="tg-toolbar">
+    <p class="tg-count"><span data-pl-count>{{ $n }}</span> of {{ $n }} refereed papers · {{ $nlead }} as first or corresponding author</p>
+    <div class="tg-filters" role="group" aria-label="Filter papers">
+      <button type="button" class="tg-chip is-active" data-pl-filter="all">All</button>
+      <button type="button" class="tg-chip" data-pl-filter="lead">First / corresponding ({{ $nlead }})</button>
+      <button type="button" class="tg-chip" data-pl-filter="major">Major contribution ({{ $nmajor }})</button>
+      <label class="pl-search"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "magnifying-glass") }}</span>
+        <input type="search" placeholder="Search title, author, journal" data-pl-search aria-label="Search papers"></label>
+    </div>
+  </div>
+
+  {{- range $years }}
+  {{- $y := . }}
+  <section class="pl-year" data-pl-year>
+    <h3 class="pl-year__label">{{ $y }}</h3>
+    <ol class="pl-rows">
+      {{- range where $pubs "year" $y }}
+      {{- $sp := index $site .arxiv | default (index $site .doi) }}
+      {{- $me := .me }}
+      {{- $suf := "th" }}{{ $m100 := mod $me 100 }}{{ if not (and (ge $m100 11) (le $m100 13)) }}{{ $m10 := mod $me 10 }}{{ if eq $m10 1 }}{{ $suf = "st" }}{{ else if eq $m10 2 }}{{ $suf = "nd" }}{{ else if eq $m10 3 }}{{ $suf = "rd" }}{{ end }}{{ end }}
+      <li class="pl-row pl-row--{{ .role }}" data-pl-role="{{ .role }}" data-pl-text="{{ lower (printf "%s %s %s %s" .title (delimit .authors " ") .journal .journal_short) }}">
+        <div class="pl-main">
+          <p class="pl-title">{{ with $sp }}<a href="{{ .RelPermalink }}">{{ end }}{{ .title }}{{ if $sp }}</a>{{ end }}</p>
+          <p class="pl-authors">
+            {{- range $i, $a := .authors -}}{{ if $i }}, {{ end }}{{ if eq (add $i 1) $me }}<strong>{{ $a }}</strong>{{ else }}{{ $a }}{{ end }}{{- end -}}
+            {{- if gt .n_authors (len .authors) -}}
+              {{- if gt $me (len .authors) }} et al. — <strong>G. Aricò</strong> <span class="pl-pos">({{ $me }}{{ $suf }} author)</span>{{ else }} et al.{{ end -}}
+            {{- end -}}
+          </p>
+          <p class="pl-venue"><span class="tg-badge">{{ .journal_short }}</span> {{ .journal }}{{ with .volume }} {{ . }}{{ end }}{{ with .pages }}, {{ . }}{{ end }}{{ if eq .role "lead" }} <span class="pl-role">{{ index $roles .role }}</span>{{ else if eq .role "major" }} <span class="pl-role pl-role--major">{{ index $roles .role }}</span>{{ end }}</p>
+        </div>
+        <div class="tl-links">
+          {{- with $sp }}<a class="tg-btn tg-btn--primary" href="{{ .RelPermalink }}">Summary</a>{{ end }}
+          {{- with .arxiv }}<a class="tg-btn" href="https://arxiv.org/abs/{{ . }}" target="_blank" rel="noopener">arXiv</a>{{ end }}
+          {{- with .doi }}<a class="tg-btn" href="https://doi.org/{{ . }}" target="_blank" rel="noopener">Journal</a>{{ end }}
+          {{- with .ads }}<a class="tg-btn" href="{{ . }}" target="_blank" rel="noopener">ADS</a>{{ end }}
+        </div>
+      </li>
+      {{- end }}
+    </ol>
+  </section>
+  {{- end }}
+  <p class="pl-empty" data-pl-empty hidden>No paper matches.</p>
+</div>

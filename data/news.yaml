@@ -1,0 +1,46 @@
+# Short news shown in the "Latest" block of the home page (layouts/_partials/hbx/blocks/news).
+# Newest first is not required: the block sorts by date. Recent talks are added automatically
+# from data/talks.yaml, so there is no need to repeat them here.
+#
+#   date       YYYY-MM-DD (use the 1st of the month if the day does not matter)
+#   year_only  true to show only the year
+#   tag        optional label: Paper | Grant | Role | Visit | Teaching | Website
+#   text       markdown, one or two lines; links are welcome
+#   images     optional: small pictures under the text, from a page bundle, linking to that page
+#                images: { page: /events/professorone, files: [featured.jpg, stage.jpg] }
+
+- date: 2026-11-26
+  tag: Outreach
+  text: "New film on the Media page: [*Connecting the luminous and dark Universe*](media/#luminous-and-dark-universe). City lights reveal the landscape beneath them; galaxies reveal the dark matter."
+  images: { page: /media, files: [luminous-and-dark-universe_poster.webp] }
+- date: 2026-11-20
+  tag: Outreach
+  text: "[*Arriva il professorone*](events/professorone/), a public evening on cosmology at ARCI L'Impegno, Milan: I talked about the Universe while the cartoonist Davide La Rosa drew the situations I described live, and the host Davide Arcuri and the audience asked the questions."
+  images: { page: /events/professorone, files: [featured.jpg, stage.jpg, poster.jpg] }
+- date: 2026-11-09
+  tag: Website
+  text: New [Talks & videos](talks/) page, with my recorded seminars, the animations from my simulations and the list of all my talks.
+- date: 2026-09-24
+  tag: Website
+  text: New [Media](media/) page — pictures and films from my MareNostrum 5 simulations, free to reuse with credit.
+- date: 2026-03-31
+  tag: Visit
+  text: Visiting the Institute of Astronomy, University of Cambridge.
+- date: 2026-03-01
+  year_only: true
+  tag: Grant
+  text: Team member of MareNostrum 5 project AECT-2026-1-0010 *Euclid Cosmology — Cosmic Shear beyond average* (9.4 M CPU hours).
+- date: 2026-01-01
+  tag: Paper
+  text: "*Euclid: An emulator for baryonic effects on the matter bispectrum* is out in A&A ([arXiv:2506.18974](https://arxiv.org/abs/2506.18974))."
+- date: 2025-07-01
+  year_only: true
+  tag: Grant
+  text: PI of MareNostrum 5 project AECT-2025-2-0044 (6 M CPU hours) to build emulators of the large-scale structure — the source of the [films on the Media page](media/).
+- date: 2025-06-02
+  tag: Teaching
+  text: Lectures on [simulating the large-scale structure](resources/lecture_colours/) at the COLOURS cosmology school, Institut Pascal.
+- date: 2025-01-01
+  year_only: true
+  tag: Role
+  text: Co-lead of the Euclid Joint Cosmological Key Project 4 on baryonic physics with DR1, and Senior Research Fellow at INFN Bologna.

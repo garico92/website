@@ -1,0 +1,9 @@
+{{/* ga/heading — section heading for home-page blocks. Input: dict "page" "block" */}}
+{{- $c := .block.content -}}
+{{- if or $c.title $c.eyebrow -}}
+<header class="ga-head">
+  {{- with $c.eyebrow }}<p class="ga-eyebrow">{{ . }}</p>{{ end }}
+  {{- with $c.title }}<h2 class="ga-h2">{{ . | emojify | $.page.RenderString }}</h2>{{ end }}
+  {{- with $c.subtitle }}<p class="ga-lead">{{ . | $.page.RenderString }}</p>{{ end }}
+</header>
+{{- end -}}

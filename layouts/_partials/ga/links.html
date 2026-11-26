@@ -1,0 +1,47 @@
+{{/*
+  ga/links — small link buttons for a publication / resource page.
+  Input: dict "page" <page> ["primary" <bool: first button primary>] ["more" <bool: add "Details" link to the page>]
+  ["max" <n: keep the n most useful links: details, arXiv, DOI, code, video, slides, ...>]
+  Reads front matter `links:` (type + url, or provider: arxiv + id), `hugoblox.ids.doi|arxiv`,
+  and a PDF in the page bundle.
+*/}}
+{{- $p := .page -}}
+{{- $labels := dict "preprint" "arXiv" "pdf" "PDF" "code" "Code" "slides" "Slides" "video" "Video"
+      "documentation" "Docs" "conference" "Event" "school" "School" "dataset" "Data" "poster" "Poster" "source" "Source" -}}
+{{- $icons := dict "preprint" "document-text" "pdf" "document-arrow-down" "code" "code-bracket" "slides" "presentation-chart-bar"
+      "video" "play-circle" "documentation" "book-open" "conference" "calendar" "school" "academic-cap" "dataset" "circle-stack"
+      "doi" "link" "page" "arrow-right" "poster" "photo" "source" "code-bracket" -}}
+{{- $btns := slice -}}
+{{- $seen := slice -}}
+{{- if .more }}{{ $btns = $btns | append (dict "t" "page" "label" "Details" "url" $p.RelPermalink) }}{{ end -}}
+{{- range $p.Params.links -}}
+  {{- $t := lower (.type | default "link") -}}
+  {{- $u := .url | default "" -}}
+  {{- if and (eq (.provider | default "") "arxiv") .id }}{{ $u = printf "https://arxiv.org/abs/%v" .id }}{{ end -}}
+  {{- if and $u (not (in $seen $u)) -}}
+    {{- $seen = $seen | append $u -}}
+    {{- $btns = $btns | append (dict "t" $t "label" (index $labels $t | default (.name | default (humanize $t))) "url" $u) -}}
+  {{- end -}}
+{{- end -}}
+{{- with $p.Params.hugoblox.ids -}}
+  {{- with .arxiv }}{{ $u := printf "https://arxiv.org/abs/%v" . }}{{ if not (in $seen $u) }}{{ $btns = $btns | append (dict "t" "preprint" "label" "arXiv" "url" $u) }}{{ $seen = $seen | append $u }}{{ end }}{{ end -}}
+  {{- with .doi }}{{ if findRE `^10\.` (string .) }}{{ $btns = $btns | append (dict "t" "doi" "label" "DOI" "url" (printf "https://doi.org/%v" .)) }}{{ end }}{{ end -}}
+{{- end -}}
+{{- with $p.Resources.GetMatch "*.pdf" }}{{ $btns = $btns | append (dict "t" "pdf" "label" "PDF" "url" .RelPermalink) }}{{ end -}}
+{{- with .max -}}
+  {{- $prio := slice "page" "preprint" "doi" "code" "video" "slides" "dataset" "documentation" "pdf" -}}
+  {{- $sorted := slice -}}
+  {{- range $prio }}{{ $t := . }}{{ range $btns }}{{ if eq .t $t }}{{ $sorted = $sorted | append . }}{{ end }}{{ end }}{{ end -}}
+  {{- range $btns }}{{ if not (in $prio .t) }}{{ $sorted = $sorted | append . }}{{ end }}{{ end -}}
+  {{- $btns = first . $sorted -}}
+{{- end -}}
+{{- if $btns -}}
+<div class="ga-links">
+  {{- range $i, $b := $btns }}
+  {{- $ext := hasPrefix $b.url "http" }}
+  <a class="tg-btn{{ if and $.primary (eq $i 0) }} tg-btn--primary{{ end }}" href="{{ $b.url }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>
+    <span class="tg-ico">{{ partial "functions/get_icon" (dict "name" (index $icons $b.t | default "link")) }}</span>{{ $b.label }}
+  </a>
+  {{- end }}
+</div>
+{{- end -}}

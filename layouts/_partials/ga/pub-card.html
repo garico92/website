@@ -1,0 +1,14 @@
+{{/* ga/pub-card — a paper page of this site as a wide card (home block featured-pubs, publications page). */}}
+{{ $img := "" }}{{ with .Resources.GetMatch "featured*" }}{{ $img = .Fit "640x420 webp q80" }}{{ end }}
+<article class="ga-card ga-pub">
+  <a class="ga-pub__img" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">
+    {{ with $img }}<img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="" loading="lazy" decoding="async">{{ end }}
+  </a>
+  <div class="ga-pub__body">
+    <p class="tg-meta"><span class="tg-badge">{{ .Params.publication_short | default .Params.publication }}</span><span>{{ .Date.Format "2006" }}</span></p>
+    <h3 class="ga-h3"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p class="ga-pub__authors">{{ partial "ga/authors" (dict "page" . "max" 4) }}</p>
+    <p class="ga-pub__summary">{{ .Params.summary | default .Summary | plainify }}</p>
+    {{ partial "ga/links" (dict "page" . "more" true "max" 4) }}
+  </div>
+</article>

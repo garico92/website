@@ -1,0 +1,28 @@
+{{/*
+  featured-pubs — selected papers (pages in content/publications/ with `featured: true`),
+  as wide cards with figure, venue, one-paragraph summary and links; then a link to the full list.
+
+  sections:
+    - block: featured-pubs
+      id: publications
+      content:
+        title: Selected publications
+        count: 4
+        archive: { text: All publications, link: publications/ }
+*/}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $count := $block.content.count | default 4 }}
+{{ $pages := where (where site.RegularPages "Section" "publications") "Params.featured" true }}
+{{ $pages = first $count $pages.ByDate.Reverse }}
+<div class="ga ga-section">
+  {{ partial "ga/heading" (dict "page" $page "block" $block) }}
+  <div class="ga-pubs">
+    {{ range $pages }}
+    {{ partial "ga/pub-card" . }}
+    {{ end }}
+  </div>
+  {{ with $block.content.archive }}
+  <div class="tg-more"><a class="tg-btn tg-btn--primary" href="{{ .link | relLangURL }}">{{ .text }}<span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-right") }}</span></a></div>
+  {{ end }}
+</div>

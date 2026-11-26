@@ -1,0 +1,64 @@
+{{/*
+  news — "Latest": hand-written highlights (data/news.yaml) next to the most recent talks
+  (data/talks.yaml, filled automatically).
+
+  sections:
+    - block: news
+      content:
+        title: Latest
+        count: 6          # news items shown
+        talks: 5          # recent talks shown (0 hides the column)
+*/}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $count := $block.content.count | default 6 }}
+{{ $ntalks := $block.content.talks | default 5 }}
+{{ $kinds := dict "seminar" "Seminar" "invited" "Invited talk" "plenary" "Plenary talk" "keynote" "Keynote" "talk" "Talk" "lecture" "Lecture" "panel" "Panel" "discussion" "Discussion leader" }}
+{{ $news := sort (site.Data.news | default slice) "date" "desc" }}
+<div class="ga ga-section">
+  {{ partial "ga/heading" (dict "page" $page "block" $block) }}
+  <div class="ga-news{{ if not $ntalks }} ga-news--single{{ end }}">
+    <div class="ga-card ga-news__col">
+      <h3 class="ga-news__label"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "sparkles") }}</span>News</h3>
+      <ol class="ga-feed">
+        {{ range first $count $news }}
+        {{ $it := . }}{{ $d := time.AsTime .date }}
+        <li class="ga-feed__item">
+          <time datetime="{{ $d.Format "2006-01-02" }}">{{ if .year_only }}{{ $d.Format "2006" }}{{ else }}{{ $d.Format "Jan 2006" }}{{ end }}</time>
+          <div>
+            {{ with .tag }}<span class="tg-badge ga-tag--{{ urlize . }}">{{ . }}</span>{{ end }}
+            <span class="ga-feed__text">{{ .text | $page.RenderString }}</span>
+            {{ with .images }}{{ $ip := site.GetPage .page }}{{ with $ip }}
+            <div class="ga-feed__pics">
+              {{ range $it.images.files }}{{ with $ip.Resources.Get . }}{{ $t := .Fill "160x160 Center webp q75" }}
+              <a href="{{ $ip.RelPermalink }}" aria-label="Photos: {{ $ip.Title }}"><img src="{{ $t.RelPermalink }}" width="80" height="80" alt="" loading="lazy" decoding="async"></a>
+              {{ end }}{{ end }}
+            </div>
+            {{ end }}{{ end }}
+          </div>
+        </li>
+        {{ end }}
+      </ol>
+    </div>
+    {{ if $ntalks }}
+    {{ $talks := slice }}
+    {{ range sort (site.Data.talks | default slice) "date" "desc" }}{{ if and (isset $kinds .kind) (lt (len $talks) $ntalks) }}{{ $talks = $talks | append . }}{{ end }}{{ end }}
+    <div class="ga-card ga-news__col">
+      <h3 class="ga-news__label"><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "megaphone") }}</span>Recent talks</h3>
+      <ol class="ga-feed">
+        {{ range $talks }}
+        {{ $d := time.AsTime .date }}
+        <li class="ga-feed__item">
+          <time datetime="{{ $d.Format "2006-01-02" }}">{{ $d.Format "Jan 2006" }}</time>
+          <div>
+            <span class="tg-badge tl-kind--{{ .kind }}">{{ index $kinds .kind }}</span>
+            <span class="ga-feed__text">{{ with .title }}<strong>{{ . }}</strong> · {{ end }}{{ .event }}{{ with .place }}, {{ . }}{{ end }}</span>
+          </div>
+        </li>
+        {{ end }}
+      </ol>
+      <a class="ga-more" href="{{ "conferences/" | relLangURL }}">All conferences and talks<span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-right") }}</span></a>
+    </div>
+    {{ end }}
+  </div>
+</div>

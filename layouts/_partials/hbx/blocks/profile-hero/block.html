@@ -1,0 +1,65 @@
+{{/*
+  profile-hero — home-page introduction: photo, name, role, short bio, buttons, profiles and key numbers.
+
+  sections:
+    - block: profile-hero
+      content:
+        username: admin              # folder in content/authors/ (photo, name, role, profiles)
+        eyebrow: 'Cosmology · Large-scale structure'
+        text: |                      # markdown; default: the author page body
+          ...
+        buttons:
+          - { text: Download CV, url: uploads/Arico_CV.pdf, icon: arrow-down-tray, primary: true }
+          - { text: Publications, url: publications/ }
+        stats: true                  # key numbers from data/cv.yaml
+*/}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $c := $block.content }}
+{{ $person_page := site.GetPage (printf "/authors/%s" ($c.username | default "admin")) }}
+{{ $person := $person_page.Params }}
+{{ $avatar := ($person_page.Resources.ByType "image").GetMatch "*avatar*" }}
+<div class="ga ga-hero">
+  <div class="ga-hero__grid">
+    <div class="ga-hero__photo">
+      {{ with $avatar }}{{ $img := .Fill "560x560 Center webp q85" }}
+      <img src="{{ $img.RelPermalink }}" width="280" height="280" alt="{{ $person_page.Title }}" fetchpriority="high">
+      {{ end }}
+    </div>
+    <div class="ga-hero__text">
+      {{ with $c.eyebrow }}<p class="ga-eyebrow">{{ . }}</p>{{ end }}
+      <h1 class="ga-hero__name">{{ $person_page.Title }}</h1>
+      <p class="ga-hero__role">
+        {{ with $person.role }}<span>{{ . | markdownify }}</span>{{ end }}
+        {{ range $person.organizations }}<span class="ga-hero__org">{{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}{{ .name }}{{ if .url }}</a>{{ end }}</span>{{ end }}
+      </p>
+      <div class="ga-hero__bio">
+        {{ with $c.text }}{{ . | emojify | $page.RenderString (dict "display" "block") }}{{ else }}{{ $person_page.Content }}{{ end }}
+      </div>
+      {{ with $c.buttons }}
+      <div class="ga-hero__actions">
+        {{ range . }}
+        {{ $u := .url }}{{ $ext := hasPrefix $u "http" }}{{ if and (not $ext) (not (hasPrefix $u "mailto:")) }}{{ $u = $u | relLangURL }}{{ end }}
+        <a class="ga-btn{{ if .primary }} ga-btn--primary{{ end }}" href="{{ $u }}"{{ if or $ext (strings.HasSuffix $u ".pdf") }} target="_blank" rel="noopener"{{ end }}>
+          {{ with .icon }}<span class="tg-ico">{{ partial "functions/get_icon" (dict "name" .) }}</span>{{ end }}{{ .text }}
+        </a>
+        {{ end }}
+      </div>
+      {{ end }}
+      <ul class="ga-hero__social" aria-label="Profiles">
+        {{ range $person.profiles }}
+        {{ $label := .label | default (replaceRE `^.*/` "" .icon | humanize) }}
+        {{ if eq .icon "academicons/google-scholar" }}{{ $label = "Google Scholar" }}{{ else if eq .icon "academicons/orcid" }}{{ $label = "ORCID" }}{{ else if eq .icon "brands/github" }}{{ $label = "GitHub" }}{{ else if eq .icon "brands/linkedin" }}{{ $label = "LinkedIn" }}{{ end }}
+        <li><a href="{{ .url }}"{{ if hasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }} title="{{ $label }}">
+          <span class="ga-hero__ico">{{ partial "functions/get_icon" (dict "name" .icon) }}</span><span class="ga-hero__lbl">{{ $label }}</span>
+        </a></li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+  {{ if $c.stats }}{{ with site.Data.cv.stats }}
+  <dl class="ga-stats">
+    {{ range . }}<div class="ga-stat"><dt>{{ .label }}</dt><dd>{{ .value }}</dd>{{ with .note }}<span class="ga-stat__note">{{ . }}</span>{{ end }}</div>{{ end }}
+  </dl>
+  {{ end }}{{ end }}
+</div>

@@ -1,0 +1,143 @@
+# Content of the CV page (content/experience.md -> shortcode cv-page) and of the
+# "Key numbers" strip on the home page. Kept in step with CV/main.tex by hand:
+# when you update the LaTeX CV, update the matching entries here.
+
+updated: 2026-11
+
+# Key numbers (home page and CV page). Citation numbers come from NASA ADS.
+stats:
+  - value: "30+"
+    label: refereed papers
+  - value: "2500+"
+    label: citations
+    note: NASA ADS
+  - value: "19"
+    label: h-index
+    note: NASA ADS
+  - value: "50+"
+    label: talks & seminars
+  - value: "100M"
+    label: CPU hours in HPC projects
+    note: as PI, co-PI or team member
+
+positions:
+  - title: Senior Research Fellow
+    org: Istituto Nazionale di Fisica Nucleare (INFN), Bologna
+    country: Italy
+    url: https://www.bo.infn.it/
+    start: 2025
+    end: 2027
+    topics: Large-scale structure, cosmological parameters, modified gravity, baryonic physics, N-body simulations
+    people: Prof. Marco Baldi
+  - title: Postdoctoral Researcher
+    org: Institute for Computational Science, University of Zurich
+    country: Switzerland
+    url: https://www.ics.uzh.ch/
+    start: 2022
+    end: 2024
+    topics: Large-scale structure, simulations, baryons, machine learning
+    people: Prof. Aurel Schneider, Prof. Joachim Stadel
+
+education:
+  - title: PhD in Physics
+    org: Universidad de Zaragoza · Donostia International Physics Center · CEFCA Teruel
+    country: Spain
+    start: 2017
+    end: 2021
+    detail: "Thesis: *Cosmology with baryons: modelling the cosmic matter distribution for Large-Scale Structure analyses*. Qualification: Outstanding."
+    people: Prof. Raul E. Angulo, Dr. Carlos Hernández-Monteagudo
+    link: { text: Thesis, url: "https://zaguan.unizar.es/record/110751" }
+  - title: MSc in Astrophysics and Cosmology
+    org: Università di Bologna
+    country: Italy
+    start: 2014
+    end: 2017
+    detail: "Thesis: *Testing the methods to reconstruct and model the Baryonic Acoustic Oscillations of different tracers using N-body simulations*. Final mark 110/110."
+    people: Prof. Lauro Moscardini, Dr. Federico Marulli, Dr. Alfonso Veropalumbo
+    link: { text: Thesis, url: "http://amslaurea.unibo.it/13167/" }
+  - title: BSc in Astronomy
+    org: Università di Bologna
+    country: Italy
+    start: 2011
+    end: 2014
+    detail: "Thesis: *Materia degenere: fisica e applicazioni astrofisiche*. Final mark 109/110."
+    people: Prof. Daniele Dallacasa
+    link: { text: Thesis, url: "http://amslaurea.unibo.it/7393/" }
+
+leadership:
+  - role: Co-lead, Euclid Joint Cosmological Key Project 4
+    detail: Constraining baryonic physics with Euclid DR1 data
+    when: 2025–now
+  - role: Lead, Baryonic Physics Work Package
+    detail: Euclid Cosmological Simulations Science Working Group
+    when: 2024–now
+
+computing:
+  - role: PI
+    project: "MareNostrum 5 (BSC), AECT-2025-2-0044 — Constraining cosmology and astrophysics with emulators of the large-scale structure of the universe"
+    hours: 6.0M CPU h
+  - role: PI
+    project: "Euclid Emulator 3 simulation project — Alps, Swiss National Supercomputing Centre (CSCS)"
+    hours: 72M core h
+  - role: Coordinator
+    project: "Leonardo (CINECA), EuroHPC EHPC-EXT-2025E02-074 — Cosmological inference of the Dark Universe with ESA Euclid"
+    hours: 3.6M CPU h
+  - role: Team member
+    project: "MareNostrum 5 (BSC), AECT-2026-1-0010 — Euclid Cosmology: Cosmic Shear beyond average"
+    hours: 9.4M CPU h
+  - role: Co-PI
+    project: "MareNostrum (BSC), AECT-2022-1-0025 — Towards constraining neutrino mass from galaxy clustering measurements"
+    hours: 2.5M CPU h
+  - role: Team member
+    project: "MareNostrum (BSC), AECT-2019-2-0012 — Numerical simulations of the large-scale structure in the Universe"
+    hours: 7.2M CPU h
+
+visits:
+  - { place: "Institut d'Astrophysique Spatiale, Université Paris-Saclay", when: "May 2026" }
+  - { place: "Institute of Astronomy, University of Cambridge", when: "Mar–Apr 2026" }
+  - { place: "Donostia International Physics Center, San Sebastián", when: "Jul 2025" }
+  - { place: "Kavli IPMU, University of Tokyo", when: "Apr 2023, Apr 2024" }
+  - { place: "Beecroft Institute for Particle Astrophysics and Cosmology, University of Oxford", when: "Feb 2024" }
+  - { place: "Max Planck Institute for Astrophysics (MPA), Garching", when: "Oct–Nov 2020" }
+  - { place: "Centro de Física del Cosmos de Aragón (CEFCA), Teruel", when: "Jul–Aug 2016" }
+
+service:
+  - Referee for MNRAS, A&A, ApJ, The Open Journal of Astrophysics and JCAP (more than 20 papers)
+  - "Local Organising Committee: Euclid Cluster Science Group meeting (Bologna, 2023); CosmoLSS workshop (DIPC, 2023); XXVI International Remote Astronomy Olympiad (2022)"
+  - Member of the Equality Committee of the Donostia International Physics Center, which set up the centre's first Gender Equality Plan (2020–2021)
+  - Member of the American Physical Society Inclusion, Diversity, and Equity Alliance (2020–2021)
+  - External collaborator of the Dark Energy Survey (2022–2023)
+
+teaching:
+  - Invited lecturer, COLOURS cosmology school, Institut Pascal, Paris-Saclay (2025)
+  - University tutor in physics and programming, University of Bologna (2016–2017)
+
+outreach:
+  - "Speaker at the public evening [*Arriva il professorone*](../events/professorone/): cosmology with live drawings by a cartoonist (Milan, 2026)"
+  - Scientific collaborator of the inclusive astronomy exhibition STRØM, Passion for Knowledge (Donostia, 2023)
+  - Invited panellist, public event “Climate, Astronomy, and Extreme events” (Reggio Calabria, 2023)
+  - Talks in primary schools, observatories, planetaria, hospitals and astronomy events
+  - Outreach films and images from my simulations, free to reuse (see the Media page)
+
+awards:
+  - { title: INFN research grant, when: 2025 }
+  - { title: "CEFCA summer fellowship, Centro de Física del Cosmos de Aragón", when: 2016 }
+  - { title: Giovanni Schiaparelli National Award for Astronomy, when: 2009 }
+
+skills:
+  - { area: Languages, items: "Python, C/C++, Fortran, SQL, Julia" }
+  - { area: Machine learning, items: "TensorFlow/Keras, JAX, neural-network emulators" }
+  - { area: Simulations & HPC, items: "Gadget, MPI/OpenMP, CLASS/CAMB, HEALPix; large allocations on EuroHPC and national supercomputers" }
+  - { area: Inference, items: "Bayesian inference, MCMC, emulator-based likelihoods" }
+
+languages:
+  - { name: Italian, level: native }
+  - { name: English, level: proficient }
+  - { name: Spanish, level: proficient }
+  - { name: Basque, level: beginner }
+
+downloads:
+  - { text: "CV (2 pages)", file: "uploads/Arico_CV.pdf", primary: true }
+  - { text: "Full CV", file: "uploads/Arico_CV_full.pdf" }
+  - { text: "Publication list", file: "uploads/Arico_publications.pdf" }
+  - { text: "Conference list", file: "uploads/Arico_conferences.pdf" }

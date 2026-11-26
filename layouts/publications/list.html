@@ -1,0 +1,28 @@
+{{/*
+  Publications section page: intro text, the papers that have a page on this site,
+  then the complete list (pub-list shortcode in content/publications/_index.md).
+*/}}
+{{ define "main" }}
+<div class="ga ga-page">
+  <header class="ga-head ga-head--page">
+    <h1 class="ga-h1">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="ga-lead">{{ . | $.RenderString }}</p>{{ end }}
+    {{ with .Params.profiles }}
+    <div class="ga-links ga-links--profiles">
+      {{ range . }}{{ $u := .url }}{{ $ext := or (hasPrefix $u "http") (strings.HasSuffix $u ".pdf") }}{{ if not (hasPrefix $u "http") }}{{ $u = $u | relURL }}{{ end }}<a class="tg-btn" href="{{ $u }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}><span class="tg-ico">{{ partial "functions/get_icon" (dict "name" .icon) }}</span>{{ .text }}</a>{{ end }}
+    </div>
+    {{ end }}
+  </header>
+  {{ $featured := (where .RegularPages "Params.featured" true).ByDate.Reverse }}
+  {{ with $featured }}
+  <section class="ga-section ga-section--tight">
+    <h2 class="ga-h2 ga-h2--sm">{{ $.Params.featured_title | default "Highlights" }}</h2>
+    <div class="ga-pubs">{{ range . }}{{ partial "ga/pub-card" . }}{{ end }}</div>
+  </section>
+  {{ end }}
+  <section class="ga-section ga-section--tight">
+    {{ with .Params.list_title }}<h2 class="ga-h2 ga-h2--sm">{{ . }}</h2>{{ end }}
+    <div class="ga-prose">{{ .Content }}</div>
+  </section>
+</div>
+{{ end }}

@@ -1,0 +1,25 @@
+{{/*
+  resource-cards — pages of a section (default: resources) as compact cards.
+
+  sections:
+    - block: resource-cards
+      id: resources
+      content:
+        title: Resources
+        section: resources
+        count: 4
+        archive: { text: All resources, link: resources/ }
+*/}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $pages := (where site.RegularPages "Section" ($block.content.section | default "resources")).ByDate.Reverse }}
+{{ with $block.content.count }}{{ $pages = first . $pages }}{{ end }}
+<div class="ga ga-section">
+  {{ partial "ga/heading" (dict "page" $page "block" $block) }}
+  <div class="ga-resgrid">
+    {{ range $pages }}{{ partial "ga/resource-card" . }}{{ end }}
+  </div>
+  {{ with $block.content.archive }}
+  <div class="tg-more"><a class="tg-btn" href="{{ .link | relLangURL }}">{{ .text }}<span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-right") }}</span></a></div>
+  {{ end }}
+</div>

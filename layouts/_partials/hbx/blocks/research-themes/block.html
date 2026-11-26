@@ -1,0 +1,47 @@
+{{/*
+  research-themes — cards with the main research lines, each with a picture and links.
+
+  sections:
+    - block: research-themes
+      id: research
+      content:
+        title: Research
+        subtitle: '...'
+        items:
+          - title: Baryons in the cosmic web
+            text: '...'                         # markdown
+            image: { page: /media, resource: baryonification_poster.webp, fit: contain }   # page-bundle image; fit: contain for plots (white background)
+            links:
+              - { text: Animation, url: media/#baryonification }
+              - { text: Paper, page: /publications/bcm }   # `page:` links a page of this site
+*/}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+<div class="ga ga-section">
+  {{ partial "ga/heading" (dict "page" $page "block" $block) }}
+  <div class="ga-themes">
+    {{ range $i, $it := $block.content.items }}
+    {{ $img := "" }}
+    {{ $contain := eq ($it.image.fit | default "") "contain" }}
+    {{ with $it.image }}{{ with site.GetPage .page }}{{ with .Resources.Get $it.image.resource }}{{ if $contain }}{{ $img = .Fit "560x560 webp q80" }}{{ else }}{{ $img = .Fill "720x405 Center webp q78" }}{{ end }}{{ end }}{{ end }}{{ end }}
+    <article class="ga-card ga-theme">
+      <div class="ga-theme__img{{ if $contain }} ga-theme__img--contain{{ end }}">
+        {{ with $img }}<img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="" loading="lazy" decoding="async">{{ end }}
+        <span class="ga-theme__num">{{ printf "%02d" (add $i 1) }}</span>
+      </div>
+      <div class="ga-theme__body">
+        <h3 class="ga-h3">{{ $it.title }}</h3>
+        <div class="ga-theme__text">{{ $it.text | $page.RenderString (dict "display" "block") }}</div>
+        {{ with $it.links }}
+        <div class="ga-links">
+          {{ range . }}
+          {{ $u := .url }}{{ with .page }}{{ with site.GetPage . }}{{ $u = .RelPermalink }}{{ end }}{{ else }}{{ if not (hasPrefix $u "http") }}{{ $u = $u | relLangURL }}{{ end }}{{ end }}
+          <a class="tg-btn" href="{{ $u }}"{{ if hasPrefix $u "http" }} target="_blank" rel="noopener"{{ end }}>{{ .text }}<span class="tg-ico">{{ partial "functions/get_icon" (dict "name" "arrow-right") }}</span></a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</div>

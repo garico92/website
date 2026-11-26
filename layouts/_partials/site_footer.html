@@ -1,0 +1,27 @@
+{{/*
+  Site footer (replaces the theme's). Contact links from the author profile, licence,
+  the supercomputing acknowledgement and a small credit to Hugo Blox.
+*/}}
+{{ $person_page := site.GetPage "/authors/admin" }}
+{{ $person := $person_page.Params }}
+<footer class="ga ga-footer">
+  {{ partial "functions/get_hook" (dict "hook" "footer-start" "context" .) }}
+  <div class="ga-footer__grid">
+    <div class="ga-footer__who">
+      <p class="ga-footer__name">{{ $person_page.Title }}</p>
+      <p class="ga-muted">{{ $person.role }}{{ range $person.organizations }} · {{ .name }}{{ end }}</p>
+      <ul class="ga-footer__social" aria-label="Profiles">
+        {{ range $person.profiles }}
+        <li><a href="{{ .url }}"{{ if hasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }} title="{{ .label | default (replaceRE `^.*/` "" .icon | humanize) }}" aria-label="{{ .label | default (replaceRE `^.*/` "" .icon | humanize) }}">{{ partial "functions/get_icon" (dict "name" .icon) }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
+    <nav class="ga-footer__nav" aria-label="Footer">
+      {{ range site.Menus.main }}<a href="{{ .URL | relLangURL }}">{{ .Name }}</a>{{ end }}
+    </nav>
+  </div>
+  <div class="ga-footer__legal">
+    <p>© {{ now.Year }} {{ $person_page.Title }}. Text, images and films are licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>.</p>
+    <p class="ga-muted">Built with <a href="https://hugoblox.com" target="_blank" rel="noopener">Hugo Blox</a>.</p>
+  </div>
+</footer>
