@@ -89,6 +89,11 @@
   kind: attendee
   event: "Workshop: Cosmology from Euclid Data Release 1"
   place: International Space Science Institute, Bern
+- date: 2025-12-01
+  kind: outreach
+  title: "Incontro con un astrofisico"
+  event: Astronomy lesson for gifted children, neuropsychiatry department of the Poliambulatorio San Camillo
+  place: San Lazzaro di Savena (Bologna)
 - date: 2025-09-29
   end: 2025-10-03
   kind: talk
@@ -166,6 +171,12 @@
   page: events/coskasi_seminar
   event: CosKASI Early Career Researcher seminar
   place: Korea Astronomy and Space Science Institute, Daejeon
+- date: 2023-10-02
+  end: 2023-10-07
+  kind: outreach
+  title: STRØM
+  event: "Inclusive astronomy exhibition (Passion for Knowledge): scientific collaborator"
+  place: San Sebastián
 - date: 2023-09-11
   end: 2023-09-15
   kind: talk
