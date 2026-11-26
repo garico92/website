@@ -38,6 +38,16 @@ A fly-through of the same Nenya simulation (512 Mpc/*h* box, 1536³ particles, G
 {{< /media-item >}}
 
 {{< media-item
+    id="luminous-and-dark-universe"
+    title="Connecting the luminous and dark Universe"
+    alt="Animation: Europe at night seen from space, where only the lights of cities and roads are visible; the daytime map appears underneath, with the coasts, valleys and mountains that the lights follow. The lights then turn into a field of galaxies, and the dark-matter cosmic web of a simulation appears underneath them."
+    note="The galaxy field is not a real observation: real galaxy images were placed in the haloes and filaments of the TheOne simulation (BACCO project) — massive ellipticals in the densest knots, with their satellites, more galaxies along the filaments, and many fainter ones in the background. Galaxy images: Euclid (ESA/Euclid/Euclid Consortium/NASA, J.-C. Cuillandre, G. Anselmi) and JWST JADES (NASA, ESA, CSA, JADES collaboration). Night lights: NASA Earth Observatory (Black Marble)."
+    license="animation by Giovanni Aricò, [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), with credit *Giovanni Aricò, NASA, ESA*. The satellite and galaxy images it contains keep the licences of their owners (see the credits above)."
+>}}
+Europe at night. City lights follow coasts, rivers and valleys and go around mountains, and thus reveal much of the invisible underlying landscape. In the same way, galaxies form in dark-matter haloes, and so they trace the invisible cosmic web. Thanks to effects such as weak gravitational lensing, we can infer the dark-matter field by studying the positions and shapes of galaxies.
+{{< /media-item >}}
+
+{{< media-item
     id="baryonification"
     title="Baryonification, step by step"
     alt="Animation of the baryonification algorithm on a single halo: density and cumulative-mass profiles of the gravity-only, galaxy, gas and baryonified components, and the resulting radial displacement of the particles."

@@ -36,7 +36,9 @@ abstract: We present the first analysis of cosmic shear measured in DES Y3 that 
 summary: Unlocking the hidden power of small scales, this study delivers the first full-range cosmic shear analysis of DES Y3 data—tightening cosmological constraints and revealing how baryons shape the universe. By harnessing advanced simulations and neural networks, we show that even the tiniest cosmic distortions carry crucial clues about matter distribution and fundamental physics.
 
 tags:
-- Large-scale structure of the Universe; Cosmic shear; emulators; 
+  - Large-scale structure of the Universe
+  - Cosmic shear
+  - Emulators
 
 featured: true
 
@@ -65,4 +67,4 @@ image:
 
 ---
 
-This analyis was enabled by my previous work on a neural networks emulator trained on baryonified N-body simulations, described [here](/publications/conference-paper/).
+This analysis was enabled by my previous work on a neural-network emulator trained on baryonified N-body simulations, described [here]({{< relref "/publications/baryonification_emulator" >}}).

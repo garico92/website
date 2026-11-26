@@ -1,10 +1,10 @@
-# Complete list of talks, seminars, lectures and events, shown at the bottom of /talks/
+# Complete list of talks, seminars, lectures and events, shown on /conferences/
 # (layouts/_shortcodes/talk-list.html). Source: the conference list of the CV.
 #
 # Fields
 #   date    first day (YYYY-MM-DD); `end` optional, last day of a multi-day event
 #   kind    seminar | invited | plenary | keynote | talk | lecture | panel | discussion |
-#           poster | attendee        (sets the coloured label)
+#           poster | attendee | outreach        (sets the coloured label)
 #   title   optional, the title of my talk
 #   event   name of the event;  place: city / institute
 #   page    optional, a page of this site with the recording or the slides
@@ -14,6 +14,12 @@
 # Recorded talks have a page in content/events/ (or a `video:` field): the date shown is the
 # one of that page.
 
+- date: 2026-11-20
+  kind: outreach
+  title: "Arriva il professorone"
+  event: "Public evening on cosmology, with live drawings by Davide La Rosa and questions from Davide Arcuri and the audience"
+  place: ARCI L'Impegno, Milan
+  page: events/professorone
 - date: 2026-10-20
   kind: seminar
   title: The interplay between gravity and baryons in the large-scale structure of the universe
@@ -22,6 +28,7 @@
 - date: 2026-10-12
   end: 2026-10-16
   kind: talk
+  title: "Joint Cosmology 4 key project"
   event: Euclid Weak Lensing Science Working Group meeting
   place: Scuola Superiore Meridionale, Naples
 - date: 2026-08-23
@@ -32,11 +39,13 @@
 - date: 2026-08-10
   end: 2026-08-14
   kind: talk
+  title: "Constraining cosmology and baryons with stage IV survey"
   event: New Frontiers in Cosmology conference
   place: A Coruña
 - date: 2026-06-16
   end: 2026-06-19
   kind: keynote
+  title: "Higher-order baryonic modelling for the Euclid mission"
   event: The non-Gaussian Universe workshop
   place: Heraklion
   slides: https://indico.in2p3.fr/event/38089/contributions/172685/attachments/102323/159135/Giovanni_slides.pdf
@@ -48,20 +57,24 @@
   place: Barcelona
 - date: 2026-05-13
   kind: seminar
+  title: "Learning baryonic physics with Stage IV cosmological surveys"
   event: Invited seminar
   place: CEA Paris-Saclay
 - date: 2026-05-06
   end: 2026-05-08
   kind: talk
+  title: "Simultaneous constraints on cosmology and astrophysics with LSS surveys"
   event: UniVersum VII conference
   place: Naples
 - date: 2026-04-13
   end: 2026-04-14
   kind: talk
+  title: "Euclid Emulator 3"
   event: Euclid Cosmological Simulations SWG meeting
   place: Barcelona
 - date: 2026-04-09
   kind: seminar
+  title: "Joint constraints on cosmology and astrophysics with multi-wavelength observations"
   event: CMB/LSS meeting
   place: Institute of Astronomy, University of Cambridge
 - date: 2026-02-02
@@ -79,11 +92,13 @@
 - date: 2025-09-29
   end: 2025-10-03
   kind: talk
+  title: "Constraining baryonic feedback with DR1 cosmic shear data"
   event: Euclid Weak Lensing Science Working Group meeting
   place: Laboratoire d'Astrophysique de Marseille
 - date: 2025-06-02
   end: 2025-06-13
   kind: lecture
+  title: "How to simulate the large-scale structure of the universe"
   page: resources/lecture_colours
   event: Cosmology school COLOURS
   place: Institut Pascal, Paris-Saclay
@@ -91,16 +106,19 @@
 - date: 2025-05-12
   end: 2025-05-23
   kind: talk
+  title: "Big data, big questions… big simulations"
   event: "Workshop: Big Data, Big Questions"
   place: MIAPbP, Munich
 - date: 2025-03-05
   end: 2025-03-07
   kind: talk
+  title: "5 Baryonic Ws questions"
   event: Euclid Cosmological Simulations SWG meeting
   place: Barcelona
 - date: 2025-02-03
   end: 2025-02-07
   kind: talk
+  title: "Simultaneous modelling of cosmology and baryons in the large-scale structure of the Universe"
   event: Cosmology on the Steep Rise
   place: Sexten
 - date: 2024-11-20
@@ -111,26 +129,31 @@
 - date: 2024-10-08
   end: 2024-10-11
   kind: invited
+  title: "Modelling baryons in LSS"
   event: "Workshop: Mock Barcelona"
   place: Barcelona
 - date: 2024-09-09
   end: 2024-09-13
   kind: invited
+  title: "Modelling baryons in LSS"
   event: "Workshop: Testing gravity with the large-scale structure of the Universe"
   place: IFPU, Trieste
 - date: 2024-06-17
   end: 2024-06-21
   kind: discussion
+  title: "Accelerating predictions with emulators"
   event: Euclid Consortium Meeting
   place: Sapienza University, Rome
 - date: 2024-04-08
   end: 2024-04-12
   kind: invited
+  title: "Constraining baryonic impact in cosmological analyses with baryonification"
   event: "Workshop: Baryons in the Universe (also session chair)"
   place: Kavli IPMU, Tokyo
   url: https://indico.ipmu.jp/event/429/overview
 - date: 2024-02-20
   kind: seminar
+  title: "Baryons in LSS: not a marginal(isation) problem"
   event: Cosmology seminar
   place: Beecroft Institute for Particle Astrophysics and Cosmology, University of Oxford
 - date: 2023-11-15

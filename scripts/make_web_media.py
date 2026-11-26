@@ -59,7 +59,8 @@ OUT = ROOT / "content" / "media"
 MANIFEST = OUT / "manifest.json"
 
 # Every video on the page shows this small credit in its last second (bottom-right corner).
-# Set "credit": False on an item to skip it. The GitHub Release originals are left untouched.
+# Set "credit": False on an item to skip it, or "credit_text": "..." to change the text (kind "ready").
+# The GitHub Release originals are left untouched.
 CREDIT_SECONDS = 1.0
 
 RELEASE_TAG = "media-v1"
@@ -144,6 +145,16 @@ ITEMS = [
         "source": "zeldovich_displacement.mp4",     # marenostrum/outreach/sentence, --style tech --lang en
         "file": "zeldovich-displacement.mp4",
         "poster_time_s": 37.0,                      # the portrait, whole-box projection
+        "poster_width": 1280,
+        "poster_quality": 80,
+    },
+    {
+        "id": "luminous-and-dark-universe",
+        "kind": "ready",
+        "source": "luminous_and_dark_universe.mp4",  # marenostrum/outreach/light_and_darkness (ld_render.py)
+        "file": "luminous-and-dark-universe.mp4",
+        "credit_text": "Credits: Giovanni Aricò, NASA, ESA",   # night lights and galaxy images
+        "poster_time_s": 12.4,                      # city lights over the daytime map, no caption
         "poster_width": 1280,
         "poster_quality": 80,
     },
@@ -465,7 +476,7 @@ def build_ready(item: dict, force: bool, step: str | None) -> dict:
         stale = src.exists() and src.stat().st_mtime < clean.stat().st_mtime
         if step in (None, "credit") and (needs(src, force) or stale):
             if item.get("credit", True):
-                how = add_credit(clean, src, CREDIT, CREDIT_SECONDS)
+                how = add_credit(clean, src, item.get("credit_text", CREDIT), CREDIT_SECONDS)
                 print(f"  -> {src.name}: credit added ({how} re-encode), {mb(src.stat().st_size)}")
             else:
                 shutil.copy2(clean, src)

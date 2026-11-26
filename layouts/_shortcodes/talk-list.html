@@ -1,6 +1,6 @@
 {{/*
   talk-list — the complete list of talks and events, grouped by year (data/talks.yaml).
-  Usage (content/talks/index.md):   {{< talk-list open=3 >}}
+  Usage (content/conferences/index.md):   {{< talk-list open=3 >}}
     open   number of most recent years shown expanded (default 3); the others are collapsed
 
   Rows with `page:` link to that page; when the page has a recording, the "Watch" button
@@ -12,8 +12,8 @@
 {{- $kinds := dict
       "seminar" "Seminar" "invited" "Invited talk" "plenary" "Plenary talk" "keynote" "Keynote"
       "talk" "Talk" "lecture" "Lecture" "panel" "Panel" "discussion" "Discussion leader"
-      "poster" "Poster" "attendee" "Participant" -}}
-{{- $speaker := slice "seminar" "invited" "plenary" "keynote" "talk" "lecture" "panel" "discussion" -}}
+      "poster" "Poster" "attendee" "Participant" "outreach" "Outreach" -}}
+{{- $speaker := slice "seminar" "invited" "plenary" "keynote" "talk" "lecture" "panel" "discussion" "outreach" -}}
 
 {{- /* resolve dates and recordings once */ -}}
 {{- $rows := slice -}}

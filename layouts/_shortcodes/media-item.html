@@ -19,6 +19,8 @@
     layout  optional  "split" (media beside text) or "wide" (media full width, text below).
                       Default: wide for videos, split otherwise.
     badge   optional  short label next to the title, e.g. "Work in progress"
+    license optional  licence line for this item (markdown), instead of the page's media_license;
+                      for media that contain third-party material
 */}}
 {{- $id := .Get "id" -}}
 {{- $title := .Get "title" -}}
@@ -34,7 +36,7 @@
 {{- $layout := .Get "layout" | default (cond (eq $kind "video") "wide" "split") -}}
 {{- $res := .Page.Resources -}}
 {{- $anchor := $id | anchorize -}}
-{{- $license := .Page.Params.media_license | default "" -}}
+{{- $license := .Get "license" | default (.Page.Params.media_license | default "") -}}
 
 {{- /* download link: full-quality file on the GitHub Release ("release"),
        or the light file already on the website ("download") */ -}}

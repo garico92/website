@@ -28,6 +28,7 @@ publishDate: '2025-10-01T00:00:00Z'
 # Accepts a single type but formatted as a YAML list (for Hugo requirements).
 # Enter a publication type from the CSL standard.
 publication_types: ['speech']
+resource_type: Lecture   # label on the resource cards
 
 # Publication name and optional abbreviated publication name.
 #publication:  Astrophysics Source Code Library
@@ -38,7 +39,8 @@ abstract: Numerical simulations currently provide our most accurate predictions 
 summary: Lecture on numerical simulations of the universe delivered for the COLOURS Cosmology school. 
 
 tags:
-  - Cosmology, Simulations
+  - Cosmology
+  - Simulations
 
 # Display this page in the Featured widget?
 featured: true

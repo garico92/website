@@ -5,20 +5,17 @@
     - block: talk-videos
       id: talks
       content:
-        title: Talks
-        text: ''            # optional, markdown
+        eyebrow: Talks       # optional small label
+        title: Recorded talks
+        subtitle: ''        # optional, markdown
         count: 3
         archive: { text: 'All talks & videos', link: talks/ }
 */}}
 {{ $page := .wcPage }}
 {{ $block := .wcBlock }}
 {{ $count := $block.content.count | default 3 }}
-<div class="flex flex-col items-center max-w-prose mx-auto gap-3 justify-center px-6 md:px-0">
-  {{ with $block.content.title }}
-  <div class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">{{ . | emojify | $page.RenderString }}</div>
-  {{ end }}
-  {{ with $block.content.text }}<p>{{ . | emojify | $page.RenderString }}</p>{{ end }}
-</div>
+<div class="ga ga-section">
+{{ partial "ga/heading" (dict "page" $page "block" $block) }}
 <div class="tg-home mx-auto px-6">
   {{ partial "talks/gallery.html" (dict "page" $page "limit" $count "hero" false "filters" false "compact" true) }}
   {{ with $block.content.archive }}
@@ -29,4 +26,5 @@
     </a>
   </div>
   {{ end }}
+</div>
 </div>

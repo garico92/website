@@ -128,6 +128,8 @@ def x264_args(opt: dict, level) -> list[str]:
         args += ["-tune", "animation"]
     params = [f"ref={ref}", f"bframes={bf}", f"keyint={opt.get('keyint', 250)}",
               f"min-keyint={opt.get('keyint_min', 25)}"]
+    if opt.get("stitchable") == "1":   # source made to be joined: its headers do not depend on rate control
+        params.append("stitchable=1")
     if opt.get("rc") == "crf":
         args += ["-crf", opt.get("crf", "20")]
     else:  # 2pass / abr: single-pass ABR with the same bitrate and VBV on the short tail

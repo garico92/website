@@ -1,41 +1,15 @@
 ---
-title: 'Short CV'
+title: 'CV'
 date: 2023-10-24
 type: landing
 
 design:
-  spacing: '5rem'
-  background:
-    image: 
-      filename: "sim.png"
-    image_darken: 1   # optional: dark overlay for readability (0–1)
-    image_parallax: true # optional: parallax scrolling
-    text_color_light: true # makes text white for contrast
+  spacing: '4rem'
 
-# Note: `username` refers to the user's folder name in `content/authors/`
-
-# Page sections
+# Content: data/cv.yaml (keep it in step with CV/main.tex). Block: layouts/_partials/hbx/blocks/cv-page/
 sections:
-  - block: resume-experience
+  - block: cv-page
     content:
-      username: admin
-    design:
-      # Hugo date format
-      date_format: 'January 2006'
-      # Education or Experience section first?
-      is_education_first: false
-  - block: resume-skills
-    content:
-      title: Skills & Hobbies
-      username: admin
-    design:
-      show_skill_percentage: false
-  - block: resume-awards
-    content:
-      title: Awards
-      username: admin
-  - block: resume-languages
-    content:
-      title: Languages
-      username: admin
+      title: Curriculum Vitae
+      subtitle: Senior Research Fellow at INFN Bologna, working on the large-scale structure of the Universe, baryonic physics, emulators and cosmological simulations.
 ---

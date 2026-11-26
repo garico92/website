@@ -35,7 +35,7 @@ publishDate: '2025-07-01T00:00:00Z'
 publication_types: ['article-journal']
 
 # Publication name and optional abbreviated publication name.
-publication: In Monthly Notices of the Royal Astronomical Society
+publication: Monthly Notices of the Royal Astronomical Society
 publication_short: MNRAS
 
 abstract: We present and test a framework that models the 3D distribution of mass in the universe as a function of cosmological and astrophysical parameters. Our approach combines two different techniques; a rescaling algorithm that modifies the cosmology of gravity-only N-body simulations, and a 'baryonification' algorithm that mimics the effects of astrophysical processes induced by baryons, such as star formation and active galactic nuclei (AGN) feedback. We show how this approach can accurately reproduce the effects of baryons on the matter power spectrum of various state-of-the-art hydrodynamical simulations (EAGLE, Illustris, Illustris-TNG, Horizon-AGN, and OWLS, Cosmo-OWLS and BAHAMAS), to better than 1 per cent from very large down to small, highly non-linear, scales (  k∼5hMpc−1 ), and from z = 0 up to z ∼ 2. We highlight that, because of the heavy optimization of our algorithms, we can obtain these predictions for arbitrary baryonic models and cosmology (including massive neutrinos and dynamical dark energy models) with an almost negligible CPU cost. With these tools in hand, we explore the degeneracies between cosmological and astrophysical parameters in the non-linear mass power spectrum. Our findings suggest that after marginalizing over baryonic physics, cosmological constraints inferred from weak gravitational lensing should be moderately degraded.
@@ -44,7 +44,9 @@ abstract: We present and test a framework that models the 3D distribution of mas
 summary: We present a fast framework that models the Universe’s 3D mass distribution by combining rescaled N-body simulations with a baryonification algorithm, accurately reproducing baryonic effects on the matter power spectrum. This enables efficient exploration of cosmological and astrophysical parameter degeneracies for weak lensing studies.
 
 tags:
-  - Cosmology, Baryons, Simulations
+  - Cosmology
+  - Baryons
+  - Simulations
 
 # Display this page in the Featured widget?
 featured: true

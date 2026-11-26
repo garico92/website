@@ -1,33 +1,28 @@
-# Navigation Links
-#   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
-  #     desired widget in your `content/home/` folder.
-  #   The weight parameter defines the order that the links will appear in.
-#   - name: Media
- #   url: /#news
- #   weight: 14
- # - name: Projects
- #   url: projects/
- #   weight: 30
- # - name: Teaching
- #   url: courses/
- #   weight: 40   
+# Navigation links (top bar and footer). `weight` sets the order.
+# Home-page sections can be linked with /#<id> (ids: research, news, publications, talks, media, resources).
 
 main:
   - name: About
     url: /
     weight: 10
-  - name: Publications
-    url: /#publications
+  - name: Research
+    url: /#research
     weight: 11
-  - name: Talks
-    url: /#talks
+  - name: Publications
+    url: publications/
     weight: 12
-  - name: Short CV
-    url: experience/
+  - name: Conferences
+    url: conferences/
     weight: 13
-  - name: Resources
-    url: /#resources
+  - name: Talks
+    url: talks/
     weight: 14
   - name: Media
     url: media/
     weight: 15
+  - name: Resources
+    url: resources/
+    weight: 16
+  - name: CV
+    url: experience/
+    weight: 17

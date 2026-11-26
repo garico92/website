@@ -73,7 +73,8 @@
   {{ end }}
 
   {{ if $lightText }}
-  body, .page-body, .hbx-section { color: #f5f5f5; }
+  /* only the page content: the navigation bar keeps the theme colours (readable in light mode) */
+  .page-body, .page-footer { color: #f5f5f5; }
   {{ end }}
 
   /* Respect users who prefer reduced motion — pause the video. */

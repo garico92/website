@@ -30,7 +30,10 @@ abstract: BACCOemu provides a collection of emulators for large-scale structure 
 summary: BACCOemu is a software library providing neural-network emulators for cosmological large-scale structure statistics.
 
 tags:
-  - Cosmology, Baryons, Simulations , Machine Learning
+  - Cosmology
+  - Baryons
+  - Simulations
+  - Machine Learning
 
 # Display this page in the Featured widget?
 featured: true

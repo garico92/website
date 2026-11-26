@@ -9,8 +9,8 @@
 # Generated site output
 public/
 
-# Hugo resources (processed assets)
-resources/
+# Hugo resources (processed assets). Root folder only: content/resources and layouts/resources stay tracked
+/resources/
 
 # Hugo build lock
 .hugo_build.lock
@@ -111,3 +111,24 @@ venv/
 # ============================================================================
 
 media_originals/
+
+# ============================================================================
+# CV (LaTeX): build files and local PDFs. CV/build.sh copies the PDFs that the
+# website links to into static/uploads/ (those are committed).
+# ============================================================================
+
+CV/build/
+CV/*.pdf
+CV/*.aux
+CV/*.bbl
+CV/*.bcf
+CV/*.blg
+CV/*.log
+CV/*.out
+CV/*.run.xml
+CV/*.fls
+CV/*.fdb_latexmk
+CV/*.synctex.gz
+
+# Files waiting to be deleted by hand (template leftovers moved here on 2026-11-25)
+to_delete/

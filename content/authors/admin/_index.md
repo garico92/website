@@ -16,18 +16,18 @@ superuser: true
 highlight_name: true
 
 # Role/position/tagline
-role: Postdoctoral fellow
+role: Senior Research Fellow
 
 # Organizations/Affiliations to display in Biography block
 organizations:
-  - name: INFN
-    url: https://www.infn.it/
+  - name: INFN Bologna
+    url: https://www.bo.infn.it/
 
 # Social network links
 profiles:
   - icon: at-symbol
     url: 'mailto:arico@bo.infn.it'
-    label: E-mail Me
+    label: Email
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/giovanni-aric%C3%B2-8832684a/
   - icon: brands/github
@@ -45,16 +45,16 @@ interests:
 
 education:
   - area: PhD in Physics
-    institution: Zaragoza University
+    institution: Universidad de Zaragoza & Donostia International Physics Center
     date_start: 2017-09-18
     date_end: 2021-11-22
     summary: |
-      Thesis on Cosmology with baryons: modelling the cosmic matter distribution for Large-Scale Structure analyses. Supervised by Prof. Raul Angulo and Dr. Carlos Hernández-Monteagudo.
+      Thesis: Cosmology with baryons: modelling the cosmic matter distribution for Large-Scale Structure analyses. Qualification: Outstanding. Supervised by Prof. Raul Angulo and Dr. Carlos Hernández-Monteagudo.
     button:
       text: 'Read Thesis'
       url: 'https://zaguan.unizar.es/record/110751#'
-  - area: MS Cosmology and Astrophysics
-    institution: Bologna University
+  - area: MSc Astrophysics and Cosmology
+    institution: Università di Bologna
     date_start: 2014-11-28
     date_end: 2017-03-10
     summary: |
@@ -64,57 +64,47 @@ education:
     button:
       text: 'Read Thesis'
       url: 'http://amslaurea.unibo.it/13167/'  
-  - area: BS Astronomy
-    institution: Bologna University
+  - area: BSc Astronomy
+    institution: Università di Bologna
     date_start: 2011-09-29
     date_end: 2014-09-18
     summary: |
       GPA: 109/110
 
 work:
-  - position: Postdoctoral fellow
+  - position: Senior Research Fellow
     company_name: Istituto Nazionale di Fisica Nucleare (INFN), Bologna, Italy
     company_url: 'https://www.infn.it/'
-    date_start: 2020-01-01
+    date_start: 2025-01-01
     date_end: ''
-    summary: | 
-      Leading positions in the Euclid Collaboration.
+    summary: |
+      Co-lead of the Euclid Joint Cosmological Key Project 4 (baryonic physics with DR1) and lead of the Baryonic Physics Work Package of the Euclid Cosmological Simulations SWG.
   - position: Postdoctoral fellow
     company_name: University of Zurich
     company_url: 'https://www.uzh.ch/'
     date_start: 2022-01-01
     date_end: 2024-12-31
     summary: |
-      Running of Euclid simulation project, featuring over 500 large simulations for a total of 72 million core hours
+      PI of the Euclid Emulator 3 simulation project: over 500 large simulations, 72 million core hours on the Alps machine (CSCS).
 
-# Skills
+# Skills (the CV page now reads data/cv.yaml; these are kept for the theme's author blocks)
 skills:
-  - name: Technical Skills
+  - name: Technical skills
     items:
-      - name: Programming Python & C
-        percent: 95
+      - name: Python, C/C++, Fortran
         icon: code-bracket
-      - name: Machine Learning Tensorflow & Jax
-        percent: 100
+      - name: Machine learning (TensorFlow, JAX)
         icon: chart-bar
-      - name: HPC computing 
-        percent: 85
-        icon: cloud
+      - name: HPC and N-body simulations
+        icon: server-stack
   - name: Hobbies
-    color: '#eeac02'
-    color_border: '#f0bf23'
     items:
       - name: Books
-        percent: 70
         icon: book-open
-      - name: Movies & Series
-        percent: 90
-        icon: cpu-chip
-      - name: Hiking 
-        percent: 80
-        icon: person-simple-walk
-      
-    
+      - name: Movies & series
+        icon: film
+      - name: Hiking
+        icon: map
 
 languages:
   - name: Italian
@@ -123,27 +113,30 @@ languages:
     percent: 90
   - name: Spanish
     percent: 80
-  - name: Euskera
+  - name: Basque
     percent: 30
 
 awards:
-  - title: INFN fellowship
+  - title: INFN research grant
     date: 2025-01-01
-    awarder: Istituto Nazionale di FIsica Nucleare
-    icon: hero/currency-dollar
-  - title: Marenostrum grant
-    url: https://www.bsc.es/news/bsc-news/european-supercomputer-marenostrum-5-starts-bsc
-    date: 2025-06-15
+    awarder: Istituto Nazionale di Fisica Nucleare
+    icon: hero/trophy
+  - title: MareNostrum 5 allocation, 6 million CPU hours (PI)
+    url: https://www.res.es/
+    date: 2025-07-01
     awarder: Red Española de Supercomputación
-    icon: hero/currency-dollar
+    icon: hero/server-stack
     summary: |
-      6 million CPU hours on the supercomputer Marenostrum to run cosmological simulations.
+      Project AECT-2025-2-0044, to run cosmological simulations for emulators of the large-scale structure.
   - title: CEFCA summer fellowship
-    url: https://www.bsc.es/news/bsc-news/european-supercomputer-marenostrum-5-starts-bsc
-    date: 2019-06-01
-    awarder: Centro de Fısica del Cosmo de Aragon
-    icon: hero/currency-dollar
-  
+    date: 2016-07-01
+    awarder: Centro de Física del Cosmos de Aragón
+    icon: hero/academic-cap
+  - title: Giovanni Schiaparelli National Award for Astronomy
+    date: 2009-01-01
+    awarder: ''
+    icon: hero/trophy
+
 ---
 
 I am a computational cosmologist with expertise in large-scale structure, numerical simulations, astrophysical processes in cosmology and machine learning applications for data analysis. I aim to answer fundamental questions such as the nature of dark matter and dark energy, the validity of General Relativity at the largest scale of the Universe, and the physics of the formation of galaxies. To do so, I analyse multi-wavelength maps of the large-scale structure of the Universe using Bayesian inference. I optimise the extraction of information by developing new non-linear methods, which combine cosmological simulations, theoretical models of astrophysics, and machine learning techniques.

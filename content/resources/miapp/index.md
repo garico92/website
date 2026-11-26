@@ -16,6 +16,7 @@ publishDate: '2023-01-01T00:00:00Z'
 # Accepts a single type but formatted as a YAML list (for Hugo requirements).
 # Enter a publication type from the CSL standard.
 publication_types: ['speech']
+resource_type: Slides   # label on the resource cards
 
 abstract: Slides of the talk at the MIAPbP workshop.
 
@@ -32,7 +33,10 @@ design:
 
 
 tags:
-  - Cosmology, Baryons, Simulations , Machine Learning
+  - Cosmology
+  - Baryons
+  - Simulations
+  - Machine Learning
 
 # Display this page in the Featured widget?
 featured: true

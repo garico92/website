@@ -32,7 +32,8 @@ abstract: Baryonification algorithms model the impact of galaxy formation and fe
 summary: We designed an enhanced baryonification model that captures not only how galaxy formation shapes matter but also how it heats and pressurizes gas — unlocking realistic predictions for lensing and the thermal Sunyaev-Zel’dovich effect. With just two extra parameters, it matches state-of-the-art hydrodynamical simulations at percent-level precision, paving the way for fast, accurate modeling of the Universe’s small-scale structure.
 
 tags:
-- Cosmology, Baryons
+  - Cosmology
+  - Baryons
 featured: true
 
 hugoblox:

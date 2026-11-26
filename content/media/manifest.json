@@ -34,6 +34,27 @@
       },
       "width": 1920
     },
+    "luminous-and-dark-universe": {
+      "download": {
+        "bytes": 21653400,
+        "file": "luminous-and-dark-universe.mp4"
+      },
+      "duration_s": 28.0,
+      "fps": 30.0,
+      "height": 1080,
+      "hold_end_s": 0,
+      "kind": "video",
+      "poster": "luminous-and-dark-universe_poster.webp",
+      "renditions": {
+        "default": {
+          "bytes": 21653400,
+          "codec": "h264",
+          "file": "luminous-and-dark-universe.mp4",
+          "height": 1080
+        }
+      },
+      "width": 1920
+    },
     "nenya-composite-zoom": {
       "dzi": "deepzoom/nenya-composite-zoom.dzi",
       "height": 4096,
